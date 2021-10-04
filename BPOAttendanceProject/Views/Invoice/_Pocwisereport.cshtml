@@ -1,0 +1,48 @@
+﻿@using System.Data
+@model DataTable
+@{
+   
+    int count = 0;
+    int cnt = 0;
+    int i = 1;
+    
+    
+  
+}
+
+<table class="table table-bordered table-responsive table-hover" id="tblPreprocess" style="width:100%;" >
+    <tr>
+        @foreach (DataColumn col in Model.Columns)
+        {
+            count = count + 1; 
+           
+              <th style="width:35%;text-align:left">@col.ColumnName</th>
+            
+                
+        }
+
+    </tr>
+      
+    
+    @foreach (DataRow row in Model.Rows)
+    {
+       
+      
+       
+         <tr>
+            @foreach (DataColumn col in Model.Columns)
+            {
+              
+              <td style="width:35%;">@row[col.ColumnName]</td>     
+                   
+              
+             }
+        </tr>
+  
+      
+         
+      }
+       
+       
+ 
+</table>

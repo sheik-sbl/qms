@@ -1,0 +1,86 @@
+﻿@model  BPOAttendanceProject.Models.HighlowModel                     
+
+ 
+@if (Model.HighlowModelList.Count > 0)
+{
+   
+    
+    
+     <table class="table table-striped table-bordered table-hover table-checkable order-column" id="tblPreprocess">
+        <thead>
+            <tr>
+               
+                <th style="width:5%">Project Code </th>
+                <th style="width:5%">Event Code </th>
+                <th>Highest Production</th>
+                <th> Date</th>
+                <th>Location</th>
+                <th>Lowest Production</th>
+                <th> Date</th>
+                <th>Location</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.HighlowModelList)
+            {
+
+               
+                 <tr class="odd gradeX">
+                     <td>@item.projectcode</td>
+                     <td>@item.eventcode</td>
+                     <td>@item.highproduction.ToString("#,##0")</td>
+                     <td>@item.highdate</td>
+                     <td>@item.highlocation</td>
+                     <td>@item.lowproduction.ToString("#,##0")</td>
+                     <td>@item.lowdate</td>
+                     <td>@item.lowlocation</td>
+                  
+                  
+                </tr>
+
+                       
+            }
+@*          <tr><td colspan="8" style="text-align:right;font-weight: bold;">Total</td><td style="text-align:right;font-weight: bold;">@Model.RevenueModelList.Sum(e => e.Total)</td></tr>*@
+
+        
+        </tbody>
+</table>
+   
+ 
+       
+    
+  
+    
+    
+    
+    
+}
+else
+{
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="alert alert-info">
+                <strong>No  details found on this date</strong><br />
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+
+
+    jQuery(function ($) {
+        $('#tblPreprocess').dataTable({
+
+            "aoColumns": [
+                              null, null, null, null, null,null,null,null
+
+            ]
+
+        });
+
+    });
+
+</script>
+

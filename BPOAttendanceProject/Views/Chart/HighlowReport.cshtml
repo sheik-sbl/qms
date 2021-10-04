@@ -1,0 +1,562 @@
+﻿@model BPOAttendanceProject.Models.Projectmodel
+
+
+
+<div class="page-container" style="margin-top: 20px">
+    <!-- BEGIN SIDEBAR -->
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet light bordered">
+                <div class="m-heading-1 border-green m-bordered ">
+                    <div class="caption font-dark">
+                        <span class="caption-subject bold uppercase">High Low Production Report</span>
+                    </div>
+                </div>
+
+                             <div class="portlet-body">
+                                  @if (@TempData["Msg"] != null)
+                            {
+                                <div class="alert alert-info" id="MsgDiv">
+                                    <button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button>
+                                    @TempData["Msg"]
+                                </div>
+                            }
+
+
+                   
+                                <div class="form-horizontal">
+                                    <div class="form-body">
+                                        <div class="row">
+
+                                            <div class="col-md-4">
+
+                                                 <div class="form-group">
+                                                    <label class="col-md-3 control-label">Start Date</label>
+                                                    <div class="col-md-9">
+                                                       <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                                        @Html.TextBoxFor(model => model.Startdate, new { @class = "form-control", @placeholder = "Date", @autocomplete = "off", @required = "true",@id = "startdate" })
+                                                       
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </span>
+                                                    </div>
+                                                     </div>
+
+
+                                                    </div>
+                                            </div>
+                                           
+                                            <div class="col-md-4">
+                                              
+                                                 <div class="form-group">
+                                                    <label class="col-md-3 control-label">End Date</label>
+                                                    <div class="col-md-9">
+                                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                                        @Html.TextBoxFor(model => model.Enddate, new { @class = "form-control", @placeholder = "Date", @autocomplete = "off", @required = "true",@id = "enddate" })
+                                                       
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </span>
+                                                    </div>
+
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-4" >
+
+                                                   
+                                                 <div class="form-group">
+                                                    <label class="col-md-3 control-label">Location</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                        
+   @Html.DropDownListFor(m => m.Id , new SelectList(new List<SelectListItem> {
+                                                                                                         new SelectListItem { Text = "KAKKANAD", Value = "6"},       
+                                                                                                         new SelectListItem { Text = "MNS", Value = "5"}, 
+                                                                                                         new SelectListItem { Text = "MQC", Value = "4"}, 
+                                                                                                         new SelectListItem { Text = "MDS", Value = "3"},
+                                                                                                         new SelectListItem { Text = "KNPY", Value = "2"}, 
+                                                                                                         new SelectListItem { Text = "TVM", Value = "1"},                  
+                                                                                                         
+                                                                                                     }, "Value", "Text"), "ALL",new {style = "width: 100%;", @required = "required", @class = "btn dropdown-toggle btn-default", @autocomplete = "off", @id = "drpLocation", @onchange = "BindClientTL();"   })
+
+                                              
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+                                           
+                                             </div> 
+                                            </div>
+                                             <div class="row">
+
+                                              <div class="col-md-4" >
+                                                  <div class="form-group">
+                                                    <label class="col-md-3 control-label">Client Code</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+
+                                                 <select class="form-control" id="drpclient" name="drpclient"  style = "width: 100%;", onchange = "GetProjectcode();" > </select>
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                              <div class="col-md-4" >
+                                                        <div class="form-group">
+                                                            <label class="col-md-3 control-label">Project code</label>
+                                                            <div class="col-md-9">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon">
+                                                                        <i class="fa fa-envelope"></i>
+                                                                    </span>
+
+                                                           <select  class="form-control"  id="ddlproject" name="ddlproject"  style = "width: 100%;" onchange = "GetEvent();"  ></select>
+
+                                                                </div>
+
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                              <div class="col-md-4" >
+                                                        <div class="form-group">
+                                                            <label class="col-md-3 control-label">Event code</label>
+                                                            <div class="col-md-9">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon">
+                                                                        <i class="fa fa-envelope"></i>
+                                                                    </span>
+                                                        
+
+                                                             <select class="form-control" id="ddlevent" name="ddlevent"  style = "width: 100%;"><option>ALL</option> </select>
+                                            
+                                                                </div>
+
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                              <div class="col-md-4">
+                                              <div class="form-group">
+                                                    <label class="col-md-3 control-label">Process</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                        
+                                                            @Html.DropDownListFor(m => m.Id, new SelectList(new List<SelectListItem> {
+                                                                                                         new SelectListItem { Text = "Indexing", Value = "6"},       
+                                                                                                         new SelectListItem { Text = "Qc2", Value = "5"}, 
+                                                                                                         new SelectListItem { Text = "Qc3", Value = "4"}, 
+                                                                                                         new SelectListItem { Text = "Audit", Value = "3"},
+                                                                                                         new SelectListItem { Text = "UAT", Value = "2"}, 
+                                                                                                         new SelectListItem { Text = "Training", Value = "1"},                  
+                                                                                                          new SelectListItem { Text = "Rework", Value = "1"}, 
+                                                                                                     }, "Value", "Text"), "ALL", new { style = "width: 100%;", @required = "required", @class = "btn dropdown-toggle btn-default", @autocomplete = "off", @id = "drpProcess" })
+
+
+                                                      
+
+                                                        </div>
+
+                                                         
+                                                    </div>
+                                                </div>
+                                              </div>
+
+
+
+                                              
+                                                
+
+
+                                           
+                                             
+                                        <div class="col-md-9">
+                                            
+                                                <div class="btn-group">
+                                                <button id="search" class="btn sbold green" onclick="ProductivityReport()">
+                                                    Ok
+                                                </button>
+                                                </div>
+                                             <div class="btn-group">
+                                                <button id="cancel" class="btn sbold green" onclick="Cancel()">
+                                                    Cancel
+                                                <i class="fa fa-cancel"></i>
+                                                </button>
+                                             </div>
+                                            @*<div class="btn-group">
+                                                <button id="graph" class="btn sbold green" onclick="getGraphReport()">
+                                                    Graph
+                                                <i class="fa fa-"></i>
+                                                </button>
+                                             </div>*@
+                                            
+
+                                       
+
+
+                                            </div>
+                                        
+                                        
+                                        
+                                        </div>
+
+                                             
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                 </div>
+                   @* <div id="reportlist">
+                    </div>*@
+
+
+             @*<div class="portlet box green">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-gift"></i>Productivity Details
+                            </div>
+
+                        </div>
+                        <div class="portlet-body" id="reportlist">
+                        </div>
+                         
+              </div>*@
+
+         <div id="reportlist"> </div>
+         
+         <div id="wait" style="display:none;width:69px;height:89px;border:1px solid black;position:absolute;top:50%;left:50%;padding:2px;"><img src='../assets/pages/img/demo_wait.gif' width="64" height="64" /><br>Loading..</div>
+
+        </div>
+    </div>
+
+</div>
+
+   
+    <!-- END EXAMPLE TABLE PORTLET-->
+
+<script>
+   
+    jQuery(document).ready(function () {
+        var pathurl = '@Url.Action("BindClientbyLocation", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'POST',
+            data: {
+
+                Location: 'ALL'
+            },
+            success: function (data) {
+               
+                var markup = "<option value='0'>ALL</option>";
+                for (var x = 0; x < data.length; x++) {
+                    if (data[x].Text != "undefined") {
+                        markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                    }
+                }
+                $("#drpclient").html(markup).show();
+                
+            }
+        });
+
+        var pathurl = '@Url.Action("BindProjectdaily", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'POST',
+            data: {
+
+                Clientcode: 'ALL',
+                fromdate:'',
+                Location: 'ALL'
+            },
+            success: function (data) {
+               
+                var markup = "<option value='0'>ALL</option>";
+                for (var x = 0; x < data.length; x++) {
+                    if (data[x].Text != "undefined") {
+                        markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                    }
+                }
+                $("#ddlproject").html(markup).show();
+               
+            }
+        });
+
+        var pathurl = '@Url.Action("BindEvent", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'POST',
+            data: {
+
+                ProjectId: 'ALL'
+            },
+            success: function (data) {
+               
+                var markup = "<option value='0'>ALL</option>";
+                for (var x = 0; x < data.length; x++) {
+                    if (data[x].Text != "undefined") {
+                        markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                    }
+                }
+                $("#ddlevent").html(markup).show();
+                
+            }
+        });
+
+
+
+
+
+
+    });
+
+
+    function BindClientTL() {
+        BindClientbyLocation();
+        GetProjectcode();
+    }
+
+    function BindClientbyLocation() {
+        $("#wait").css("display", "block");
+        var pathurl = '@Url.Action("BindClientbyLocationfromtoDate", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'POST',
+            data: {
+                fromdate: $('#startdate').val(),
+                enddate: $('#enddate').val(),
+                Location: $("#drpLocation option:selected").text()
+            },
+            success: function (data) {
+                $("#wait").css("display", "none");
+                var markup = "<option value='0'>ALL</option>";
+                for (var x = 0; x < data.length; x++) {
+                    if (data[x].Text != "undefined") {
+                        markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                    }
+                }
+                $("#drpclient").html(markup).show();
+              
+            }
+        });
+
+
+
+    }
+
+    function GetProjectcode() {
+
+        $("#wait").css("display", "block");
+        var pathurl = '@Url.Action("BindProjectProductivity", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'POST',
+            data: {
+
+                Clientcode: $("#drpclient option:selected").text(),
+                fromdate: $('#startdate').val(),
+                enddate: $('#enddate').val(),
+                Location: $("#drpLocation option:selected").text()
+            },
+            success: function (data) {
+                $("#wait").css("display", "none");
+                var markup = "<option value='0'>ALL</option>";
+                for (var x = 0; x < data.length; x++) {
+                    if (data[x].Text != "undefined") {
+                        markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                    }
+                }
+                $("#ddlproject").html(markup).show();
+
+            }
+        });
+
+    }
+
+    function GetEvent() {
+
+        $("#wait").css("display", "block");
+        var pathurl = '@Url.Action("BindEventHighlow", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'POST',
+            data: {
+
+                
+                fromdate: $('#startdate').val(),
+                enddate: $('#enddate').val(),
+                Clientcode:$("#drpclient option:selected").text(),
+                ProjectId: $("#ddlproject option:selected").text(),
+                Location: $("#drpLocation option:selected").text(),
+               
+            },
+            success: function (data) {
+                $("#wait").css("display", "none");
+                var markup = "<option value='0'>ALL</option>";
+                for (var x = 0; x < data.length; x++) {
+                    if (data[x].Text != "undefined") {
+                        markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                    }
+                }
+                $("#ddlevent").html(markup).show();
+
+
+
+            }
+        });
+
+    }
+
+
+    function ProductivityReport() {
+
+       
+        if ($('#startdate').val() =="") {
+            alert("Please select start date !");
+        }
+        else {
+            $("#wait").css("display", "block");
+            var pathurl = '@Url.Action("HighlowDetailedReport", "Chart")';
+            $.ajax({
+                url: pathurl,
+                type: 'GET',
+                data: {
+
+                    Location: $("#drpLocation option:selected").text(),
+                    projectcode: $("#ddlproject option:selected").text(),
+                    sdate: $('#startdate').val(),
+                    enddate: $('#enddate').val(),
+                    clientcode: $("#drpclient option:selected").text(),
+                    eventcode: $("#ddlevent option:selected").text(),
+                    process: $("#drpProcess option:selected").text()
+
+                },
+                cache: false,
+                success: function (data) {
+                    $("#wait").css("display", "none");
+                    $("#reportlist").html("");
+                    $("#reportlist").html(data);
+                   
+
+
+                }
+            });
+        }
+     }
+
+
+   
+    function Cancel() {
+        $("#reportlist").html("");
+       
+        
+        var pathurl = '@Url.Action("BindProjectdaily", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'POST',
+            data: {
+
+                Clientcode: 'ALL',
+                fromdate: '',
+                Location: 'ALL'
+            },
+            success: function (data) {
+               
+                var markup = "<option value='0'>ALL</option>";
+                for (var x = 0; x < data.length; x++) {
+                    if (data[x].Text != "undefined") {
+                        markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                    }
+                }
+                $("#ddlproject").html(markup).show();
+
+            }
+        });
+
+        var pathurl = '@Url.Action("BindClientbyLocation", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'POST',
+            data: {
+
+                Location: 'ALL'
+            },
+            success: function (data) {
+               
+                var markup = "<option value='0'>ALL</option>";
+                for (var x = 0; x < data.length; x++) {
+                    if (data[x].Text != "undefined") {
+                        markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                    }
+                }
+                $("#drpclient").html(markup).show();
+
+            }
+        });
+
+       
+
+        var pathurl = '@Url.Action("BindEvent", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'POST',
+            data: {
+
+                ProjectId: 'ALL'
+            },
+            success: function (data) {
+                
+                var markup = "<option value='0'>ALL</option>";
+                for (var x = 0; x < data.length; x++) {
+                    if (data[x].Text != "undefined") {
+                        markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                    }
+                }
+                $("#ddlevent").html(markup).show();
+
+            }
+        });
+
+        $('#drpLocation').get(0).selectedIndex = 0;
+        $('#drpclient').get(0).selectedIndex = 0;
+        $('#ddlproject').get(0).selectedIndex = 0;
+        $('#ddlevent').get(0).selectedIndex = 0;
+        $('#drpProcess').get(0).selectedIndex = 0;
+      
+
+    }
+
+    
+
+   
+
+    
+
+    
+
+
+</script>
+ 

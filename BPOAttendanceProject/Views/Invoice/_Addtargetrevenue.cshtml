@@ -1,0 +1,323 @@
+﻿<link href="../assets/global/plugins/bootstrap-sweetalert/sweetalert.css" rel="stylesheet" />
+<link href="../assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css" />
+<link href="../assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css" />
+
+@model BPOAttendanceProject.Models.InvoiceModel
+
+<div>
+    @using (Html.BeginForm("SaveTargetrevenue", "Invoice", FormMethod.Post, new { @classs = "invoiceform", @id = "form" }))
+    {
+        <div class="modal-content">
+            <div class="modal-body">
+                <div>
+                    <div>
+                        <!-- BEGIN SAMPLE FORM PORTLET-->
+                        <div class="portlet light bordered">
+                            <div class="m-heading-1 border-green m-bordered">
+                                <div class="caption">
+                                    <i class="fa fa-edit"></i>
+                                  
+                                      @if (Model.Id == 0)
+                                    {
+                                    <span class="caption-subject font-dark sbold uppercase">Add </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="caption-subject font-dark sbold uppercase">Edit </span>
+                                    }
+
+
+                                </div>
+                            </div>
+                            <div class="portlet-body form">
+                                <div class="form-horizontal">
+                                    <div class="form-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+
+                                               
+
+                                                  <div class="form-group">
+                                                        @Html.HiddenFor(model => model.Id, new { @Id = "Id" })
+                                                    <label class="col-md-3 control-label">Month</label>
+                                                    <div class="col-md-9">
+                                                         <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                   
+                                                      @Html.DropDownListFor(model => model.MonthName , new SelectList(new List<SelectListItem> { 
+                                                                                                         new SelectListItem { Text = "January", Value = "January"}, 
+                                                                                                         new SelectListItem { Text = "February", Value = "February"}, 
+                                                                                                         new SelectListItem { Text = "March", Value = "March"}, 
+                                                                                                         new SelectListItem { Text = "April", Value = "April"},                   
+                                                                                                         new SelectListItem { Text = "May", Value = "May"},
+                                                                                                         new SelectListItem { Text = "June", Value = "June"}, 
+                                                                                                         new SelectListItem { Text = "July", Value = "July"}, 
+                                                                                                         new SelectListItem { Text = "August", Value = "August"}, 
+                                                                                                         new SelectListItem { Text = "September", Value = "September"},                   
+                                                                                                         new SelectListItem { Text = "October", Value = "October"},
+                                                                                                         new SelectListItem { Text = "November", Value = "November"},
+                                                                                                         new SelectListItem { Text = "December", Value = "December"}
+                                                                                                     }, "Value", "Text"), "Select",new {style = "width: 100%;", @required = "required", @class = "btn dropdown-toggle btn-default", @autocomplete = "off", @id = "drpMonth",@onchange="BindClientcodebaseMonthyear();"  })
+                                                       
+                                                       
+                                                    </div>
+
+
+                                                    
+                                                </div>
+
+                                                  </div>
+                                                      
+                                                  <div class="form-group">
+                                                    <label class="col-md-3 control-label">Year</label>
+                                                    <div class="col-md-9">
+                                                         <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                   
+                                                      @Html.DropDownListFor(model => model.YearName , new SelectList(new List<SelectListItem> {
+                                                                                                           new SelectListItem { Text = "2022", Value = "2022"}, 
+                                                                                                          new SelectListItem { Text = "2021", Value = "2021"}, 
+                                                                                                         new SelectListItem { Text = "2020", Value = "2020"},
+                                                                                                         new SelectListItem { Text = "2019", Value = "2019"},
+                                                                                                     }, "Value", "Text"), "Select",new {style = "width: 100%;", @required = "required", @class = "btn dropdown-toggle btn-default", @autocomplete = "off", @id = "drpYear" ,@onchange="BindClientcodebaseMonthyear();" })
+                                                       
+                                                       
+                                                    </div>
+
+
+                                                    
+                                                </div>
+
+                                                  </div>
+
+                                                  <div class="form-group">
+                                                    <label class="col-md-3 control-label">Target</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.Target, new { @id = "txttarget", @class = "form-control", @placeholder = "Last Name", @autocomplete = "off", @required = "required",@maxlength="50" })
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+                                                  <div class="form-group">
+                                                    <label class="col-md-3 control-label">Actual</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.Actual, new { @id = "txtActual", @class = "form-control", @placeholder = "Actual", @autocomplete = "off", @required = "required",@maxlength="50" })
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+                                                   <div class="form-group">
+                                                    <label class="col-md-3 control-label">Achievement</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.Achievement, new { @id = "txtAchievement", @class = "form-control", @placeholder = "Achievement", @autocomplete = "off", @required = "required",@maxlength="50" })
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                                  
+
+                                               
+
+
+                                                   
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END SAMPLE FORM PORTLET-->
+                    </div>
+
+                </div>
+            </div>
+         <div class="modal-footer">
+
+
+              
+                <button type="button" class="btn dark btn-outline" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn green">Save</button>
+            </div>
+       
+    }
+    <!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->
+
+
+
+
+
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="../assets/global/plugins/bootstrap-sweetalert/sweetalert.js"></script>
+<script src="../assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="../assets/pages/scripts/ui-extended-modals.min.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
+
+<script type="text/javascript">
+    var result = "";
+    
+  
+    $(function () {
+        $('#form').validate({
+
+            rules: {
+                Month: {
+                    required: true
+                },
+                Year: {
+                    required: true
+                },
+                Target: {
+                    required: true
+                },
+                Revenue: {
+                    required: true
+                },
+                Achievement: {
+                    required: true
+                }
+        },
+
+            messages: {
+                Month: {
+                    required: " Select Month."
+                },
+                Year: {
+                    required: "Select Year."
+                },
+                Target: {
+                    required: "Target value required."
+                },
+               
+                Revenue: {
+                    required: "Revenue value required."
+                },
+                Achievement: {
+                    required: "Achievement value required."
+               }
+               
+                
+            },
+
+            invalidHandler: function (event, validator) {
+
+                $('.alert-danger', $('#form')).show();
+            },
+
+            highlight: function (element) { // hightlight error inputs
+                $(element).closest('.valid-group').addClass('has-error'); // set error class to the control group
+            },
+
+            success: function (label) {
+                label.closest('.valid-group').removeClass('has-error');
+                label.remove();
+            },
+
+            errorPlacement: function (error, element) {
+                error.addClass('text-danger');
+                error.insertAfter(element.closest('.input-group'));
+            },
+
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+    });
+
+   
+
+
+
+
+   
+
+
+
+
+    function CheckAccessAlreadyExist(object) {
+     
+        var Value = $("#txtusername").val();
+        if (Value.length > 0) {
+            var pathurl = '@Url.Action("CheckStringWithOneColumn", "Admin")';
+            $.ajax({
+                url: pathurl,
+                type: 'POST',
+                data: {ActualValue: Value },
+                success: function (data) {
+                    if (data == "true") {
+                        alert("UserName  already exist !");
+                        $(object).val("");
+                        $(object).focus();
+                    }
+                }
+            });
+        }
+    }
+
+  
+
+
+</script>
+<style>
+
+    .sweet-overlay {
+        z-index: 20000;
+    }
+
+    .sweet-alert {
+        z-index: 20000;
+    }
+
+    #errmsg
+{
+color: red;
+}
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,262 @@
+﻿@{
+    ViewBag.Title = "Users";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int count = 0;
+}
+
+@model BPOAttendanceProject.Models.PromotionModel  
+@using System.Data;
+  
+<div>
+@using (Html.BeginForm("UploadDailyPromotion", "Admin", null, FormMethod.Post, new { enctype = "multipart/form-data" ,@id="form"}))
+{
+   @Html.AntiForgeryToken() 
+   @Html.ValidationSummary()
+    
+    <div class="modal-content">
+            <div class="modal-body">
+                <div>
+                    <div>
+                        <!-- BEGIN SAMPLE FORM PORTLET-->
+                        <div class="portlet light bordered">
+                            <div class="m-heading-1 border-green m-bordered">
+                                <div class="caption">
+                                    <i class="fa fa-edit"></i>
+                                        <span class="caption-subject font-dark sbold uppercase">Promotion Details</span>
+                       
+                                </div>
+                            </div>
+                            <div class="portlet-body form">
+                                <div class="form-horizontal">
+                                    <div class="form-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+
+                                             @*   <div class="form-group">
+                                                  
+                                                    <label class="col-md-3 control-label">Date<span  style="color:red"> *</span></label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            <input class="date form-control" style="width: 300px;" type="text" id="from" name="from">
+                                                            
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>*@
+                                               
+                                             
+                                                  @*   <div class="form-group">
+                                                    <label class="col-md-3 control-label">Location<span  style="color:red"> *</span></label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                        
+                                                               @Html.DropDownList("FooBarDropDown", new List<SelectListItem>
+                                    {
+                                        new SelectListItem{ Text = "All", Value = "0" },
+                                        new SelectListItem{ Text = "KAKKANAD", Value = "6" },
+                                        new SelectListItem{ Text = "MNS", Value = "5" },
+                                        new SelectListItem{ Text = "MQC", Value = "4" },
+                                        new SelectListItem{ Text = "MDS", Value = "3" },
+                                        new SelectListItem {Text = "KNPY", Value = "2"},
+                                        new SelectListItem{ Text = "TVM", Value = "1" },
+                              
+                                     }, new { id = "ddlLocations", @class = "form-control" }) 
+
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>*@
+
+                                              
+
+                                            
+
+
+                                                 <div class="form-group">
+                                                    <label class="col-md-3 control-label">File<span  style="color:red"> *</span></label>
+                                                    <div class="col-md-9">
+                                                        
+                                                             <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                            <div class="input-group input-large">
+                                                                <div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
+                                                                    <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                                    <span class="fileinput-filename"> </span>
+                                                                </div>
+                                                                <span class="input-group-addon btn default btn-file">
+                                                                <span class="fileinput-new"></span>
+                                                                <input type="hidden"><input type="file" id="dataFile" name="upload"  required /> </span>
+                                                               
+                                                            </div>
+                                                        </div>
+                                                            
+                                                        </div>
+                                                     <span style="color:blue"   class="help-block">Excel sheet date format should be in  'dd/mm/yyyy'.</span>
+
+                                                    </div>
+                                                </div>
+
+
+                                                
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END SAMPLE FORM PORTLET-->
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+
+
+               
+                <button type="button" class="btn dark btn-outline" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn green">Save</button>
+            </div>
+        </div>
+
+}
+
+</div>
+
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="../assets/global/plugins/bootstrap-sweetalert/sweetalert.js"></script>
+<script src="../assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="../assets/pages/scripts/ui-extended-modals.min.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
+
+
+
+
+
+
+
+
+
+
+<style>
+
+    .sweet-overlay {
+        z-index: 20000;
+    }
+
+    .sweet-alert {
+        z-index: 20000;
+    }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                       
+                       
+                       
+
+
+
+
+                    
+              
+
+
+<script src="../assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="../assets/pages/scripts/ui-extended-modals.min.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
+
+<script>
+   
+    //jQuery(document).ready(function () {
+       
+    //    $("#from").datepicker({
+    //        format: 'dd/mm/yyyy',
+    //        minDate: 0,
+    //        defaultDate: "+1w",
+    //        changeMonth: true,
+    //        numberOfMonths: 1,
+            
+           
+    //    });
+    //    //$("#from").datepicker("setDate", new Date());
+       
+    //    var date = new Date();
+    //    date.setTime(date.getTime() - (1000 * 60 * 60 * 24))
+    //    $('#from').datepicker("setDate", date);
+    //    $('#from').datepicker({ autoclose: true });
+    //});
+   
+
+    $('#btnupload').submit(function () {
+        if ($('#dataFile').val() === '') {
+            alert('please upload a file');
+            return false;
+        }
+    });
+
+    jQuery(document).ready(function () {
+        setTimeout(function () {
+            $("#MsgDiv").slideUp(400);
+        }, 2000);
+        $('#divPhotolistpop').css('width', '55%');
+    });
+
+
+   
+
+ 
+
+
+
+
+
+  
+
+
+
+</script>

@@ -1,0 +1,297 @@
+﻿@model BPOAttendanceProject.Models.AssociateModel
+@{
+    
+}
+
+
+<div class="page-container" style="margin-top: 20px">
+    <!-- BEGIN SIDEBAR -->
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet light bordered">
+                <div class="m-heading-1 border-green m-bordered ">
+                    <div class="caption font-dark">
+                        <span class="caption-subject bold uppercase">Productivity Report</span>
+                    </div>
+                </div>
+
+                <div class="portlet-body">
+                   
+                                <div class="form-horizontal">
+                                    <div class="form-body">
+                                        <div class="row">
+                                           
+                                           
+                                            
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Start Date<span  style="color:red"> *</span></label>
+                                                    <div class="col-md-9">
+                                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                                        @Html.TextBoxFor(model => model.startDate, new { @class = "form-control", @placeholder = "Date", @autocomplete = "off", @required = "true",@id = "startdate" })
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </span>
+                                                    </div>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                             <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">End Date<span  style="color:red"> *</span></label>
+                                                    <div class="col-md-9">
+                                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                                        @Html.TextBoxFor(model => model.endDate, new { @class = "form-control", @placeholder = "Date", @autocomplete = "off", @required = "true",@id = "enddate" })
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </span>
+                                                    </div>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                              <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">PSN<span  style="color:red"> *</span></label>
+                                                    <div class="col-md-9">
+                                                    <div class="input-group">
+                                                        @Html.TextBoxFor(model => model.PSN, new { @class = "form-control", @placeholder = "PSN", @autocomplete = "off", @required = "true", @id = "txtpsn" ,@maxlength=4} )
+                                                        <span style="color:blue"   class="help-block">Enter PSN and press enter key for the project code filtration. </span>
+                                                    </div>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3">
+
+                                                    <div class="form-group">
+                                                    <label class="col-md-3 control-label">Project Code<span  style="color:red"> *</span></label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                        
+
+
+                                                        <select  class="form-control"  id="ddlproject" name="ddlproject"  style = "width: 100%;"  ><option>ALL</option> </select>
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+                                                
+
+                                            </div>
+                                            
+                                        <div class="col-md-4">
+                                            <div class="btn-group">
+                                                <button id="search" class="btn sbold green" onclick="ProductivityReport()">
+                                                    Ok
+                                                
+                                                </button>
+                                                </div>
+                                             <div class="btn-group">
+                                                <button id="cancel" class="btn sbold green" onclick="Cancel()">
+                                                    Cancel
+                                                <i class="fa fa-cancel"></i>
+                                                </button>
+                                                 </div>
+
+                                            </div>
+                                        
+                                        
+                                        
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                 </div>
+                    <div id="reportlist"></div>
+                    
+                  <div id="wait" style="display:none;width:69px;height:89px;border:1px solid black;position:absolute;top:50%;left:50%;padding:2px;"><img src='../assets/pages/img/demo_wait.gif' width="64" height="64" /><br>Loading..</div>
+
+  
+                </div>
+        </div>
+
+</div>
+
+   
+    <!-- END EXAMPLE TABLE PORTLET-->
+
+<script>
+   
+    $(function () {
+
+        $("#startdate").datepicker({
+            format: 'dd/mm/yyyy',
+            minDate: 0,
+            defaultDate: "+1w",
+            changeMonth: true,
+            numberOfMonths: 1,
+
+
+        });
+        $("#enddate").datepicker({
+            format: 'dd/mm/yyyy',
+            minDate: 0,
+            defaultDate: "+1w",
+            changeMonth: true,
+            numberOfMonths: 1,
+
+
+        });
+     
+
+
+        var date = new Date();
+        date.setTime(date.getTime() - (1000 * 60 * 60 * 24))
+        $('#startdate').datepicker("setDate", date);
+        $('#startdate').datepicker({ autoclose: true });
+        $('#enddate').datepicker("setDate", date);
+        $('#enddate').datepicker({ autoclose: true });
+    });
+
+
+    jQuery(document).ready(function () {
+        setTimeout(function () {
+            $("#MsgDiv").slideUp(400);
+        }, 2000);
+        $('#divPhotolistpop').css('width', '55%');
+    });
+
+
+    $(document).ready(function () {
+
+
+
+
+
+        var pathurl = '@Url.Action("BindProductivityProject", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'POST',
+            data: {
+                Clientcode: 'ALL'
+            },
+
+            success: function (data) {
+                $("#wait").css("display", "none");
+                var markup = "<option value='0'>ALL</option>";
+                for (var x = 0; x < data.length; x++) {
+                    if (data[x].Text != "undefined") {
+                        markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                    }
+                }
+                $("#ddlproject").html(markup).show();
+
+
+
+
+            }
+        });
+
+    });
+
+
+    $("#txtpsn").on('keypress', function (e) {
+        if (e.which === 13) {
+            GetProjectcode();
+            ////Disable textbox to prevent multiple submit
+            //$(this).attr("disabled", "disabled");
+
+            ////Do Stuff, submit, etc..
+
+            ////Enable the textbox again if needed.
+            //$(this).removeAttr("disabled");
+        }
+    });
+
+
+    function GetProjectcode() {
+
+        var pathurl = '@Url.Action("BindAssociateProject", "Admin")';
+         $.ajax({
+             url: pathurl,
+             type: 'POST',
+             data: {
+                 startdate: $("#startdate").val(),
+                 enddate: $("#enddate").val(),
+                 PSN: $("#txtpsn").val()
+             },
+
+
+             success: function (data) {
+                
+                 $("#wait").css("display", "none");
+                 var markup;
+                 if (data.length > 0)
+                    {
+                     markup = "<option value='0'>ALL</option>";
+                     for (var x = 0; x < data.length; x++)
+                     {
+                         if (data[x].Text)
+                         {
+                             markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                         }
+                     }
+                   }
+                 else
+                 {
+                     markup = "<option value='0'>No Data</option>";
+                 }
+                
+                 $("#ddlproject").html(markup).show();
+                
+             }
+         });
+
+
+
+     }
+
+    
+
+    function ProductivityReport() {
+        $("#wait").css("display", "block");
+        var Value = $("#txtpsn").val();
+        if (Value.length > 0) {
+            var pathurl = '@Url.Action("AssociateProductivity", "Admin")';
+            $.ajax({
+                url: pathurl,
+                type: 'GET',
+                data: {
+                    startdate: $("#startdate").val(),
+                    enddate: $("#enddate").val(),
+                    ProjectId: $("#ddlproject option:selected").text(),
+                    PSN: $("#txtpsn").val()
+                },
+                success: function (data) {
+                    $("#wait").css("display", "none");
+                    $("#reportlist").html(data);
+                }
+            });
+        }
+        else {
+            $("#wait").css("display", "none");
+            alert("Please enter PSN No");
+        }
+    }
+
+   
+
+</script>

@@ -1,0 +1,167 @@
+﻿
+
+<div class="page-container" style="margin-top: 20px">
+    <!-- BEGIN SIDEBAR -->
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet light bordered">
+                <div class="m-heading-1 border-green m-bordered ">
+                    <div class="caption font-dark">
+                        <span class="caption-subject bold uppercase">Remove Entries</span>
+                    </div>
+                </div>
+@using (Html.BeginForm("RemoveTLmistakeEntry", "Admin", null, FormMethod.Post))
+{
+    @Html.AntiForgeryToken() 
+    @Html.ValidationSummary()
+    
+<div class="portlet-body">
+                    <div class="table-header">
+                        <div class="form-group">
+                            @if (@TempData["Msg"] != null)
+                            {
+                                <div class="alert alert-info" id="MsgDiv">
+                                    <button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button>
+                                    @TempData["Msg"]
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="table-toolbar">
+                       
+                       
+                        <div class="row">
+                            <div class="col-md-1">Date</div>
+                            <div class="col-md-3 valid-group">
+                                <div >
+                                     <input type="text" id="from" name="dateFrom">
+
+                                </div>
+                            </div>
+                            </div>
+
+                        @* <div style="height:20px"></div>
+                         <div class="row">
+                               <label class="col-md-1 ">Location</label>
+                                 <div class="col-md-3 valid-group">
+                                     <div>
+
+                        @Html.DropDownList("Location", new List<SelectListItem>
+                            {
+                                new SelectListItem{ Text = "ALL", Value = "7" },
+                                new SelectListItem{ Text = "KAKKANAD", Value = "6" },
+                                new SelectListItem{ Text = "MNS", Value = "5" },
+                                new SelectListItem{ Text = "MQC", Value = "4" },
+                                new SelectListItem{ Text = "MDS", Value = "3" },
+                                new SelectListItem {Text = "KNPY", Value = "2"},
+                                new SelectListItem{ Text = "TVM", Value = "1" },
+                              
+                             }, new { id = "ddlLocations", @class = "form-control" }) 
+ 
+                              </div>
+
+
+                                       </div>
+                                       </div>                                                                            
+                                                        *@                                                 
+                       
+                       <div style="height:20px"></div>
+
+                 
+
+                         <div class="col-md-3">
+                                <div class="btn-group">
+                                    <button type="submit" id="search" class="btn sbold green" >
+                                        Delete
+                                    <i class="fa fa-upload"></i>
+                                    </button>
+                                    
+                                    </div>
+                              
+
+                                </div>
+
+                     </div>
+
+                    </div>
+                   
+    
+}
+
+   
+                    
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- END EXAMPLE TABLE PORTLET-->
+
+<script>
+    $(function () {
+        $("#from").datepicker("setDate", new Date());
+        $("#from").datepicker({
+            minDate: 0,
+            defaultDate: "+1w",
+            changeMonth: true,
+            numberOfMonths: 1,
+           
+        });
+        $('#from').datepicker({ autoclose: true });
+       
+    }).on('change', function () {
+        $('.datepicker').hide();
+    });
+    ;
+</script>
+
+
+<script>
+   
+   
+
+    jQuery(document).ready(function () {
+        setTimeout(function () {
+            $("#MsgDiv").slideUp(400);
+        }, 2000);
+        $('#divPhotolistpop').css('width', '55%');
+    });
+
+
+    $("#ddlLocations").on("change", function () {
+
+       
+        var pathurl = '@Url.Action("LocationwiseFileupload", "Admin")';
+        $.ajax(
+        {
+            url: pathurl,
+            type: 'GET',
+            data: {
+                LocationId: $("#ddlLocations option:selected").text(),
+                date: $('#from').val()
+
+            },
+            success: function (data) {
+                $("#reportlist").html(data);
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    });
+
+
+ 
+
+
+
+
+
+  
+
+
+
+</script>

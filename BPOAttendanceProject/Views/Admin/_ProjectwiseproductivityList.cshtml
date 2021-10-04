@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "_ProjectwiseproductivityList";
+}
+
+@model  BPOAttendanceProject.Models.ProjectproductivityModel    
+
+@if (Model.LstProjectproductivityModel.Count > 0)
+{
+    <table class="table table-striped table-bordered table-hover table-checkable order-column" id="tblPreprocess">
+        <thead>
+            <tr>
+                <th style="width:15%;text-align: left;">PECode </th>
+                <th style="width:15%;text-align: left;">Planned Record </th>
+                <th style="width:15%;text-align: left;">Actual Record </th>
+                 <th style="width:20%;text-align: center;">Target Revenue(INR) </th>
+                <th style="width:20%;text-align: center;">Actual Revenue(INR) </th>
+                <th style="width:20%;text-align: center;">Revenue Achievement(%) </th>
+                <th style="width:20%;text-align: center;">Productivity/Hour </th>
+            </tr>
+        </thead>
+        <tbody>
+
+         @foreach (var item in Model.LstProjectproductivityModel)
+                             {
+             
+             
+         <tr class="odd gradeX">
+                            <td style="text-align: left;">@item.pecode</td>
+                            <td style="text-align: right;">@Math.Round(item.plannedprodrecord,2).ToString("#,##0")</td>
+                            <td style="text-align: right;">@Math.Round(item.actualprodrecord,2).ToString("#,##0")</td>
+                            <td style="text-align: right;">@Math.Round(item.Targetrevenue,2).ToString("#,##0")</td>
+                            <td style="text-align: right;">@Math.Round(item.Actualrevenue,2).ToString("#,##0")</td>
+                            <td style="text-align: right;">@Math.Round(item.revenueachievement*100,2)</td>
+                            <td style="text-align: right;">@Math.Round(item.Productivity)</td>
+           </tr>
+             
+         }
+            
+ </tbody>
+  </table>
+}
+ else
+                         {
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="alert alert-info">
+                                                        <strong>No Records</strong><br />
+                                                    </div>
+                                                </div>
+                                            </div>
+                         }
+
+<script>
+
+
+    jQuery(function ($) {
+        $('#tblPreprocess').dataTable({
+
+            "aoColumns": [
+                              null, null, null, null,null,null,null
+
+            ]
+
+        });
+
+    });
+
+</script>
+

@@ -1,0 +1,212 @@
+﻿@{
+   
+}
+<link href="../assets/global/plugins/bootstrap-sweetalert/sweetalert.css" rel="stylesheet" />
+<link href="../assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css" />
+<link href="../assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css" />
+
+@model BPOAttendanceProject.Models.FinalQcModel
+
+<div>
+    @using (Html.BeginForm("SavePromoDetails", "Admin", FormMethod.Post, new { @classs = "userform", @id = "form" }))
+    {
+        <div class="modal-content">
+            <div class="modal-body">
+                <div>
+                    <div>
+                        <!-- BEGIN SAMPLE FORM PORTLET-->
+                        <div class="portlet light bordered">
+                            <div class="m-heading-1 border-green m-bordered">
+                                <div class="caption">
+                                    <i class="fa fa-edit"></i>
+                                  
+                                      @if (Model.Id > 0)
+                                    {
+                                    <span class="caption-subject font-dark sbold uppercase">Edit Details</span>
+                                    }
+                                   
+
+
+                                </div>
+                            </div>
+                            <div class="portlet-body form">
+                                <div class="form-horizontal">
+                                    <div class="form-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+
+                                                <div class="form-group">
+                                                    @Html.HiddenFor(model => model.Id, new { @Id = "Id" })
+                                                    <label class="col-md-3 control-label">Project</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span id="errmsg" class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.project, new {  @id = "txtproject", @class = "form-control", @placeholder = "Project", @autocomplete = "off", @required = "required",@maxlength="20" })
+                                                            
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                               
+
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Location</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.Location, new { @id = "txtlocation", @class = "form-control", @placeholder = "Location", @autocomplete = "off", @required = "required",@maxlength="50" })
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Event code</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.Eventcode, new { @id = "txtEventcode", @class = "form-control", @placeholder = "Eventcode", @autocomplete = "off", @required = "required",@maxlength="50" })
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label"> No of Batches</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.noofbatches, new {  @id = "txtnoofbatches", @class = "form-control", @placeholder = "No of characters", @autocomplete = "off",@maxlength="50" })
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+                                            
+
+
+                                               <div class="form-group">
+                                                    <label class="col-md-3 control-label">Client code</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.Clientcode, new {  @id = "txtClientcode", @class = "form-control", @placeholder = "Client code", @autocomplete = "off",@maxlength="50" })
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Total promotion</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.totalpromotion, new {  @id = "txtpromotion", @class = "form-control", @placeholder = "Total Promotion", @autocomplete = "off",@maxlength="50" })
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+                                                    <div class="form-group">
+                                                    <label class="col-md-3 control-label">Character Rate</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.characterrate, new {  @id = "txtcharacterrate", @class = "form-control", @placeholder = "Character Rate", @autocomplete = "off",@maxlength="50" })
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                                   
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END SAMPLE FORM PORTLET-->
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark btn-outline" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn green">Save</button>
+            </div>
+        </div>
+    }
+    <!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->
+
+
+
+
+
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="../assets/global/plugins/bootstrap-sweetalert/sweetalert.js"></script>
+<script src="../assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="../assets/pages/scripts/ui-extended-modals.min.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
+
+<style>
+
+    .sweet-overlay {
+        z-index: 20000;
+    }
+
+    .sweet-alert {
+        z-index: 20000;
+    }
+
+    #errmsg
+{
+color: red;
+}
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+

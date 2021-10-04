@@ -1,0 +1,52 @@
+﻿@using System.Data
+@model DataTable
+@{
+   
+    int count = 0;
+}
+
+<style>
+
+.modal.container {
+	width:800px;
+    margin-left:-250px;
+    align-content:center
+}
+</style>
+
+<table class="table table-bordered table-responsive table-hover" id="tblPreprocess" style="width:100%;" >
+    <tr>
+       <th style="background-color:#ADD8E6">Sno</th>
+       <th style="background-color:#ADD8E6">MMS</th>
+       <th style="background-color:#ADD8E6">BPO Online</th>
+    </tr>
+      
+    
+    @foreach (DataRow row in Model.Rows)
+    {
+
+        count = count + 1; 
+       
+         <tr class="odd gradeX">
+             <td>@count</td>
+
+            @foreach (DataColumn col in Model.Columns)
+            {
+              <td style="width:35%;">@row[col.ColumnName]</td>     
+              
+             }
+        </tr>
+         
+      }
+       
+       
+ 
+</table>
+
+ <div class="modal-footer">
+
+
+
+            <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+           
+</div>

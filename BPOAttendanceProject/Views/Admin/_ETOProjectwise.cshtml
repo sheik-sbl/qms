@@ -1,0 +1,65 @@
+﻿@model  BPOAttendanceProject.Models.DailyETO    
+
+@if (Model.LstDailyETO.Count > 0)
+{
+    <table class="table table-striped table-bordered table-hover table-checkable order-column" id="tblPreprocess">
+        <thead>
+            <tr>
+                <th style="width:20%">Project </th>
+                <th style="width:15%">Date </th>
+                <th style="width:15%">Location </th>
+                <th style="width:20%">Actual Revenue(INR) </th>
+                <th style="width:20%">Actual Revenue(USD) </th>
+                <th style="width:20%">Employee ETO </th>
+            </tr>
+        </thead>
+        <tbody>
+
+         @foreach (var item in Model.LstDailyETO)
+                             {
+             
+             if (@item.Projectcode!="")
+             {
+         <tr class="odd gradeX">
+                            <td>@item.Projectcode</td>
+                            <td>@item.Date</td>
+                            <td>@item.Location</td>
+                            <td>@Math.Round(item.Actualrevenue,2)</td>
+                            <td>@Math.Round(item.Actualrevenue/item.dollarrate,2)</td>
+                            <td>@Math.Round(item.Actualrevenue/item.dollarrate/item.Employeeno,2)</td>
+           </tr>
+             }
+         }
+            
+ </tbody>
+  </table>
+}
+
+     else
+                         {
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="alert alert-info">
+                                                        <strong>No Records Found</strong><br />
+                                                    </div>
+                                                </div>
+                                            </div>
+                         }
+
+
+<script>
+
+
+    jQuery(function ($) {
+        $('#tblPreprocess').dataTable({
+
+            "aoColumns": [
+                              null, null, null, null, null,null
+
+            ]
+
+        });
+
+    });
+
+</script>

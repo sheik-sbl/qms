@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "_poctargetrevenue";
+}
+
+@model BPOAttendanceProject.Models.PocWiseModel
+
+@if (Model.PocWiseModelList != null)
+ {
+
+     if (Model.PocWiseModelList.Count > 0)
+            { 
+         <div class="portlet box grey">
+   <div class="portlet-title">      
+  <div class="caption">@ViewBag.Monthlist</div>
+    </div>
+       </div>                                   
+                                                   
+ 
+  <table id="tbldisplay" style="width:100%;border: 1px solid black;padding: 5px;">
+        <tr>
+        
+        <th style="border: 1px solid black;padding: 5px;background-color:#E5E5E5">POC</th>
+        <th style="border: 1px solid black;padding: 5px;background-color:#E5E5E5">Target </th>
+        <th style="border: 1px solid black;padding: 5px;background-color:#E5E5E5">Achieved</th>
+        <th style="border: 1px solid black;padding: 5px;background-color:#E5E5E5">%</th>
+       
+        </tr>
+        <tbody>
+                  @foreach (var item in Model.PocWiseModelList)
+                  { 
+                       
+                     <tr>
+                      <td style="border: 1px solid black;padding: 5px;text-align:left;">@item.PocName</td>
+                      <td style="border: 1px solid black;padding: 5px;text-align:right;">@item.Target.ToString("#,##0")</td>
+                      <td style="border: 1px solid black;padding: 5px;text-align:right;">@item.Actual.ToString("#,##0")</td>
+                      <td style="border: 1px solid black;padding: 5px;text-align:right;">@Math.Round(item.Achieved*100)%</td>
+                       
+                    
+                     </tr>
+                  }
+         
+             @*  @if (Model.PocWiseModelList.Count > 0)
+               {
+                 <tr><td style="border: 1px solid black;padding: 5px;font-weight: bold;">Shan</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@String.Format( "{0:#,##0.##}", Math.Round(Model.InvoiceModelList.Sum(e => e.Target)) ) </td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@String.Format( "{0:#,##0.##}",Math.Round( Model.InvoiceModelList.Sum(e => e.Actual)) )</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@(Math.Round(Model.InvoiceModelList.Sum(e => e.Actual) / Model.InvoiceModelList.Sum(e => e.Target) * 100, 0))%</td></tr>
+                }
+             *@
+
+                </tbody>         
+                  
+                 
+   </table>
+    
+ }
+ 
+   else
+                         {
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="alert alert-info">
+                                                        <strong>No Records Found</strong><br />
+                                                    </div>
+                                                </div>
+                                            </div>
+                         }
+  }
+
+ 
+ 
+<script type="text/javascript">
+  
+   
+
+
+
+</script>
+

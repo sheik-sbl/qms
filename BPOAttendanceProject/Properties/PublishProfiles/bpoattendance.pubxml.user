@@ -1,0 +1,1153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <LastUsedBuildConfiguration>Release</LastUsedBuildConfiguration>
+    <LastUsedPlatform>Any CPU</LastUsedPlatform>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>E:\RE</_PublishTargetUrl>
+    <History>True|2021-08-17T07:14:02.9822233Z;True|2021-08-17T12:43:37.3251060+05:30;</History>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Antlr3.Runtime.dll">
+      <publishTime>07/29/2021 12:12:41</publishTime>
+    </File>
+    <File Include="bin/BangloreBPOProject.dll">
+      <publishTime>08/18/2021 14:35:00</publishTime>
+    </File>
+    <File Include="bin/BangloreBPOProject.pdb">
+      <publishTime>08/18/2021 14:35:00</publishTime>
+    </File>
+    <File Include="bin/BouncyCastle.Crypto.dll">
+      <publishTime>07/29/2021 12:09:45</publishTime>
+    </File>
+    <File Include="bin/BPOAttendanceProject.dll">
+      <publishTime>07/26/2021 11:12:14</publishTime>
+    </File>
+    <File Include="bin/ClosedXML.dll">
+      <publishTime>07/29/2021 12:01:52</publishTime>
+    </File>
+    <File Include="bin/DocumentFormat.OpenXml.dll">
+      <publishTime>07/29/2021 12:01:52</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.AspNet.dll">
+      <publishTime>07/29/2021 12:11:18</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.Core.dll">
+      <publishTime>07/29/2021 12:11:20</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OAuth.Consumer.dll">
+      <publishTime>07/29/2021 12:11:21</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OAuth.dll">
+      <publishTime>07/29/2021 12:11:21</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OpenId.dll">
+      <publishTime>07/29/2021 12:11:23</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OpenId.RelyingParty.dll">
+      <publishTime>07/29/2021 12:11:24</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>07/29/2021 12:12:03</publishTime>
+    </File>
+    <File Include="bin/ExcelDataReader.DataSet.dll">
+      <publishTime>07/29/2021 12:12:10</publishTime>
+    </File>
+    <File Include="bin/ExcelDataReader.dll">
+      <publishTime>07/29/2021 12:12:08</publishTime>
+    </File>
+    <File Include="bin/itextsharp.dll">
+      <publishTime>07/29/2021 12:13:04</publishTime>
+    </File>
+    <File Include="bin/Microsoft.CSharp.dll">
+      <publishTime>07/29/2021 12:01:52</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>07/29/2021 12:12:26</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.WebPages.OAuth.dll">
+      <publishTime>07/29/2021 12:12:24</publishTime>
+    </File>
+    <File Include="bin/MySql.Data.dll">
+      <publishTime>07/29/2021 12:07:57</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>07/29/2021 12:12:30</publishTime>
+    </File>
+    <File Include="bin/SpreadsheetLight.dll">
+      <publishTime>07/29/2021 12:07:57</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Formatting.dll">
+      <publishTime>07/29/2021 12:12:18</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>07/29/2021 12:12:23</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.dll">
+      <publishTime>07/29/2021 12:12:20</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.WebHost.dll">
+      <publishTime>07/29/2021 12:12:20</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>07/29/2021 12:12:15</publishTime>
+    </File>
+    <File Include="bin/System.Web.Optimization.dll">
+      <publishTime>07/29/2021 12:12:17</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>07/29/2021 12:12:17</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>07/29/2021 12:12:23</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>07/29/2021 12:12:23</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>07/29/2021 12:12:23</publishTime>
+    </File>
+    <File Include="bin/Web.config">
+      <publishTime>08/17/2021 12:43:36</publishTime>
+    </File>
+    <File Include="bin/Web.Debug.config">
+      <publishTime>07/29/2021 12:01:55</publishTime>
+    </File>
+    <File Include="bin/Web.Release.config">
+      <publishTime>07/29/2021 12:01:55</publishTime>
+    </File>
+    <File Include="bin/WebGrease.dll">
+      <publishTime>07/29/2021 12:12:41</publishTime>
+    </File>
+    <File Include="bin/WebMatrix.Data.dll">
+      <publishTime>07/29/2021 12:12:24</publishTime>
+    </File>
+    <File Include="bin/WebMatrix.WebData.dll">
+      <publishTime>07/29/2021 12:12:24</publishTime>
+    </File>
+    <File Include="Content/c3.css">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/c3.min.css">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/Site.css">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-bg_flat_0_aaaaaa_40x100.png">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-bg_flat_75_ffffff_40x100.png">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-bg_glass_55_fbf9ee_1x400.png">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-bg_glass_65_ffffff_1x400.png">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-bg_glass_75_dadada_1x400.png">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-bg_glass_75_e6e6e6_1x400.png">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-bg_glass_95_fef1ec_1x400.png">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-bg_highlight-soft_75_cccccc_1x100.png">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-icons_222222_256x240.png">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-icons_2e83ff_256x240.png">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-icons_454545_256x240.png">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-icons_888888_256x240.png">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-icons_cd0a0a_256x240.png">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery-ui.css">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.accordion.css">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.all.css">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.autocomplete.css">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.base.css">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.button.css">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.core.css">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.datepicker.css">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.dialog.css">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.progressbar.css">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.resizable.css">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.selectable.css">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.slider.css">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.tabs.css">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.theme.css">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-bg_flat_0_aaaaaa_40x100.png">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-bg_flat_75_ffffff_40x100.png">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-bg_glass_55_fbf9ee_1x400.png">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-bg_glass_65_ffffff_1x400.png">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-bg_glass_75_dadada_1x400.png">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-bg_glass_75_e6e6e6_1x400.png">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-bg_glass_95_fef1ec_1x400.png">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-bg_highlight-soft_75_cccccc_1x100.png">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-icons_222222_256x240.png">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-icons_2e83ff_256x240.png">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-icons_454545_256x240.png">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-icons_888888_256x240.png">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-icons_cd0a0a_256x240.png">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery-ui.min.css">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.accordion.min.css">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.autocomplete.min.css">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.button.min.css">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.core.min.css">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.datepicker.min.css">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.dialog.min.css">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.progressbar.min.css">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.resizable.min.css">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.selectable.min.css">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.slider.min.css">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.tabs.min.css">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.theme.min.css">
+      <publishTime>07/29/2021 12:00:46</publishTime>
+    </File>
+    <File Include="DollarSettings.cshtml">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="favicon.ico">
+      <publishTime>07/29/2021 12:07:59</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>07/29/2021 12:01:39</publishTime>
+    </File>
+    <File Include="Images/accent.png">
+      <publishTime>07/29/2021 12:01:39</publishTime>
+    </File>
+    <File Include="Images/bullet.png">
+      <publishTime>07/29/2021 12:01:39</publishTime>
+    </File>
+    <File Include="Images/heroAccent.png">
+      <publishTime>07/29/2021 12:01:39</publishTime>
+    </File>
+    <File Include="Images/mrm.png">
+      <publishTime>07/29/2021 12:01:39</publishTime>
+    </File>
+    <File Include="Images/orderedList0.png">
+      <publishTime>07/29/2021 12:01:39</publishTime>
+    </File>
+    <File Include="Images/orderedList1.png">
+      <publishTime>07/29/2021 12:01:39</publishTime>
+    </File>
+    <File Include="Images/orderedList2.png">
+      <publishTime>07/29/2021 12:01:39</publishTime>
+    </File>
+    <File Include="Images/orderedList3.png">
+      <publishTime>07/29/2021 12:01:39</publishTime>
+    </File>
+    <File Include="Images/orderedList4.png">
+      <publishTime>07/29/2021 12:01:39</publishTime>
+    </File>
+    <File Include="Images/orderedList5.png">
+      <publishTime>07/29/2021 12:01:39</publishTime>
+    </File>
+    <File Include="Images/orderedList6.png">
+      <publishTime>07/29/2021 12:01:39</publishTime>
+    </File>
+    <File Include="Images/orderedList7.png">
+      <publishTime>07/29/2021 12:01:39</publishTime>
+    </File>
+    <File Include="Images/orderedList8.png">
+      <publishTime>07/29/2021 12:01:39</publishTime>
+    </File>
+    <File Include="Images/orderedList9.png">
+      <publishTime>07/29/2021 12:01:39</publishTime>
+    </File>
+    <File Include="LICENSE.txt">
+      <publishTime>07/29/2021 12:01:40</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>07/29/2021 12:09:08</publishTime>
+    </File>
+    <File Include="Scripts/c3.js">
+      <publishTime>07/29/2021 12:01:55</publishTime>
+    </File>
+    <File Include="Scripts/c3.min.js">
+      <publishTime>07/29/2021 12:01:55</publishTime>
+    </File>
+    <File Include="Scripts/d3.js">
+      <publishTime>07/29/2021 12:01:55</publishTime>
+    </File>
+    <File Include="Scripts/d3.min.js">
+      <publishTime>07/29/2021 12:01:55</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.7.1.js">
+      <publishTime>07/29/2021 12:01:55</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.7.1.min.js">
+      <publishTime>07/29/2021 12:01:55</publishTime>
+    </File>
+    <File Include="Scripts/jquery-migrate-1.2.1.js">
+      <publishTime>07/29/2021 12:01:55</publishTime>
+    </File>
+    <File Include="Scripts/jquery-ui-1.8.20.js">
+      <publishTime>07/29/2021 12:01:55</publishTime>
+    </File>
+    <File Include="Scripts/jquery-ui-1.8.20.min.js">
+      <publishTime>07/29/2021 12:01:55</publishTime>
+    </File>
+    <File Include="Scripts/jquery-ui.min.js">
+      <publishTime>07/29/2021 12:01:55</publishTime>
+    </File>
+    <File Include="Scripts/jquery.min.js">
+      <publishTime>07/29/2021 12:01:55</publishTime>
+    </File>
+    <File Include="Scripts/jquery.unobtrusive-ajax.js">
+      <publishTime>07/29/2021 12:01:55</publishTime>
+    </File>
+    <File Include="Scripts/jquery.unobtrusive-ajax.min.js">
+      <publishTime>07/29/2021 12:01:55</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.js">
+      <publishTime>07/29/2021 12:01:55</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.min.js">
+      <publishTime>07/29/2021 12:01:55</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.js">
+      <publishTime>07/29/2021 12:01:55</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.min.js">
+      <publishTime>07/29/2021 12:01:55</publishTime>
+    </File>
+    <File Include="Scripts/json2.js">
+      <publishTime>07/29/2021 12:01:55</publishTime>
+    </File>
+    <File Include="Scripts/knockout-2.1.0.debug.js">
+      <publishTime>07/29/2021 12:01:55</publishTime>
+    </File>
+    <File Include="Scripts/knockout-2.1.0.js">
+      <publishTime>07/29/2021 12:01:55</publishTime>
+    </File>
+    <File Include="Scripts/modernizr-2.5.3.js">
+      <publishTime>07/29/2021 12:01:55</publishTime>
+    </File>
+    <File Include="Scripts/table2excel.js">
+      <publishTime>07/29/2021 12:01:55</publishTime>
+    </File>
+    <File Include="Scripts/_references.js">
+      <publishTime>07/29/2021 12:01:55</publishTime>
+    </File>
+    <File Include="Views/Account/ExternalLoginConfirmation.cshtml">
+      <publishTime>07/29/2021 12:00:38</publishTime>
+    </File>
+    <File Include="Views/Account/ExternalLoginFailure.cshtml">
+      <publishTime>07/29/2021 12:00:38</publishTime>
+    </File>
+    <File Include="Views/Account/Login.cshtml">
+      <publishTime>07/29/2021 12:00:38</publishTime>
+    </File>
+    <File Include="Views/Account/Manage.cshtml">
+      <publishTime>07/29/2021 12:00:38</publishTime>
+    </File>
+    <File Include="Views/Account/Register.cshtml">
+      <publishTime>07/29/2021 12:00:38</publishTime>
+    </File>
+    <File Include="Views/Account/_ChangePasswordPartial.cshtml">
+      <publishTime>07/29/2021 12:00:38</publishTime>
+    </File>
+    <File Include="Views/Account/_ExternalLoginsListPartial.cshtml">
+      <publishTime>07/29/2021 12:00:38</publishTime>
+    </File>
+    <File Include="Views/Account/_RemoveExternalLoginsPartial.cshtml">
+      <publishTime>07/29/2021 12:00:38</publishTime>
+    </File>
+    <File Include="Views/Account/_SetPasswordPartial.cshtml">
+      <publishTime>07/29/2021 12:00:38</publishTime>
+    </File>
+    <File Include="Views/Admin/AssociatewiseProductivity.cshtml">
+      <publishTime>07/29/2021 12:00:38</publishTime>
+    </File>
+    <File Include="Views/Admin/BulkUpload.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/ConsolidatedProductionReport.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/ConsolidatedReport.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/ConsolidatedView.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/DailymasterProductionReportIndex.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/DailyMasterProductionView.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/DailyProductionView.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/DailyProductionViewIndex.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/DailyTeamLeadViewIndex.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/DailyTeamView.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/DailyTeamViewIndex.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/DollarSettings.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/EditEntryEmployeeDetails.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/EmployeeList.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/EmployeeMapping.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/EntryEmployeeDetails.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/ETOCalculation.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/ETOCalculationLocationwise.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/ETOCalculationProjectwise.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/ETOEmployee.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/ETOEmployeeDatewise.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/FileUploadIndex.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/FinalQctoCusList.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/HolidayList.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/locationtargetrevenue.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/LocationwiseDailyreportIndex.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/MonthlyConfigurationList.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/MonthlyProductionDetails.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/MonthlyTargetedrecords.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/PasswordList.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/PendingTL.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/PendingTLAdmin.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/PeriodicProductionChartView.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/PeriodicProductionReportIndex.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/PeriodicProductionReportList.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/PeriodicProductionView.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/PeriodicProductionViewIndex.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/PeriodicRevenueReport.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/ProductionDetailsReport.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/ProductionEntryDetails.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/ProductionUploadIndex.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/ProductionuploadIndexByAdmin.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/ProductionuploadSummary.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/Productivity.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/ProjectConfigurationList.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/projectlist.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/Projectwiseproductivity.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/ProjectwiserevenueAchievement.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/PromotionDetailsReport.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/PromotionList.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/RemoveEntry.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/RemoveTeamleadEntry.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/ResourcePlanList.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/resourcetargetrevenue.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/Resourcewiseproductivity.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/ResourcewiseRevenue.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/RevenueChartIndex.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/Revenuechartview.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/RevenueConfigurationList.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/RevenueDetailReport.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/RevenueDetailsList.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/SampleConsolidation.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/SampleFileupload.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/samplepage.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/SampleProjectFileupload.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/singlelocationtargetrevenue.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/TeamleadPending.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/TeamLeadUploadViewIndex.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/Tlwiseproductivity.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/uploadbulkemployee.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/UploadDailyCustomerDetails.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/UploadDailyPromotionDetails.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/uploaddailyrevenuedetails.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/UploadProjectConfiguration.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/UploadQcCustomer.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/UploadRevenueconfiguration.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/Uploaduserdetails.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/UserList.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/ViewProduction.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/YearlyProductionDetails.cshtml">
+      <publishTime>07/29/2021 12:00:40</publishTime>
+    </File>
+    <File Include="Views/Admin/_AssociatewiseProductivityList.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_DailyConsolidatedProductionReport.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_Dailyreport.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_DailySampleview.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_DailyTeamleadproductionview.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_EditDollar.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_Employee.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_ETODatewise.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_ETOEmployeewise.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_ETOEmployeewisee.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_ETOLocationwise.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_ETOProjectwise.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_FinalQcCustlist.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_GetPromotionListPopup.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_GetQcListPopup.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_GetRevRepPopup.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_Holiday.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_MonthlyConfiguration.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_MonthlyProductionDetailsList.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_MonthlyRecord.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_MonthlySummaryDetailsList.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_NewDollar.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_NewEmployee.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_NotExistForm.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_NotUpdated.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_ProductionDetailsList.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_ProductionReportList.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_ProjectConfiguration.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_projectlocationreport.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_projectmonthlylocationreport.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_ProjectRevAchievement.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_ProjectwiseproductivityList.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_PromotionReportList.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_ReasonEntry.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_ResourcePlan.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_ResourcewiseproductivityList.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_RevenueConfigurationForm.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_RevenueReportList.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_TlwwiseproductivityList.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_UploadDailyPromotionDetails.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_UploadReason.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_UploadRevenue.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_UploadRevenueReport.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_uploadsample.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_UserForm.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_viewproductionList.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_ViewResourceplan.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Admin/_YearlyPoductionDetailsList.cshtml">
+      <publishTime>07/29/2021 12:00:41</publishTime>
+    </File>
+    <File Include="Views/Chart/AverageProductionList.cshtml">
+      <publishTime>07/29/2021 12:00:42</publishTime>
+    </File>
+    <File Include="Views/Chart/HighlowReport.cshtml">
+      <publishTime>07/29/2021 12:00:42</publishTime>
+    </File>
+    <File Include="Views/Chart/Index.cshtml">
+      <publishTime>07/29/2021 12:00:42</publishTime>
+    </File>
+    <File Include="Views/Chart/MilestoneList.cshtml">
+      <publishTime>07/29/2021 12:00:42</publishTime>
+    </File>
+    <File Include="Views/Chart/Processwiseimprovement.cshtml">
+      <publishTime>07/29/2021 12:00:42</publishTime>
+    </File>
+    <File Include="Views/Chart/_AvgProductionList.cshtml">
+      <publishTime>07/29/2021 12:00:42</publishTime>
+    </File>
+    <File Include="Views/Chart/_HighlowReportList.cshtml">
+      <publishTime>07/29/2021 12:00:42</publishTime>
+    </File>
+    <File Include="Views/Chart/_Milestoneform.cshtml">
+      <publishTime>07/29/2021 12:00:42</publishTime>
+    </File>
+    <File Include="Views/Chart/_ProcesswiseReport.cshtml">
+      <publishTime>07/29/2021 12:00:42</publishTime>
+    </File>
+    <File Include="Views/Chart/_Registration.cshtml">
+      <publishTime>07/29/2021 12:00:42</publishTime>
+    </File>
+    <File Include="Views/Error.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/Error/SessionTimedOut.cshtml">
+      <publishTime>07/29/2021 12:00:42</publishTime>
+    </File>
+    <File Include="Views/GIS/GisServices.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/GIS/MonthlyGisService.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/GIS/MonthlyRevenuePlan.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/GIS/_AddGISservice.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/GIS/_AddMonthlyGisservice.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/GIS/_AddRevenueplan.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/GIS/_ViewGisService.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/Home/About.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/Home/Contact.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/Home/Index.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/Invoice/Dashboardchart.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/Invoice/MonthlyTargetAchieverevenue.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/Invoice/POCWiseReport.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/Invoice/UploadPOCWise.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/Invoice/_Addtargetrevenue.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/Invoice/_poctargetrevenue.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/Invoice/_Pocwisereport.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/Invoice/_targetvsrevenuelist.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/MMS/AdditionalServices.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/MMS/CientsList.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/MMS/DashboardDetails.cshtml">
+      <publishTime>08/09/2021 13:07:38</publishTime>
+    </File>
+    <File Include="Views/MMS/MonthlyMMS.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/MMS/MonthlyRevenuePlan.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/MMS/NewClientList.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/MMS/ProjectList.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/MMS/UpdatesList.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/MMS/_AddAdditionalServices.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/MMS/_AddClient.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/MMS/_AddMonthlyMMS.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/MMS/_AddProject.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/MMS/_AddRevenueplan.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/MMS/_AddUpdates.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/MMS/_DashboardList.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/MMS/_DashboardUSDList.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/MMS/_DetailMMS.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/MMS/_ViewAdditionalservice.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/MMS/_ViewClientBPOlist.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/MMS/_ViewClientCalllist.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/MMS/_ViewClientlist.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/MMS/_ViewClientMMSlist.cshtml">
+      <publishTime>07/29/2021 12:00:43</publishTime>
+    </File>
+    <File Include="Views/MRM/MonthlyRevenuePlan.cshtml">
+      <publishTime>07/29/2021 12:00:44</publishTime>
+    </File>
+    <File Include="Views/MRM/MonthlySoftwareservice.cshtml">
+      <publishTime>07/29/2021 12:00:44</publishTime>
+    </File>
+    <File Include="Views/MRM/SoftwareServices.cshtml">
+      <publishTime>07/29/2021 12:00:44</publishTime>
+    </File>
+    <File Include="Views/MRM/TeamwiseMRM.cshtml">
+      <publishTime>07/29/2021 12:00:44</publishTime>
+    </File>
+    <File Include="Views/MRM/_AddMonthlysoftwareservice.cshtml">
+      <publishTime>07/29/2021 12:00:44</publishTime>
+    </File>
+    <File Include="Views/MRM/_AddRevenueplan.cshtml">
+      <publishTime>07/29/2021 12:00:44</publishTime>
+    </File>
+    <File Include="Views/MRM/_AddSoftwareservice.cshtml">
+      <publishTime>07/29/2021 12:00:44</publishTime>
+    </File>
+    <File Include="Views/MRM/_AddTeamwiseMRM.cshtml">
+      <publishTime>07/29/2021 12:00:44</publishTime>
+    </File>
+    <File Include="Views/MRM/_EditTeamwiseMRM.cshtml">
+      <publishTime>07/29/2021 12:00:44</publishTime>
+    </File>
+    <File Include="Views/MRM/_testmrm.cshtml">
+      <publishTime>07/29/2021 12:00:44</publishTime>
+    </File>
+    <File Include="Views/MRM/_ViewSoftwareservice.cshtml">
+      <publishTime>07/29/2021 12:00:44</publishTime>
+    </File>
+    <File Include="Views/MRM/_ViewTeamwiseMRM.cshtml">
+      <publishTime>07/29/2021 12:00:44</publishTime>
+    </File>
+    <File Include="Views/Shared/ChangePassword.cshtml">
+      <publishTime>07/29/2021 12:00:38</publishTime>
+    </File>
+    <File Include="Views/Shared/Error.cshtml">
+      <publishTime>07/29/2021 12:00:38</publishTime>
+    </File>
+    <File Include="Views/Shared/LoginPage.cshtml">
+      <publishTime>07/29/2021 12:00:38</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout.cshtml">
+      <publishTime>08/16/2021 12:37:59</publishTime>
+    </File>
+    <File Include="Views/Shared/_LoginPartial.cshtml">
+      <publishTime>07/29/2021 12:00:38</publishTime>
+    </File>
+    <File Include="Views/StaffAug/AdditionalInfo.cshtml">
+      <publishTime>07/29/2021 12:00:44</publishTime>
+    </File>
+    <File Include="Views/StaffAug/MonthlyRevenuePlan.cshtml">
+      <publishTime>07/29/2021 12:00:44</publishTime>
+    </File>
+    <File Include="Views/StaffAug/MonthlyStaffAugService.cshtml">
+      <publishTime>07/29/2021 12:00:44</publishTime>
+    </File>
+    <File Include="Views/StaffAug/_AddAdditionalInfo.cshtml">
+      <publishTime>07/29/2021 12:00:44</publishTime>
+    </File>
+    <File Include="Views/StaffAug/_AddRevenueplan.cshtml">
+      <publishTime>07/29/2021 12:00:44</publishTime>
+    </File>
+    <File Include="Views/StaffAug/_AddStaffAugService.cshtml">
+      <publishTime>07/29/2021 12:00:44</publishTime>
+    </File>
+    <File Include="Views/StaffAug/_ViewStaffAugService.cshtml">
+      <publishTime>07/29/2021 12:00:44</publishTime>
+    </File>
+    <File Include="Views/TLS/AssociateProductionReport.cshtml">
+      <publishTime>01/31/2021 23:32:25</publishTime>
+    </File>
+    <File Include="Views/TLS/CheckModel.cshtml">
+      <publishTime>03/19/2021 10:58:55</publishTime>
+    </File>
+    <File Include="Views/TLS/Dashboardchart.cshtml">
+      <publishTime>04/18/2021 16:12:43</publishTime>
+    </File>
+    <File Include="Views/TLS/DashChartview.cshtml">
+      <publishTime>04/18/2021 15:31:02</publishTime>
+    </File>
+    <File Include="Views/TLS/EditProjectInformation.cshtml">
+      <publishTime>04/07/2021 12:46:19</publishTime>
+    </File>
+    <File Include="Views/TLS/NewProjectInformation.cshtml">
+      <publishTime>04/05/2021 14:47:47</publishTime>
+    </File>
+    <File Include="Views/TLS/NewProjectInformations.cshtml">
+      <publishTime>03/09/2021 17:28:34</publishTime>
+    </File>
+    <File Include="Views/TLS/ProjectinformationList.cshtml">
+      <publishTime>03/26/2021 22:31:17</publishTime>
+    </File>
+    <File Include="Views/TLS/projectwiseTargetvsActual.cshtml">
+      <publishTime>04/18/2021 16:06:49</publishTime>
+    </File>
+    <File Include="Views/TLS/ResourceProductivity.cshtml">
+      <publishTime>01/31/2021 23:51:26</publishTime>
+    </File>
+    <File Include="Views/TLS/TargetActualrevenuechart.cshtml">
+      <publishTime>04/16/2021 17:51:51</publishTime>
+    </File>
+    <File Include="Views/TLS/TargetVsActual.cshtml">
+      <publishTime>04/18/2021 16:44:11</publishTime>
+    </File>
+    <File Include="Views/TLS/TargetvsRevenue.cshtml">
+      <publishTime>04/17/2021 08:59:08</publishTime>
+    </File>
+    <File Include="Views/TLS/testconfiguration.cshtml">
+      <publishTime>03/22/2021 22:44:29</publishTime>
+    </File>
+    <File Include="Views/TLS/TLProcessReport.cshtml">
+      <publishTime>01/31/2021 23:55:48</publishTime>
+    </File>
+    <File Include="Views/TLS/TLProductivity.cshtml">
+      <publishTime>01/31/2021 23:54:01</publishTime>
+    </File>
+    <File Include="Views/TLS/_DailyProduction.cshtml">
+      <publishTime>02/18/2021 10:06:08</publishTime>
+    </File>
+    <File Include="Views/TLS/_monthlyprojectwise.cshtml">
+      <publishTime>04/15/2021 16:10:18</publishTime>
+    </File>
+    <File Include="Views/TLS/_pdfgeneration.cshtml">
+      <publishTime>04/13/2021 13:09:03</publishTime>
+    </File>
+    <File Include="Views/TLS/_Projectwiseproductivity.cshtml">
+      <publishTime>02/18/2021 10:02:52</publishTime>
+    </File>
+    <File Include="Views/TLS/_Resourcewiseproductivity.cshtml">
+      <publishTime>02/18/2021 10:03:18</publishTime>
+    </File>
+    <File Include="Views/TLS/_targetvsactuallist.cshtml">
+      <publishTime>04/16/2021 20:28:04</publishTime>
+    </File>
+    <File Include="Views/TLS/_targetvsrevenuelist.cshtml">
+      <publishTime>05/03/2021 21:43:56</publishTime>
+    </File>
+    <File Include="Views/TLS/_TLProcesslist.cshtml">
+      <publishTime>01/31/2021 23:17:02</publishTime>
+    </File>
+    <File Include="Views/Web.config">
+      <publishTime>07/29/2021 12:00:44</publishTime>
+    </File>
+    <File Include="Views/_ViewStart.cshtml">
+      <publishTime>07/29/2021 12:00:44</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>08/17/2021 12:43:36</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

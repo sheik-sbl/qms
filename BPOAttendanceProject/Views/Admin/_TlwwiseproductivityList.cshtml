@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "_ProjectwiseproductivityList";
+}
+
+@model  BPOAttendanceProject.Models.TLproductivityModel    
+
+@if (Model.LstTLproductivityModel.Count > 0)
+{
+    <table class="table table-striped table-bordered table-hover table-checkable order-column" id="tbltl">
+        <thead>
+            <tr>
+                <th style="width:15%;text-align: left;">TL Name </th>
+                 <th style="width:20%;text-align: center;">Planned Production Records </th>
+                <th style="width:20%;text-align: center;">Actual Production Records </th>
+                <th style="width:20%;text-align: center;">Achievement(%) </th>
+                <th style="width:20%;text-align: center;">Productivity/hour </th>
+            </tr>
+        </thead>
+        <tbody>
+
+         @foreach (var item in Model.LstTLproductivityModel)
+                             {
+             
+             
+         <tr class="odd gradeX">
+                            <td style="text-align: left;">@item.tlname</td>
+                             <td style="text-align: right;">@Math.Round(item.Plannedproduction).ToString("#,##0")</td>
+                            <td style="text-align: right;">@item.Actualproduction.ToString("#,##0")</td>
+                             <td style="text-align: right;">@Math.Round(item.Achievement)</td>
+                             <td style="text-align: right;">@Math.Round(item.Productivity)</td>
+                         
+           </tr>
+             
+         }
+            
+ </tbody>
+  </table>
+}
+else
+                         {
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="alert alert-info">
+                                                        <strong>No Records</strong><br />
+                                                    </div>
+                                                </div>
+                                            </div>
+                         }
+
+
+
+
+<script>
+
+ jQuery(function ($) {
+     $('#tbltl').dataTable({
+
+            "aoColumns": [
+                              null, null, null,null,null
+
+            ]
+
+        });
+
+    });
+
+</script>

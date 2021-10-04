@@ -1,0 +1,87 @@
+﻿@model  BPOAttendanceProject.Models.ProductionDetailModel                     
+
+ 
+@if (Model.LstTeamleadProductionReport.Count > 0)
+{
+   
+    
+    
+     <table class="table table-striped table-bordered table-hover table-checkable order-column" id="tblPreprocess">
+        <thead>
+            <tr>
+               
+
+                <th style="width:5%">PSN </th>
+                <th style="width:5%">Process</th>
+                <th style="width:5%">Project</th>
+                <th style="width:5%">Project Code</th>
+                <th style="width:5%">Event code</th>
+                <th style="width:5%">Hours planned</th>
+                <th style="width:5%">Hours Worked</th>
+                <th style="width:5%">Actual Production</th>
+                <th style="width:5%">Remarks</th>
+               <th style="width:5%"> PECODE</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.LstTeamleadProductionReport)
+            {
+
+               
+                 <tr class="odd gradeX">
+                    <td>@item.psn</td>
+                    <td>@item.process</td>
+                    <td>@item.project</td>
+                    <td>@item.projectcode</td>
+                    <td>@item.eventcode</td>
+                    <td>@item.hoursplanned</td>
+                    <td>@item.hoursworked</td>
+                    <td>@item.actualproduction</td>
+                    <td>@item.remarks</td>
+                     <td>@(item.projectcode + item.eventcode)</td>
+                 
+                </tr>
+                       
+            }
+
+          
+        </tbody>
+</table>
+    
+ 
+       
+    
+  
+    
+    
+    
+    
+}
+else
+{
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="alert alert-info">
+                <strong>No Daily Production details found on this date</strong><br />
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+
+
+    jQuery(function ($) {
+        $('#tblPreprocess').dataTable({
+
+            "aoColumns": [
+                              null, null, null, null, null, null, null, null, null, null
+
+            ]
+
+        });
+
+    });
+
+</script>
+

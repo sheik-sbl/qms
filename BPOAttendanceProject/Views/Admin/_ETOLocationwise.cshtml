@@ -1,0 +1,63 @@
+﻿@using System.Data
+@model DataTable
+@{
+   
+   
+    int count = 0;
+    int datacount = 0;
+    int rowcount = 0;
+   
+}
+@if (Model.Rows.Count >0)
+{
+<table class="table table-striped table-bordered table-hover table-checkable order-column" id="tblPreprocess" >
+    <tr>
+        @foreach (DataColumn col in Model.Columns)
+        {
+            count = count + 1; 
+            if (count == 1 )
+             {
+            
+             <th style="width:8%">@col.ColumnName</th>
+        }
+        else
+         {
+             <th style="width:8%">@col.ColumnName</th>
+            
+            }       
+        }
+
+    </tr>
+    @foreach (DataRow row in Model.Rows)
+    {
+       
+         <tr>
+            @foreach (DataColumn col in Model.Columns)
+            {
+          
+                
+             if (@col.ColumnName!="Date")
+             {
+             <td>@string.Format("{0:#.00}", row[col.ColumnName]) </td>
+             }
+             else{
+                 
+             <td>@row[col.ColumnName]</td>
+             
+            
+             }
+             }
+        </tr>
+    }
+</table>
+}
+else
+{
+     <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="alert alert-info">
+                                                        <strong>No Records Found</strong><br />
+                                                    </div>
+                                                </div>
+                                            </div>
+}

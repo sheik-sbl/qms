@@ -1,0 +1,49 @@
+﻿@model BPOAttendanceProject.Models.ReasonModel 
+@*<button id="sample_editable_1_new" class="btn sbold green" onclick="OpenReason()">Update Reason</button>*@
+<table style="width:100%;border: 1px solid black;padding: 5px;">
+        <tr>
+        <th style="border: 1px solid black;padding: 5px;" >Date</th>
+         <th style="border: 1px solid black;padding: 5px;">Remarks </th>
+      
+        </tr>
+            
+                  @foreach (var item in Model.ReasonModelList)
+                  { 
+                
+                     <tr >
+                        <td style="border: 1px solid black;padding: 5px;">@item.date</td>
+                        <td style="border: 1px solid black;padding: 5px;">@item.Remarks</td>
+                      </tr>  
+                  }          
+       
+                    
+                    
+                
+         
+                
+   
+</table>
+ <div id="userform" class="modal " style="width: 100px;"     tabindex="-1">
+ </div>
+<script>
+
+
+
+function OpenReason() {
+       
+        var pathurl = '@Url.Action("Openreasonentry", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'GET',
+            success: function (data) {
+                $("#userform").html(data);
+                $("form").attr('autocomplete', 'off')
+                $("#userform").modal({                    // wire up the actual modal functionality and show the dialog
+                    "backdrop": "static",
+                    "keyboard": true,
+                    "show": true                     // ensure the modal is shown immediately
+                });
+            }
+        });
+    }
+</script>

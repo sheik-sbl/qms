@@ -1,0 +1,101 @@
+﻿@using System.Data
+@model DataTable
+@{
+   
+    int cnt = 0;
+    int i = 1;
+   
+    
+    
+  
+}
+
+<style>
+
+.modal.container {
+	width:800px;
+    margin-left:-250px;
+    align-content:center
+}
+</style>
+
+<table class="table table-bordered table-responsive table-hover" id="tblPreprocess" style="width:100%;" >
+    <tr>
+        @foreach (DataColumn col in Model.Columns)
+        {
+            
+           
+               if (@col.ColumnName=="clientname")
+           {
+              <th style="background-color:#ADD8E6">Clients-BPO Onile</th>
+           }
+           else
+           {
+               <th style="background-color:#ADD8E6">@col.ColumnName</th>
+           }  
+            
+                
+        }
+
+    </tr>
+    
+    @foreach (DataRow row in Model.Rows)
+    {
+
+        cnt = Model.Rows.Count;
+        if (@i == @cnt)
+        {
+         <tr class="odd gradeX">
+             
+
+            @foreach (DataColumn col in Model.Columns)
+            {
+             if (@col.ColumnName=="clientname")
+               {
+                <td style="width:35%;">@row[col.ColumnName]</td> 
+                }
+                else 
+                {
+                 <td style="width:35%;">@row[col.ColumnName]%</td> 
+                }       
+              
+             }
+        </tr>
+        }
+        
+        else
+        
+        {
+            <tr class="odd gradeX">
+             
+
+            @foreach (DataColumn col in Model.Columns)
+            {
+             if (@col.ColumnName=="clientname")
+               {
+                <td style="width:35%;">@row[col.ColumnName]</td> 
+                }
+                else 
+                {
+                 <td style="width:35%;">$@row[col.ColumnName]</td> 
+                }       
+              
+             }
+        </tr>
+            
+        }
+        i = i + 1;
+         
+      }
+       
+       
+ 
+</table>
+
+ <div class="modal-footer">
+
+
+
+            <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+           
+</div>

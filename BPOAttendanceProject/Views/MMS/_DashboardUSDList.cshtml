@@ -1,0 +1,64 @@
+﻿@model BPOAttendanceProject.Models.MonthlyMMS
+
+
+
+ @if (Model.LstMonthlyMMS.Count > 0)
+  { 
+        
+   <div class="caption"></div>
+    <div style="height:4px;"></div> 
+  <table id="tbldisplay" style="width:100%;border: 1px solid black;padding: 5px;">
+        <tr>
+        <th style="border: 1px solid black;padding: 5px;background-color:#E5E5E5">Month</th>
+        <th style="border: 1px solid black;padding: 5px;background-color:#E5E5E5">Target Revenue</th>
+        <th style="border: 1px solid black;padding: 5px;background-color:#E5E5E5">Actual Revenue </th>
+        <th style="border: 1px solid black;padding: 5px;background-color:#E5E5E5">% Revenue Achievement</th>
+       
+        </tr>
+        <tbody>
+                  @foreach (var item in Model.LstMonthlyMMS)
+                  { 
+                       
+                     <tr>
+                      <td style="border: 1px solid black;padding: 5px;text-align:left;">@item.Month</td>
+                      <td style="border: 1px solid black;padding: 5px;text-align:right;">$@Math.Round(item.budgeINR/72).ToString("#,##0")</td>
+                      <td style="border: 1px solid black;padding: 5px;text-align:right;">$@Math.Round(item.ActualINR/72).ToString("#,##0")</td>
+                      <td style="border: 1px solid black;padding: 5px;text-align:right;">@Math.Round(item.ActualINR/item.budgeINR*100)%</td>
+                       
+                    
+                     </tr>
+                  }
+         
+            
+                 <tr><td style="border: 1px solid black;padding: 5px;font-weight: bold;">TOTAL</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">$@String.Format( "{0:#,##0.##}", Math.Round(Model.LstMonthlyMMS.Sum(e => e.budgeINR)/72) ) </td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">$@String.Format( "{0:#,##0.##}",Math.Round( Model.LstMonthlyMMS.Sum(e => e.ActualINR)/72) )</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@(Math.Round(Model.LstMonthlyMMS.Sum(e => e.ActualINR) / Model.LstMonthlyMMS.Sum(e => e.budgeINR) * 100, 0))%</td></tr>
+               
+             
+
+                </tbody>         
+                  
+                 
+   </table>
+    
+ }
+ 
+   else
+                         {
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="alert alert-info">
+                                                        <strong>No Records Found</strong><br />
+                                                    </div>
+                                                </div>
+                                            </div>
+                         }
+
+
+ 
+ 
+<script type="text/javascript">
+  
+   
+
+
+
+</script>

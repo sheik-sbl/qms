@@ -1,0 +1,30 @@
+﻿@model BPOAttendanceProject.Models.FinalQcModel
+
+
+ 
+
+  <table style="width:100%;border: 1px solid black;padding: 5px;">
+        <tr>
+        <th style="border: 1px solid black;padding: 5px;">Date</th>
+        <th style="border: 1px solid black;padding: 5px;">Location</th>
+        <th style="border: 1px solid black;padding: 5px;">Project</th>
+        <th style="border: 1px solid black;padding: 5px;">No of Characters</th>
+        <th style="border: 1px solid black;padding: 5px;">TL</th>
+        <th style="border: 1px solid black;padding: 5px;">Eventcode</th>      
+        </tr>
+            
+                  @foreach (var item in Model.QcModelList)
+                  { 
+                       
+                     <tr>
+                        <td style="border: 1px solid black;padding: 5px;">@item.proddate</td>
+                        <td style="border: 1px solid black;padding: 5px;">@item.Location</td>
+                        <td style="border: 1px solid black;padding: 5px;">@item.project</td>
+                        <td style="border: 1px solid black;padding: 5px;">@item.noofcharacters</td>
+                        <td style="border: 1px solid black;padding: 5px;">@item.TL</td>
+                        <td style="border: 1px solid black;padding: 5px;">@item.Eventcode</td>
+                       
+                    
+                     </tr>
+                  }
+      </table>

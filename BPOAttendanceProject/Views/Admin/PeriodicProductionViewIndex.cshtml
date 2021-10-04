@@ -1,0 +1,276 @@
+﻿@model BPOAttendanceProject.Models.PeriodicProductionViewModel
+@{
+    
+}
+
+
+<div class="page-container" style="margin-top: 20px">
+    <!-- BEGIN SIDEBAR -->
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet light bordered">
+                <div class="m-heading-1 border-green m-bordered ">
+                    <div class="caption font-dark">
+                        <span class="caption-subject bold uppercase">Periodic Production View Report</span>
+                    </div>
+                </div>
+
+                <div class="portlet-body">
+                   
+                                <div class="form-horizontal">
+                                    <div class="form-body">
+                                        <div class="row">
+                                           
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">From</label>
+                                                    <div class="col-md-9">
+                                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                                        @Html.TextBoxFor(model => model.Date, new {@id="fromdate", @class = "form-control", @placeholder = "From Date", @autocomplete = "off", @required = "true" })
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </span>
+                                                    </div>
+                                                    </div>
+                                                </div>
+
+                                                 <div class="form-group">
+                                                    <label class="col-md-3 control-label">TL</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                         @Html.DropDownListFor(model => model.Id, new SelectList(Model.UserList, "Id", "FirstName"), "ALL", new { style = "width: 100%;", @required = "required", @class = "btn dropdown-toggle btn-default", @autocomplete = "off", @id = "drpuserId" })
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">To</label>
+                                                    <div class="col-md-9">
+                                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                                        @Html.TextBoxFor(model => model.Date, new {@id="todate", @class = "form-control", @placeholder = "To Date", @autocomplete = "off", @required = "true" })
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </span>
+                                                    </div>
+
+
+                                                    </div>
+                                                </div>
+                                                
+                                                 <div class="form-group">
+                                                    <label class="col-md-3 control-label">Display</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+
+@*                                                           @Html.DropDownListFor(model => model.SpeceisId, new SelectList(Model.SpeciesList, "Id", "Name"), "Select", new { style = "width: 100%;", @required = "required", @class = "btn dropdown-toggle btn-default", @autocomplete = "off", @id = "drpSpeciesId" })*@
+                                                            @Html.DropDownList("FooBarDropDown", new List<SelectListItem>
+                                                            {
+                                                                new SelectListItem{ Text="Tabular", Value = "1" },
+                                                                new SelectListItem{ Text="Trend", Value = "2" },
+                                                               
+                                                             }, "Select", new { style = "width: 100%;", @required = "required", @class = "btn dropdown-toggle btn-default", @autocomplete = "off", @id = "drpTypeId" }) 
+
+
+
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                                
+                                           </div>
+                                            
+                                            <div class="col-md-6">
+                                             <div class="form-group">
+                                                    <label class="col-md-3 control-label">Type</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+
+                                                            @Html.DropDownList("TypeDropDown", new List<SelectListItem>
+                                                            {
+                                                                new SelectListItem{ Text="Record", Value = "1" },
+                                                                new SelectListItem{ Text="Character", Value = "2" },
+                                                               
+                                                             }, "Select", new { style = "width: 100%;", @required = "required", @class = "btn dropdown-toggle btn-default", @autocomplete = "off", @id = "drpGraphType" }) 
+
+
+
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                           </div>
+                                            
+                                             <div class="col-md-6">
+                                            <div class="btn-group">
+                                                <button id="search" class="btn sbold green"  onclick="PeriodicProductionReport()">
+                                                    Search
+                                                <i class="fa fa-search"></i>
+                                                </button>
+                                                </div>
+                                             <div class="btn-group">
+                                                <button id="cancel" class="btn sbold green" onclick="Cancel()">
+                                                    Cancel
+                                                <i class="fa fa-cancel"></i>
+                                                </button>
+                                                 </div>
+
+                                            </div>
+                                        
+                                           <div class="col-md-6">
+                                               <div style="float: right;">
+                                                     <div class="btn-group">
+                                                <button id="Previous" class="btn sbold green"  onclick="Previous()">
+                                                    Previous
+                                                </button>
+                                                </div>
+                                                     <div class="btn-group">
+                                                <button id="Next" class="btn sbold green" onclick="Next()">
+                                                    Next
+                                                <i class="fa fa-cancel"></i>
+                                                </button>
+                                                 </div>
+                                                </div>
+                                            </div>
+                                        
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+            </div>
+            <div id="reportlist">
+               
+             
+                    </div>
+                </div>
+        </div>
+
+</div>
+
+   
+    <!-- END EXAMPLE TABLE PORTLET-->
+
+
+ <script>
+     function Next() {
+         var index;
+         var ddlNumbers = document.getElementById("drpuserId");
+         var options = ddlNumbers.getElementsByTagName("option")
+         for (var i = 0; i < options.length; i++) {
+             if (options[i].selected) {
+                 index = i;
+             }
+         }
+         index = index + 1;
+         if (index >= ddlNumbers.length) {
+             alert('Last record reached')
+         }
+         else {
+             ddlNumbers.value = ddlNumbers[index].value;
+             PeriodicProductionReport();
+         }
+
+     }
+     function Previous() {
+         var index;
+         var ddlNumbers = document.getElementById("drpuserId");
+         var options = ddlNumbers.getElementsByTagName("option")
+         for (var i = 0; i < options.length; i++) {
+             if (options[i].selected) {
+                 index = i;
+             }
+         }
+         index = index - 1;
+
+         if (index <= -1) {
+             alert('First record reached')
+         }
+         else {
+             ddlNumbers.value = ddlNumbers[index].value;
+             PeriodicProductionReport();
+         }
+     }
+    </script>
+
+
+
+
+
+
+<script>
+
+
+
+    function PeriodicProductionReport() {
+        var pathurl = '@Url.Action("PeriodicProductionReport", "Admin")';
+        var temp = $("#drpTypeId option:selected").text();
+
+     $.ajax({
+         url: pathurl,
+         type: 'GET',
+         data: {
+             fromdate: $('#fromdate').val(),
+             todate: $('#todate').val(),
+             UserId: $("#drpuserId option:selected").text(),
+             TypeId: $("#drpTypeId option:selected").text(),
+             GraphType: $("#drpGraphType option:selected").text()
+         },
+         cache : false,
+         success: function (data) {
+           
+                 $("#reportlist").html("");
+                 $("#reportlist").html(data);
+                 getReport();
+  
+             
+         },
+         error: function (data) {
+             //alert("error");
+            
+          }
+     });
+    }
+
+    function getReport() {
+
+        var pathurl = '@Url.Action("CreateChart", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'GET',
+            data: {},
+            cache: false,
+            success: function (data) {
+              
+                document.getElementById("testImg").src = 'data:image/png;base64,'+data;
+                
+            },
+            error: function (data) {
+               // alert("error");
+
+            }
+        });
+    }
+
+       
+   
+</script>

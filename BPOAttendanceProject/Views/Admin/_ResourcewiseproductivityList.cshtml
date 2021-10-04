@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "_ProjectwiseproductivityList";
+}
+
+@model  BPOAttendanceProject.Models.ResourceproductivityModel    
+
+@if (Model.LstResourceproductivityModel.Count > 0)
+{
+    <table class="table table-bordered table-responsive table-hover" id="tblresource" style="width:100%;" >
+        <thead>
+            <tr>
+                <th style="width:15%;text-align: left;">Associate </th>
+                <th style="width:15%;text-align: left;">Planned Records </th>
+                <th style="width:15%;text-align: left;">Actual Records </th>
+                 <th style="width:20%;text-align: center;">Target Revenue(INR) </th>
+                <th style="width:20%;text-align: center;">Actual Revenue(INR) </th>
+                <th style="width:20%;text-align: center;">Production/Hour </th>
+            </tr>
+        </thead>
+        <tbody>
+
+         @foreach (var item in Model.LstResourceproductivityModel)
+                             {
+             
+             
+         <tr class="odd gradeX">
+                            <td style="text-align: left;">@item.associate</td>
+                             <td style="text-align: right;">@Math.Round(item.plannedprodrecord,2).ToString("#,##0")</td>
+                            <td style="text-align: right;">@Math.Round(item.actualprodrecord,2).ToString("#,##0")</td>
+                            <td style="text-align: right;">@Math.Round(item.Targetrevenue,2).ToString("#,##0")</td>
+                            <td style="text-align: right;">@Math.Round(item.Actualrevenue,2).ToString("#,##0")</td>
+                            <td style="text-align: right;">@Math.Round(item.Productivity)</td>
+           </tr>
+             
+         }
+            
+ </tbody>
+  </table>
+}
+else
+                         {
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="alert alert-info">
+                                                        <strong>No Records</strong><br />
+                                                    </div>
+                                                </div>
+                                            </div>
+                         }
+
+
+<script>
+
+ jQuery(function ($) {
+     $('#tblresource').dataTable({
+
+            "aoColumns": [
+                              null, null, null,null,null,null
+
+            ]
+
+        });
+
+    });
+
+</script>

@@ -1,0 +1,160 @@
+﻿
+<link href="../assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css" />
+<link href="../assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css" />
+
+@model BPOAttendanceProject.Models.MonthlyMMS
+<style>
+
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 50%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+</style>
+
+
+<div>
+   
+        <div class="modal-content">
+            <div class="modal-body">
+                <div>
+                    <div>
+                        <!-- BEGIN SAMPLE FORM PORTLET-->
+                        <div class="portlet light bordered">
+                            <div class="m-heading-1 border-green m-bordered">
+                                <div class="caption">
+                                    <i class="fa fa-edit"></i>
+                                  
+                                    View Details
+
+                                </div>
+                            </div>
+                            <div class="portlet-body form">
+                                 <table class="table table-striped table-bordered table-hover table-checkable order-column" id="tbluser">
+                        <thead>
+                            <tr>
+                               
+ 
+                                <th style="background-color:#ADD8E6">Month Year</th>
+                                <th style="background-color:#ADD8E6">Budgeted INR</th>
+                                <th style="background-color:#ADD8E6">Actual INR</th>
+                                <th style="background-color:#ADD8E6">In Percentage </th>
+                               <th style="background-color:#ADD8E6">Backlog </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           
+                          
+                                
+                            <tr class="odd gradeX">
+                                <td>@Model.Month &nbsp; @Model.Year</td>
+                                 <td>₹@Model.budgeINR.ToString("#,##0")</td>
+                                <td>₹@Model.ActualINR.ToString("#,##0")</td>
+                                <td>@(Math.Round((Model.ActualINR/Model.budgeINR)*100))%</td>
+                                <td>₹@Model.cbacklog.ToString("#,##0")</td>
+                            </tr>
+                       
+                          
+
+                        </tbody>
+                    </table>
+                               
+                            </div>
+<div>
+  <table id="customers">
+    <tr><th>Department</th><th>Target</th><th>Actual</th><th>Percent</th><th>Backlog</th></tr>  
+  <tr>
+    <td>MMS</td>
+    <td>₹@Model.MMSbudgeINR.ToString("#,##0")</td>
+    <td>₹@Model.MMSActualINR.ToString("#,##0")</td>
+    <td>@(Math.Round((Model.MMSActualINR/Model.MMSbudgeINR)*100))%</td>
+    <td>₹@Model.cumbacklog.ToString("#,##0")</td>
+  </tr>
+
+  <tr>
+     <td>BPO Online</td>
+    <td>₹@Model.ONbudgeINR.ToString("#,##0")</td>
+    <td>₹@Model.ONActualINR.ToString("#,##0")</td>
+    <td>@(Math.Round((Model.ONActualINR/Model.ONbudgeINR)*100))%</td>
+     <td>₹@Model.onbacklog.ToString("#,##0")</td>
+  </tr>
+ <tr>
+     <td>Call center</td>
+    <td>₹@Model.CallbudgeINR.ToString("#,##0")</td>
+    <td>₹@Model.CallActualINR.ToString("#,##0")</td>
+    <td>@(Math.Round((Model.CallActualINR/Model.CallbudgeINR)*100))%</td>
+     <td>₹@Model.callbacklog.ToString("#,##0")</td>
+  </tr>
+   
+</table>
+<div>Comments:@Model.Comments</div>
+</div>
+                            
+                    
+                       
+                            
+
+                        </div>
+                        </div>
+                        <!-- END SAMPLE FORM PORTLET-->
+                    </div>
+
+                </div>
+            </div>
+        
+       <div class="modal-footer">
+       <button type="button" class="btn dark btn-outline " data-dismiss="modal" >Close</button>  
+  </div>
+   
+    <!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->
+
+
+
+
+
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+
+<script src="../assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="../assets/pages/scripts/ui-extended-modals.min.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

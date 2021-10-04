@@ -1,0 +1,113 @@
+﻿@model BPOAttendanceProject.Models.DailyTeamViewModel
+@{
+    
+}
+
+
+<div class="page-container" style="margin-top: 20px">
+    <!-- BEGIN SIDEBAR -->
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet light bordered">
+                <div class="m-heading-1 border-green m-bordered ">
+                    <div class="caption font-dark">
+                        <span class="caption-subject bold uppercase">Daily Team View Report</span>
+                    </div>
+                </div>
+
+                <div class="portlet-body">
+                   
+                                <div class="form-horizontal">
+                                    <div class="form-body">
+                                        <div class="row">
+                                           
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Date</label>
+                                                    <div class="col-md-9">
+                                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                                        @Html.TextBoxFor(model => model.Date, new { @class = "form-control", @placeholder = "Date", @autocomplete = "off", @required = "true" })
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </span>
+                                                    </div>
+                                                       <input type="hidden" name="userid" id="userid" value="@ViewBag.hdnFlag" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                         
+                                            
+                                        <div class="col-md-4">
+                                            <div class="btn-group">
+                                                <button id="search" class="btn sbold green" onclick="DailyTeamLeadViewReport()">
+                                                    Search
+                                                <i class="fa fa-search"></i>
+                                                </button>
+                                                </div>
+                                             <div class="btn-group">
+                                                <button id="cancel" class="btn sbold green" onclick="Cancel()">
+                                                    Cancel
+                                                <i class="fa fa-cancel"></i>
+                                                </button>
+                                                 </div>
+
+                                            </div>
+                                        
+                                        
+                                        
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                 </div>
+                    <div id="reportlist">
+                    </div>
+  
+                </div>
+        </div>
+
+</div>
+
+   
+    <!-- END EXAMPLE TABLE PORTLET-->
+
+<script>
+   
+    //$('.date-picker').datepicker({
+    //    format: 'dd/mm/yyyy',
+    //    startDate: '-1d',
+    //    autoclose: true
+    //});
+
+    jQuery(document).ready(function () {
+        setTimeout(function () {
+            $("#MsgDiv").slideUp(400);
+        }, 2000);
+        $('#divPhotolistpop').css('width', '55%');
+    });
+
+    function DailyTeamLeadViewReport() {
+
+      
+        var pathurl = '@Url.Action("DailyTeamViewReport", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'GET',
+            data: {
+                date: $('#Date').val(),
+                userid: $("#userid").val()
+            },
+            success: function (data) {
+                $("#reportlist").html(data);
+            }
+        });
+    }
+
+   
+
+</script>
+@*  *@

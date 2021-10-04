@@ -1,0 +1,661 @@
+﻿@model BPOAttendanceProject.Models.PecodeModel
+
+
+
+<div class="page-container" style="margin-top: 20px;overflow:auto">
+    <!-- BEGIN SIDEBAR -->
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet light bordered">
+                <div class="m-heading-1 border-green m-bordered ">
+                    <div class="caption font-dark">
+                        <span class="caption-subject bold uppercase">ProjectWise Revenue</span>
+                    </div>
+                </div>
+
+                             <div class="portlet-body">
+                                  @if (@TempData["Msg"] != null)
+                                  {
+                                <div class="alert alert-info" id="MsgDiv">
+                                    <button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button>
+                                    @TempData["Msg"]
+                                </div>
+                                  }
+
+
+                   
+                                <div class="form-horizontal">
+                                    <div class="form-body">
+                                        <div class="row">
+                                           
+                                              <div class="col-md-3">
+
+                                                  <div class="form-group">
+                                                    <label class="col-md-3 control-label">Start Date<span  style="color:red"> *</span></label>
+                                                    <div class="col-md-9">
+                                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                                        @Html.TextBoxFor(model => model.Startdate, new { @class = "form-control", @placeholder = "Date", @autocomplete = "off", @required = "true", @id = "startdate", @onchange = "BindClientbyLocation();" })
+                                                       
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </span>
+                                                    </div>
+
+
+                                                    </div>
+                                                </div>
+                                                
+                                                  <div class="form-group">
+                                                    <label class="col-md-3 control-label">Project Code<span  style="color:red"> *</span></label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                        
+@*                                                        @Html.DropDownListFor(model => model.Id, new SelectList(Model.PecodeModelList, "Id", "pecode", "Select"), "Select Projectcode", new { @class = "form-control", @placeholder = "Project", @autocomplete = "off", @id = "drpproject" })*@
+
+                          
+                                                        <select id="drpproject" name="drpproject" class = "form-control"   style = "width: 100%;" onchange="GetEvent();" > </select>
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                              
+                                                </div>
+
+                                              <div class="col-md-3">
+
+                                                  <div class="form-group">
+                                                    <label class="col-md-3 control-label">End Date<span  style="color:red"> *</span></label>
+                                                    <div class="col-md-9">
+                                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                                        @Html.TextBoxFor(model => model.Enddate, new { @class = "form-control", @placeholder = "Date", @autocomplete = "off", @required = "true", @id = "enddate" })
+                                                       
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </span>
+                                                    </div>
+
+
+                                                    </div>
+                                                </div>
+
+                                                  <div class="form-group">
+                                                    <label class="col-md-3 control-label">Event Code<span  style="color:red"> *</span></label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+@*                                                       @Html.DropDownList("EventCodes", (IEnumerable<SelectListItem>)ViewBag.EventCodes, "ALL", new { @class = "form-control", @id = "drpevent" })*@
+                                                        <select id="ddlevent" name="ddlevent" class = "form-control"   style = "width: 100%;" > </select>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div> 
+
+
+
+                                                
+
+                                               
+
+
+
+                                                 
+                                            </div>
+                                              <div class="col-md-3" id="projectlist">
+
+                                                  <div class="form-group">
+                                                    <label class="col-md-3 control-label">Location<span  style="color:red"> *</span></label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                        
+                                                            @Html.DropDownListFor(m => m.Id, new SelectList(new List<SelectListItem> {
+                                                                                                         new SelectListItem { Text = "KAKKANAD", Value = "6"},       
+                                                                                                         new SelectListItem { Text = "MNS", Value = "5"}, 
+                                                                                                         new SelectListItem { Text = "MQC", Value = "4"}, 
+                                                                                                         new SelectListItem { Text = "MDS", Value = "3"},
+                                                                                                         new SelectListItem { Text = "KNPY", Value = "2"}, 
+                                                                                                         new SelectListItem { Text = "TVM", Value = "1"},                  
+                                                                                                         
+                                                                                                     }, "Value", "Text"), "ALL", new { style = "width: 100%;", @required = "required", @class = "btn dropdown-toggle btn-default", @autocomplete = "off", @id = "drpLocation", @onchange = "Getlocation();" })
+
+
+@*                                                         @Html.DropDownListFor(model => model.Id, new SelectList(Model.UserList, "Id", "FirstName"), "Select", new { style = "width: 100%;", @required = "required", @class = "btn dropdown-toggle btn-default", @autocomplete = "off", @id = "drpuserId" })*@
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+
+
+
+
+                                           
+
+
+                                                 <div class="form-group">
+                                                    <label class="col-md-3 control-label">Process<span  style="color:red"> *</span></label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                        
+                                                            @Html.DropDownListFor(m => m.Id, new SelectList(new List<SelectListItem> {
+                                                                                                         new SelectListItem { Text = "Indexing", Value = "6"},       
+                                                                                                         new SelectListItem { Text = "Qc2", Value = "5"}, 
+                                                                                                         new SelectListItem { Text = "Qc3", Value = "4"}, 
+                                                                                                         new SelectListItem { Text = "Audit", Value = "3"},
+                                                                                                         new SelectListItem { Text = "UAT", Value = "2"}, 
+                                                                                                         new SelectListItem { Text = "Training", Value = "1"},                  
+                                                                                                          new SelectListItem { Text = "Rework", Value = "1"}, 
+                                                                                                     }, "Value", "Text"), "ALL", new { style = "width: 100%;", @required = "required", @class = "btn dropdown-toggle btn-default", @autocomplete = "off", @id = "drpProcess" })
+
+
+                                                      
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+
+                                                
+                                               
+                                                
+                                                
+                                              
+                                                
+                                            
+
+                                                
+
+                                            </div>
+
+                                               <div class="col-md-3" >
+
+                                                  <div class="form-group">
+                                                    <label class="col-md-3 control-label">Client Code</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+
+                                                         <select class="form-control" id="drpclient" name="drpclient"  style = "width: 100%;", onchange = "GetProject();" > </select>
+
+                                                            
+                                                        </div>
+
+
+                                                    </div>
+
+                                                    
+                                                </div>
+
+                                                
+                                               
+                                                
+                                                
+                                              
+                                                
+                                            
+
+                                                
+
+                                            </div>
+                                             
+                                        <div class="col-md-9">
+                                            
+                                                <div class="btn-group">
+                                                <button id="search" class="btn sbold green" onclick="ProjectAchievementReport()">
+                                                    Ok
+                                                </button>
+                                                </div>
+                                             <div class="btn-group">
+                                                <button id="cancel" class="btn sbold green" onclick="Cancel()" data-dismiss="modal">
+                                                    Cancel
+                                                <i class="fa fa-cancel"></i>
+                                                </button>
+                                                 
+                                             </div>
+                                            @*<div class="btn-group">
+                                                <button id="graph" class="btn sbold green" onclick="getGraphReport()">
+                                                    Graph
+                                                <i class="fa fa-"></i>
+                                                </button>
+                                             </div>*@
+                                            
+
+                                       
+
+
+                                            </div>
+                                         <label><input type="checkbox" onclick="onClickHandler();" id="chkINR" checked="checked" >INR</label>
+                                         <label><input type="checkbox" onclick="onClickHandler();" id="chkETO">ETO</label>
+                                        
+                                        
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                 </div>
+                   @* <div id="reportlist">
+                    </div>*@
+
+
+            @* <div class="portlet box green">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-gift"></i>Productivity Details
+                            </div>
+
+                        </div>
+                        <div class="portlet-body" id="reportlist">
+                        </div>
+                         
+              </div>*@
+
+        <div  id="reportlist"></div>
+           
+
+         <div id="wait" style="display:none;width:69px;height:89px;border:1px solid black;position:absolute;top:50%;left:50%;padding:2px;"><img src='../assets/pages/img/demo_wait.gif' width="64" height="64" /><br>Loading..</div>
+
+        </div>
+    </div>
+
+</div>
+
+   
+    <!-- END EXAMPLE TABLE PORTLET-->
+
+<script>
+
+    jQuery(document).ready(function () {
+
+
+        var pathurl = '@Url.Action("BindEvent", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'POST',
+            data: {
+
+                ProjectId: 'ALL'
+            },
+            success: function (data) {
+                $("#wait").css("display", "none");
+                var markup = "<option value='0'>ALL</option>";
+                for (var x = 0; x < data.length; x++) {
+                    if (data[x].Text) {
+                        markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                    }
+                }
+                $("#ddlevent").html(markup).show();
+
+            }
+        });
+
+
+        var pathurl = '@Url.Action("BindClientbyLocation", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'POST',
+            data: {
+
+                Location: 'ALL'
+            },
+            success: function (data) {
+                $("#wait").css("display", "none");
+                var markup = "<option value='0'>ALL</option>";
+                for (var x = 0; x < data.length; x++) {
+                    if (data[x].Text != "undefined") {
+                        markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                    }
+                }
+                $("#drpclient").html(markup).show();
+               
+            }
+        });
+
+
+        var pathurl = '@Url.Action("BindprojectETO", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'POST',
+            data: {
+
+                fromdate:null,
+                enddate:null,
+                LocationId: $("#drpLocation option:selected").text()
+            },
+            success: function (data) {
+                $("#wait").css("display", "none");
+                var markup = "<option value='0'>ALL</option>";
+                for (var x = 0; x < data.length; x++) {
+                    if (data[x].Text) {
+                        markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                    }
+                }
+                $("#drpproject").html(markup).show();
+
+            }
+        });
+
+
+ 
+
+
+
+
+
+
+
+
+
+       
+
+
+    });
+
+
+    $(function () {
+
+        $("#startdate").datepicker({
+            format: 'dd/mm/yyyy',
+            minDate: 0,
+            defaultDate: "+1w",
+            changeMonth: true,
+            numberOfMonths: 1,
+
+
+        });
+
+        $("#enddate").datepicker({
+            format: 'dd/mm/yyyy',
+            minDate: 0,
+            defaultDate: "+1w",
+            changeMonth: true,
+            numberOfMonths: 1,
+
+
+        });
+
+
+        var date = new Date();
+        date.setTime(date.getTime() - (1000 * 60 * 60 * 24))
+        $('#startdate').datepicker("setDate", date);
+        $('#startdate').datepicker({ autoclose: true });
+        $('#enddate').datepicker("setDate", date);
+        $('#enddate').datepicker({ autoclose: true });
+    });
+
+
+    function onClickHandler() {
+        if (chkETO.checked) {
+
+            var pathurl = '@Url.Action("ProjectwiseRevenueAchievementETO", "Admin")';
+            $.ajax({
+                url: pathurl,
+                type: 'GET',
+                data: {
+                    Process: $("#drpProcess option:selected").text(),
+                    sdate: $('#startdate').val(),
+                    enddate: $('#enddate').val(),
+                    Projectcode: $("#drpproject option:selected").text(),
+                    Eventcode: $("#ddlevent option:selected").text(),
+                    location: $("#drpLocation option:selected").text(),
+                    Clientcode: $("#drpclient option:selected").text()
+                },
+                cache: false,
+                success: function (data) {
+                    $("#wait").css("display", "none");
+                    $("#reportlist").html("");
+                    $("#reportlist").html(data);
+
+                }
+            });
+
+
+
+        }
+        else {
+
+            var pathurl = '@Url.Action("ProjectwiseRevenueAchievement", "Admin")';
+            $.ajax({
+                url: pathurl,
+                type: 'GET',
+                data: {
+                    Process: $("#drpProcess option:selected").text(),
+                    sdate: $('#startdate').val(),
+                    enddate: $('#enddate').val(),
+                    Projectcode: $("#drpproject option:selected").text(),
+                    Eventcode: $("#ddlevent option:selected").text(),
+                    location: $("#drpLocation option:selected").text(),
+                    Clientcode: $("#drpclient option:selected").text()
+                },
+                cache: false,
+                success: function (data) {
+                    $("#wait").css("display", "none");
+                    $("#reportlist").html("");
+                    $("#reportlist").html(data);
+
+                }
+            });
+
+
+        }
+
+
+
+    }
+
+
+    jQuery(document).ready(function () {
+        setTimeout(function () {
+            $("#MsgDiv").slideUp(400);
+        }, 2000);
+        $('#divPhotolistpop').css('width', '55%');
+    });
+
+        function Cancel() {
+       
+            $('#drpclient option:selected').prop('selected', false);
+            $('#drpproject option:selected').prop('selected', false);
+            $('#drpLocation option:selected').prop('selected', false);
+           
+            $('#ddlevent option:selected').prop('selected', false);
+            $('#drpProcess option:selected').prop('selected', false);
+        }
+    
+
+
+        function GetEvent() {
+
+            $("#wait").css("display", "block");
+            var pathurl = '@Url.Action("BindProjRevEvent", "Admin")';
+            $.ajax({
+                url: pathurl,
+                type: 'POST',
+                data: {
+                    ClientId: $("#drpclient option:selected").text(),
+                    ProjectId: $("#drpproject option:selected").text(),
+                    fromdate: $('#startdate').val(),
+                    enddate: $('#enddate').val(),
+                    Location: $("#drpLocation option:selected").text()
+                
+                },
+                success: function (data) {
+                    $("#wait").css("display", "none");
+                    var markup = "<option value='0'>ALL</option>";
+                    for (var x = 0; x < data.length; x++) {
+                        if (data[x].Text != "undefined") {
+                            markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                        }
+                    }
+                    $("#ddlevent").html(markup).show();
+
+
+
+                }
+            });
+
+        }
+
+
+
+
+
+
+
+
+        function Getlocation() {
+            $("#wait").css("display", "block");
+            var pathurl = '@Url.Action("BindClientbyLocationETO", "Admin")';
+            $.ajax({
+                url: pathurl,
+                type: 'POST',
+                data: {
+                    Location: $("#drpLocation option:selected").text(),
+                    fromdate: $('#startdate').val(),
+                    enddate: $('#enddate').val(),
+               
+                },
+                success: function (data) {
+                    $("#wait").css("display", "none");
+                    var markup = "<option value='0'>ALL</option>";
+                    for (var x = 0; x < data.length; x++) {
+                        markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                    }
+                    $("#drpclient").html(markup).show();
+
+                }
+            });
+            GetProject();
+            GetEvent();
+        }
+
+        function GetProject() {
+            $("#wait").css("display", "block");
+            var pathurl = '@Url.Action("FillprojectbyClientETO", "Admin")';
+            $.ajax({
+                url: pathurl,
+                type: 'POST',
+                data: {
+                    Clientcode:$("#drpclient option:selected").text(),
+                    startdate: $('#startdate').val(),
+                    enddate: $('#enddate').val(),
+                    Location: $("#drpLocation option:selected").text()
+                },
+                success: function (data) {
+                    $("#wait").css("display", "none");
+                    var markup = "<option value='0'>ALL</option>";
+                    for (var x = 0; x < data.length; x++) {
+                        markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                    }
+                    $("#drpproject").html(markup).show();
+
+                }
+            });
+            GetEvent();
+        }
+
+
+
+
+
+
+
+        function ProjectAchievementReport() {
+
+            if (($('#startdate').val() =="")||($('#enddate').val() =="") ){
+                alert("Please select  date !");
+            }
+            else
+            {
+
+
+            $("#wait").css("display", "block");
+            var pathurl = '@Url.Action("ProjectwiseRevenueAchievement", "Admin")';
+            $.ajax({
+                url: pathurl,
+                type: 'GET',
+                data: {
+                    Process: $("#drpProcess option:selected").text(),
+                    sdate: $('#startdate').val(),
+                    enddate: $('#enddate').val(),
+                    Projectcode: $("#drpproject option:selected").text(),
+                    Eventcode: $("#ddlevent option:selected").text(),
+                    location: $("#drpLocation option:selected").text(),
+                    Clientcode: $("#drpclient option:selected").text()
+
+                },
+                cache: false,
+                success: function (data) {
+                    $("#wait").css("display", "none");
+                    $("#reportlist").html("");
+                    $("#reportlist").html(data);
+
+                }
+            });
+        }
+        }
+
+
+
+
+
+    function BindClientbyLocation() {
+
+        var pathurl = '@Url.Action("BindClientbyLocationfromtoDate", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'POST',
+            data: {
+                fromdate: $('#startdate').val(),
+                enddate: $('#enddate').val(),
+                Location: $("#drpLocation option:selected").text()
+            },
+            success: function (data) {
+                $("#wait").css("display", "none");
+                var markup = "<option value='0'>ALL</option>";
+                for (var x = 0; x < data.length; x++) {
+                    if (data[x].Text != "undefined") {
+                        markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                    }
+                }
+                $("#drpclient").html(markup).show();
+
+            }
+        });
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+</script>
+ 

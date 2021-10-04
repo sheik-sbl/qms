@@ -1,0 +1,846 @@
+﻿<link href="../assets/global/plugins/bootstrap-sweetalert/sweetalert.css" rel="stylesheet" />
+<link href="../assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css" />
+<link href="../assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css" />
+@model BPOAttendanceProject.Models.SoftwareServices
+
+<div>
+    @using (Html.BeginForm("Savesoftwareservice", "MRM", FormMethod.Post, new { @classs = "invoiceform", @id = "form" }))
+    {
+        <div class="modal-content">
+            <div class="modal-body">
+                <div>
+                    <div>
+                        <!-- BEGIN SAMPLE FORM PORTLET-->
+                        <div class="portlet light bordered">
+                            <div class="m-heading-1 border-green m-bordered">
+                                <div class="caption">
+                                    <i class="fa fa-edit"></i>
+
+                                    @if (Model.Id == 0)
+                                    {
+                                        <span class="caption-subject font-dark sbold uppercase">Add </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="caption-subject font-dark sbold uppercase">Edit </span>
+                                    }
+
+                                </div>
+                            </div>
+                            <div class="portlet-body form">
+                                <div class="form-horizontal">
+                                    <div class="form-body">
+                                        <div class="row">
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    @Html.HiddenFor(model => model.Id, new { @Id = "Id" })
+                                                    <label class="col-md-3 control-label">DATE	</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                                            @Html.TextBoxFor(model => model.DATE, new { @id = "dateFrom", @class = "form-control", @autocomplete = "off" })
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-calendar"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">AGENT NAME</label>
+                                                    <div class="col-md-9 valid-group">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.DropDownListFor(model => model.AGENTNAME, new SelectList(Model.LstAgent, "Id", "Name"), "Select", new { style = "width: 100%;", @required = "required", @class = "btn dropdown-toggle btn-default", @autocomplete = "off", @id = "drpMonth" })
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">CALL FROM </label>
+                                                    <div class="col-md-9 valid-group">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.CALLFROM, new { @id = "txtinternalbilling", @class = "form-control", @autocomplete = "off" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">CALL TO	</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.CALLTO, new { @id = "txtinternalbilling", @class = "form-control", @autocomplete = "off" })
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Ticket Number	</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.TicketNumber, new { @id = "txtexternalbilling", @class = "form-control", @autocomplete = "off", })
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Recording URL	</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.RecordingURL, new { @id = "txtexternalbilling", @class = "form-control", @autocomplete = "off" })
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">CALL REVIEW	</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.CALLREVIEW, new { @id = "txtresource", @class = "form-control", @autocomplete = "off" })
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">TICKET REVIEW	</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.TICKETREVIEW, new { @id = "txtresource", @class = "form-control", @autocomplete = "off" })
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Greeting/Gain agreement (5)	</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.Greeting, new { @id = "txtresource22", @class = "form-control changee", @autocomplete = "off" })
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">REMARKS	</label>
+                                                    <div class="col-md-9">
+
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.REMARKS, new { @id = "txtsoftwareservice", @class = "form-control", @autocomplete = "off", @maxlength = "100" })
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Probing (5)	</label>
+                                                    <div class="col-md-9">
+
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.Probing, new { @id = "txtsoftwareservice23", @class = "form-control changee", @autocomplete = "off", @maxlength = "100" })
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">REMARKS	</label>
+                                                    <div class="col-md-9">
+
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.REMARKS2, new { @id = "txtsoftwareservice", @class = "form-control", @autocomplete = "off", @maxlength = "100" })
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Tagging (10)	</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.Tagging, new { @id = "txtbilledincluded24", @class = "form-control changee", @autocomplete = "off", onkeypress = "return isNumber(event)" })
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">REMARKS	</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.REMARKS3, new { @id = "txtnotbilled", @class = "form-control", @autocomplete = "off", onkeypress = "return isNumber(event)" })
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Accurate Details Updating(10)	</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.Details, new { @id = "txtnotbilled25", @class = "form-control changee", @autocomplete = "off", onkeypress = "return isNumber(event)" })
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">REMARKS	</label>
+                                                    <div class="col-md-9">
+
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.REMARKS4, new { @id = "txtbestperformer", @class = "form-control", @autocomplete = "off", @maxlength = "100" })
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Solution provided on call (10)	</label>
+                                                    <div class="col-md-9">
+
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.Solution, new { @id = "txtbestperformer26", @class = "form-control changee", @autocomplete = "off", @maxlength = "100" })
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">REMARKS	</label>
+                                                    <div class="col-md-9">
+
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.REMARKS5, new { @id = "txtbestperformer", @class = "form-control", @autocomplete = "off", @maxlength = "100" })
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    @Html.HiddenFor(model => model.Id, new { @Id = "Id" })
+                                                    <label class="col-md-3 control-label">Updating reminder(5)	 </label>
+                                                    <div class="col-md-9 valid-group">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+
+                                                            @Html.TextBoxFor(model => model.reminder, new { @id = "txtinternalbilling3", @class = "form-control changee", @autocomplete = "off" })
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">REMARKS	</label>
+                                                    <div class="col-md-9 valid-group">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.REMARKS6, new { @id = "txtinternalbilling", @class = "form-control", @autocomplete = "off" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Informing Timeline(5)	</label>
+                                                    <div class="col-md-9 valid-group">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.Timeline, new { @id = "txtinternalbilling4", @class = "form-control changee", @autocomplete = "off" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">REMARKS	</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.REMARKS6, new { @id = "txtinternalbilling", @class = "form-control", @autocomplete = "off" })
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Active listening / Interruption (15)	</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.listening, new { @id = "txtexternalbilling5", @class = "form-control changee", @autocomplete = "off" })
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">REMARKS	</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.REMARKS6, new { @id = "txtexternalbilling", @class = "form-control", @autocomplete = "off" })
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Phone Etiquettes(15)	</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.Phone, new { @id = "txtresource6", @class = "form-control changee", @autocomplete = "off", onkeypress = "return isNumber(event)" })
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">REMARKS	</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.REMARKS8, new { @id = "txtresource", @class = "form-control", @autocomplete = "off", onkeypress = "return isNumber(event)" })
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Grammar / Rate of speech(5)	</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.Grammar, new { @id = "txtresource7", @class = "form-control changee", @autocomplete = "off", onkeypress = "return isNumber(event)" })
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">REMARKS	</label>
+                                                    <div class="col-md-9">
+
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.REMARKS9, new { @id = "txtsoftwareservice", @class = "form-control", @autocomplete = "off", @maxlength = "100" })
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Professionalism(5)	</label>
+                                                    <div class="col-md-9">
+
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.Professionalism, new { @id = "txtsoftwareservice8", @class = "form-control changee", @autocomplete = "off", @maxlength = "100" })
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">REMARKS	</label>
+                                                    <div class="col-md-9">
+
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.REMARKS10, new { @id = "txtsoftwareservice", @class = "form-control", @autocomplete = "off", @maxlength = "100" })
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Use of tools (5)	</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.tools, new { @id = "txtbilledincluded9", @class = "form-control changee", @autocomplete = "off", onkeypress = "return isNumber(event)" })
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">REMARKS	</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.REMARKS11, new { @id = "txtnotbilled", @class = "form-control", @autocomplete = "off", onkeypress = "return isNumber(event)" })
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Closing (5)	</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.Closing, new { @id = "txtnotbilled10", @class = "form-control changee", @autocomplete = "off", onkeypress = "return isNumber(event)" })
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">REMARKS	</label>
+                                                    <div class="col-md-9">
+
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.REMARKS12, new { @id = "txtbestperformer", @class = "form-control", @autocomplete = "off", @maxlength = "100" })
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Being Professional ( Being rude to customer) (50)	</label>
+                                                    <div class="col-md-9">
+
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.rude, new { @id = "txtbestperformer11", @class = "form-control changee", @autocomplete = "off", @maxlength = "100" })
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Tagging ( Not done ) (75)	</label>
+                                                    <div class="col-md-9">
+
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.Tagging2, new { @id = "txtbestperformer12", @class = "form-control changee", @autocomplete = "off", @maxlength = "100" })
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Details Updating (more than 3 mistakes)(20)		</label>
+                                                    <div class="col-md-9">
+
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.mistakes, new { @id = "txtbestperformer13", @class = "form-control changee", @autocomplete = "off", @maxlength = "100" })
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">TOTAL	</label>
+                                                    <div class="col-md-9">
+
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.Total, new { @id = "txtbestperformer88", @class = "form-control", @autocomplete = "off", @maxlength = "100" })
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">
+                                                        ACTION TAKEN
+                                                    </label>
+                                                    <div class="col-md-9">
+
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextAreaFor(model => model.ActionTaken, new { @id = "txtbestperformer", @class = "form-control", @autocomplete = "off", @maxlength = "100" })
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END SAMPLE FORM PORTLET-->
+                </div>
+
+            </div>
+        </div>
+        <div class="modal-footer">
+
+            <button type="button" class="btn dark btn-outline" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn green">Save</button>
+        </div>
+
+    }
+    <!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="../assets/global/plugins/bootstrap-sweetalert/sweetalert.js"></script>
+<script src="../assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="../assets/pages/scripts/ui-extended-modals.min.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
+
+<script type="text/javascript">
+    var result = "";
+    $(document).ready(function () {
+        $('.changee').change(function () {
+            debugger;
+            var ab = parseInt($('#txtbestperformer11').val()) + parseInt($('#txtbestperformer12').val())
+                + parseInt($('#txtbestperformer13').val());
+            var aa = parseInt($('#txtresource22').val()) + parseInt($('#txtsoftwareservice23').val())
+                + parseInt($('#txtbilledincluded24').val()) + parseInt($('#txtnotbilled25').val())
+                + parseInt($('#txtbestperformer26').val()) + parseInt($('#txtinternalbilling3').val())
+                + parseInt($('#txtinternalbilling4').val()) + parseInt($('#txtexternalbilling5').val())
+                + parseInt($('#txtresource6').val()) + parseInt($('#txtinternalbilling4').val())
+                + parseInt($('#txtresource7').val()) + parseInt($('#txtbilledincluded9').val())
+                + parseInt($('#txtnotbilled10').val()) + parseInt($('#txtbestperformer11').val())
+                + parseInt($('#txtbestperformer12').val()) + parseInt($('#txtbestperformer13').val());
+            $('#txtbestperformer88').val(aa);
+        });
+    });
+    $(function () {
+        //$('#dateFrom').datepicker({
+        //    dateFormat: 'dd-mm-yy'
+        //});
+        //$("#dateFrom").datepicker({ dateFormat: 'dd-MM-YYYY' }).val();
+        $("#dateFrom").datepicker({
+            format: 'dd/mm/yyyy',
+            minDate: 0,
+            defaultDate: "+1w",
+            changeMonth: true,
+            numberOfMonths: 1,
+        });
+     
+        $('#form').validate({
+            rules: {
+                Month: {
+                    required: true
+                },
+                Year: {
+                    required: true
+                },
+                internalbilling: {
+                    required: true
+                },
+                externalbilling: {
+                    required: true
+                },
+                Resources: {
+                    required: true
+                }
+        },
+            messages: {
+                Month: {
+                    required: " Select Month."
+                },
+                Year: {
+                    required: "Select Year."
+                },
+                internalbilling: {
+                    required: "Resources no required."
+                },
+                externalbilling: {
+                    required: "Resources no required."
+                },
+                Resources: {
+                    required: "Resources no required."
+                }
+            },
+
+            invalidHandler: function (event, validator) {
+
+                $('.alert-danger', $('#form')).show();
+            },
+
+            highlight: function (element) { // hightlight error inputs
+                $(element).closest('.valid-group').addClass('has-error'); // set error class to the control group
+            },
+
+            success: function (label) {
+                label.closest('.valid-group').removeClass('has-error');
+                label.remove();
+            },
+
+            errorPlacement: function (error, element) {
+                error.addClass('text-danger');
+                error.insertAfter(element.closest('.input-group'));
+            },
+
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+    });
+
+    function CalculateProduction(value) {
+        var internal = $('#txtinternalbilling').val();
+        var external = $('#txtexternalbilling').val();
+
+        if (internal != '' && external != '') {
+
+            total = (parseFloat(internal) + parseFloat(external)).toFixed(2);
+
+                    $('#txttotal').val(total);
+
+                }
+    }
+
+    function CalculateETO(value) {
+        var internal = $('#txtinternalbilling').val();
+        var external = $('#txtexternalbilling').val();
+        var resource = $('#txtresource').val();
+
+        if (internal != '' && external != '') {
+
+            total = (parseFloat(internal) + parseFloat(external)).toFixed(2);
+
+            resourceeto = (parseFloat(total) / resource).toFixed(0);
+            $('#txtetoinr').val(resourceeto);
+
+        }
+
+            var month = $('#drpMonth').val();
+            var year = $('#drpYear').val();
+            var pathurl = '@Url.Action("CalculateETo", "MRM")';
+             $.ajax({
+                 url: pathurl,
+                 type: 'GET',
+                 data: {
+                     month: month,
+                     year:year
+
+                 },
+                 success: function (data) {
+
+                     totusd = (parseFloat(resourceeto) / parseFloat(data.rate)).toFixed(0);
+                     $('#txtetousd').val(totusd);
+                 }
+             });
+    }
+</script>
+<style>
+    .sweet-overlay {
+        z-index: 20000;
+    }
+
+    .sweet-alert {
+        z-index: 20000;
+    }
+
+    #errmsg {
+        color: red;
+    }
+</style>
+
+
+
+
+
+

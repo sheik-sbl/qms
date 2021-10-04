@@ -1,0 +1,73 @@
+﻿
+@model  BPOAttendanceProject.Models.AssociatewiseModel    
+
+@if (Model.LstAssociatewiseModel.Count > 0)
+{
+    <table class="table table-striped table-bordered table-hover table-checkable order-column" id="tblPreprocess">
+        <thead>
+            <tr>
+               
+                <th style="width:20%">Name </th>
+                <th style="width:5%">Date </th>
+                <th style="width:5%">Projectcode </th>
+                <th style="width:5%">Eventcode</th>
+                <th style="width:5%">Process</th>
+                <th style="width:5%">Target Production</th>
+                <th style="width:5%">Actual Production</th>
+                <th style="width:5%">Hours</th>
+                 <th style="width:5%">Productivity/Hr</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.LstAssociatewiseModel)
+            {
+               
+                         <tr class="odd gradeX">
+                            <td>@item.associate</td>
+                            <td>@item.Date</td>
+                            <td>@item.projectcode</td>
+                            <td>@item.eventcode</td>
+                            <td>@item.Process</td>
+                            <td>@item.plannedprodrecord</td>
+                            <td>@item.actualprodrecord</td>
+                            <td>@item.workedhrs</td>
+                            <td>@item.Productivity</td>
+                        </tr> 
+              }
+          
+
+        </tbody>
+    </table>
+}  
+    
+    
+   
+else
+{
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="alert alert-info">
+                <strong>No  Productivity information found on this date</strong><br />
+            </div>
+        </div>
+    </div>
+}
+
+
+<script>
+
+
+    jQuery(function ($) {
+        $('#tblPreprocess').dataTable({
+
+            "aoColumns": [
+                              null, null, null, null, null, null
+            ]
+
+        });
+
+    });
+
+</script>
+

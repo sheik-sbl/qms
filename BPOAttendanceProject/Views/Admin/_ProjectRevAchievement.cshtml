@@ -1,0 +1,102 @@
+﻿@using System.Data
+@model DataTable
+@{
+   
+    int count = 0;
+    int cnt = 0;
+    int i = 1;
+    int cntclmn = 0;
+    
+  
+}
+
+<table class="table table-bordered table-responsive table-hover" id="tblPreprocess" style="width:100%;" >
+    <tr>
+        @foreach (DataColumn col in Model.Columns)
+        {
+            count = count + 1; 
+            if (count == 1 )
+            {
+            
+            <th  style="width:35%;text-align:center">@col.ColumnName</th>
+            }
+           else
+             {
+              <th style="width:35%;text-align:center">@col.ColumnName</th>
+            
+            }       
+        }
+
+    </tr>
+      
+    
+    @foreach (DataRow row in Model.Rows)
+    {
+        cnt = Model.Rows.Count;
+        int j = 1;
+      
+        if (@i == @cnt)
+        {
+         <tr>
+            @foreach (DataColumn col in Model.Columns)
+            {
+              
+             if (@col.ColumnName!="PECODE")
+             {
+             <td style="width:35%;text-align:right;font-weight: bold;">@row[col.ColumnName]</td>
+            
+             }
+             else
+             {
+              <td style="width:35%;font-weight: bold;">@row[col.ColumnName]</td>     
+                   
+               }
+               
+             }
+        </tr>
+        }
+        else
+        {
+            <tr>
+
+            @foreach (DataColumn col in Model.Columns)
+            {
+              cntclmn = Model.Columns.Count;
+                
+             if (@j == @cntclmn)
+             {
+                
+                     if (@col.ColumnName!="PECODE")
+                     {
+                     <td style="width:35%;text-align:right;font-weight: bold;">@row[col.ColumnName]</td>
+                     }
+                     else
+                     {
+                      <td style="width:35%;font-weight: bold;">@row[col.ColumnName]</td>     
+                     }
+             }
+             else
+             {
+                   if (@col.ColumnName!="PECODE")
+                     {
+                     <td style="width:35%;text-align:right;">@row[col.ColumnName]</td>
+            
+                     }
+                     else
+                     {
+                      <td style="width:35%;">@row[col.ColumnName]</td>     
+                   
+                     }
+             }
+             
+             
+             
+                j = j + 1;
+             }
+            
+        </tr>
+        }
+        i = i + 1;
+       
+    }
+</table>

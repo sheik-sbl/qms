@@ -1,0 +1,62 @@
+﻿
+@model  BPOAttendanceProject.Models.MonthlyRecord  
+
+   <table class="table table-striped table-bordered table-hover table-checkable order-column" id="tbluser">
+                        <thead>
+                            <tr>
+                                @*<th>
+                                                        <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                                            <input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" />
+                                                            <span></span>
+                                                        </label>
+                                                    </th>*@
+                                <th>Sl No </th>
+                                <th>Projectcode </th>
+                                <th>Eventcode </th>
+                                <th>Process</th>
+                                <th>ProductionPlannedHr</th>
+                                <th>Month</th>
+                                <th>Location</th>
+                                <th>Actions </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                             @foreach (var item in Model.ProjectConfList)
+                             {
+                                 count = count + 1; 
+                            <tr class="odd gradeX">
+                                <td>
+                                   @count
+                                </td>
+                                <td>@item.Projectcode</td>
+                                <td>@item.Eventcode</td>
+                                <td>@item.Process</td>
+                                <td>@item.ProductionPlannedHr</td>
+                                <td>@item.monthname</td>
+                                 <td>@item.location</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                                            Actions
+                                                               
+                                        <i class="fa fa-angle-down"></i>
+                                        </button>
+                                        <ul class="dropdown-menu pull-left" role="menu">
+                                            <li>
+                                                <a href="javascript:;"   onclick="GetConfPopup(@item.Id,'Edit');" ><i class="icon-docs"></i>Edit </a>
+                                                    
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;"   onclick="DeleteConf(@item.Id,'Delete');"><i class="icon-tag"></i>Delete </a>
+                                            </li>
+                                           
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                       
+                             }
+
+                        </tbody>
+                    </table>

@@ -1,0 +1,129 @@
+﻿@model BPOAttendanceProject.Models.Projectmodel
+
+
+
+<div class="page-container" style="margin-top: 20px">
+    <!-- BEGIN SIDEBAR -->
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+           [[[[['
+                   @* <div id="reportlist">
+                    </div>*@
+
+
+             <div class="portlet box green">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-gift"></i>Productivity Details
+                            </div>
+
+                        </div>
+                        <div class="portlet-body" id="reportlist">
+                        </div>
+                         
+              </div>
+
+
+         
+         <div id="wait" style="display:none;width:69px;height:89px;border:1px solid black;position:absolute;top:50%;left:50%;padding:2px;"><img src='../assets/pages/img/demo_wait.gif' width="64" height="64" /><br>Loading..</div>
+
+        </div>
+    </div>
+
+</div>
+
+   
+    <!-- END EXAMPLE TABLE PORTLET-->
+
+<script>
+   
+    $(function () {
+
+        $("#startdate").datepicker({
+            format: 'dd/mm/yyyy',
+            minDate: 0,
+            defaultDate: "+1w",
+            changeMonth: true,
+            numberOfMonths: 1,
+
+
+        });
+
+        $("#enddate").datepicker({
+            format: 'dd/mm/yyyy',
+            minDate: 0,
+            defaultDate: "+1w",
+            changeMonth: true,
+            numberOfMonths: 1,
+
+
+        });
+
+
+        var date = new Date();
+        date.setTime(date.getTime() - (1000 * 60 * 60 * 24))
+        $('#startdate').datepicker("setDate", date);
+        $('#startdate').datepicker({ autoclose: true });
+        $('#enddate').datepicker("setDate", date);
+        $('#enddate').datepicker({ autoclose: true });
+    });
+
+
+
+   
+
+
+
+    jQuery(document).ready(function () {
+        setTimeout(function () {
+            $("#MsgDiv").slideUp(400);
+        }, 2000);
+        $('#divPhotolistpop').css('width', '55%');
+    });
+
+
+    
+
+
+    function ProductivityReport() {
+
+
+        $("#wait").css("display", "block");
+        var pathurl = '@Url.Action("TLproductivityReport", "Admin")';
+         $.ajax({
+             url: pathurl,
+             type: 'GET',
+             data: {
+                 Process: $("#drpProcess option:selected").text(),
+                 Location: $("#drpLocation option:selected").text(),
+                 projectcode:$("#drpproject option:selected").text(),
+                 sdate: $('#startdate').val(),
+                 enddate: $('#enddate').val()
+                 
+             },
+             cache: false,
+             success: function (data) {
+                 $("#wait").css("display", "none");
+                 $("#reportlist").html("");
+                 $("#reportlist").html(data);
+                 
+             }
+         });
+     }
+
+
+   
+    
+
+    
+
+   
+
+    
+
+    
+
+
+</script>
+ 

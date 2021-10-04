@@ -1,0 +1,432 @@
+﻿@{
+   
+}
+<link href="../assets/global/plugins/bootstrap-sweetalert/sweetalert.css" rel="stylesheet" />
+<link href="../assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css" />
+<link href="../assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css" />
+
+@model BPOAttendanceProject.Models.ViewResourcePlan
+
+<div>
+    @using (Html.BeginForm("SaveViewResourceplan", "Admin", FormMethod.Post, new { @classs = "userform", @id = "form" }))
+    {
+        <div class="modal-content">
+            <div class="modal-body">
+                <div>
+                    <div>
+                        <!-- BEGIN SAMPLE FORM PORTLET-->
+                        <div class="portlet light bordered">
+                            <div class="m-heading-1 border-green m-bordered">
+                                <div class="caption">
+                                    <i class="fa fa-edit"></i>
+                                  
+                                   
+                                        <span class="caption-subject font-dark sbold uppercase">View Resource Plan</span>
+                                   
+
+                                </div>
+                            </div>
+                            <div class="portlet-body form">
+                                <div class="form-horizontal">
+                                    <div class="form-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+
+                                                <div class="form-group">
+                                                    @Html.HiddenFor(model => model.Id, new { @Id = "Id" })
+                                                    <label class="col-md-3 control-label">Report Date</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.Projectdate, new {  @id = "txtprojectcode", @class = "form-control", @placeholder = "Projectdate", @autocomplete = "off", @required = "required",@maxlength="20" })
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                                
+                                                  <div class="form-group">
+                                                    <label class="col-md-3 control-label">No of Days remaining</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                        
+                                                        @Html.TextBoxFor(model => model.remainday, new { @id = "txtremainday", @class = "form-control", @placeholder = "Remainday", @autocomplete = "off", @required = "required",@maxlength="20" })
+
+
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+                                                  <div class="form-group">
+                                                    <label class="col-md-3 control-label">No of associates reqd/day</label>
+                                                    <div class="col-md-9">
+                                                  @Html.TextBoxFor(model => model.Noofassociatereqday, new { @id = "txtassociatereqday", @class = "form-control", @placeholder = "No of associates reqd/day", @autocomplete = "off", @required = "required",@maxlength="20" })
+                                                    </div>
+                                                </div>
+
+
+                                                
+                                                
+                                                
+                                                
+                                                
+                                              
+                                           
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+
+                                               
+
+                                            </div>
+                                       
+                                             <div class="col-md-6">
+
+                                                 <div class="form-group">
+                                                        <label class="col-md-3 control-label">Project Name</label>
+                                                        <div class="col-md-9">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">
+                                                                    <i class="fa fa-envelope"></i>
+                                                                </span>
+                                                                @Html.TextBoxFor(model => model.Projectcode, new { @id = "txtProject", @class = "form-control", @placeholder = "Project Code", @autocomplete = "off", @required = "required",@maxlength="20" })
+
+                                                            </div>
+                                                            
+
+                                                        </div>
+                                                    </div>
+
+                                                
+                                                  <div class="form-group">
+                                                    <label class="col-md-3 control-label">Remaining No of Records</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                          
+                                                        @Html.TextBoxFor(model => model.balanceAchieve, new { @id = "txbaalnceAchieve", @class = "form-control", @placeholder = "Remainday", @autocomplete = "off", @required = "required",@maxlength="20" })
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                 
+                                                 <div class="form-group">
+                                                    <label class="col-md-3 control-label">Actual no of associates deployed</label>
+                                                    <div class="col-md-9">
+                                                        
+                                                 @Html.TextBoxFor(model => model.associatedeployed, new { @id = "txttodayachieveper", @class = "form-control", @placeholder = "Acchievement %", @autocomplete = "off", @required = "required",@maxlength="20" })
+
+                                                    </div>
+                                                </div>   
+                                                 
+                                                 
+                                                 
+                                                 
+
+                                               </div>
+                                            
+                                             <div class="form-group">
+                                                    <label class="col-md-3 control-label">No of associates required /day  today's % achievement (%)</label>
+                                                    <div class="col-md-9">
+                                                        
+                                                       @Html.TextBoxFor(model => model.todayachievepercent, new { @id = "txttodayachieveper", @class = "form-control", @placeholder = "Acchievement %", @autocomplete = "off", @required = "required",@maxlength="20" })
+
+
+                                                    </div>
+                                                </div>
+                                               
+                                             <div class="form-group">
+                                                    <label class="col-md-3 control-label">Reason for Deviation</label>
+                                                    <div class="col-md-9">
+                                                        
+                                                     @Html.TextBoxFor(model => model.DeviationReason, new { @id = "txtDeviation", @class = "form-control", @placeholder = "Reason for Deviation", @autocomplete = "off", @required = "required",@maxlength="20" })
+                                                    </div>
+                                                </div>
+                                             @* <div style="text-decoration:underline;">2233</div>*@
+                                            <div><input type="button" id="btn" class="btn btn-default" value="show"></div>
+
+                                             <div class="row" id="inload" style="display:none">
+
+                                                  <div class="col-md-6">
+
+                                                       <div class="form-group">
+                                                        <label class="col-md-3 control-label">Total Target</label>
+                                                        <div class="col-md-9">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">
+                                                                    <i class="fa fa-envelope"></i>
+                                                                </span>
+                                                             @Html.TextBoxFor(model => model.Totaltarget, new { @id = "txttotaltarget", @class = "form-control", @placeholder = "Total Target", @autocomplete = "off", @required = "required",@maxlength="20" })
+                                                                                </div>
+                                                            <span id="result"></span>
+
+                                                        </div>
+                                                    </div>
+
+
+                                               
+
+                                                 <div class="form-group">
+                                                    <label class="col-md-3 control-label">Immediate Completion date</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                             @Html.TextBoxFor(model => model.Completiondate, new { @id = "txtcompletiondate", @class = "form-control", @placeholder = "Completion date", @autocomplete = "off", @required = "required",@maxlength="20" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                               <div class="form-group">
+                                                    <label class="col-md-3 control-label">Reference Date</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                             @Html.TextBoxFor(model => model.Referencedate, new { @id = "txtreference", @class = "form-control", @placeholder = "Reference date", @autocomplete = "off", @required = "required",@maxlength="20" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+     
+
+                                                 <div class="form-group">
+                                                    <label class="col-md-3 control-label">Intervening holidays</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                        
+                                                       @Html.TextBoxFor(model => model.Holiday, new { @id = "txtholiday", @class = "form-control", @placeholder = "Holiday", @autocomplete = "off", @required = "required",@maxlength="20" })
+      
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                   <div class="form-group">
+                                                    <label class="col-md-3 control-label">Balanced to achieved/day</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                        
+                                                        @Html.TextBoxFor(model => model.balanceAchieveday, new { @id = "txbaalnceAchieveday", @class = "form-control", @placeholder = "Balanced to achieved/day", @autocomplete = "off", @required = "required",@maxlength="20" })
+ 
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                                    <div class="form-group">
+                                                    <label class="col-md-3 control-label">No of hrs reqd/day</label>
+                                                    <div class="col-md-9">
+                                                        
+                                                  @Html.TextBoxFor(model => model.Noofhrsreqdday, new { @id = "txthrsreqday", @class = "form-control", @placeholder = "No of hrs reqd/day", @autocomplete = "off", @required = "required",@maxlength="20" })
+
+
+                                                    </div>
+                                                </div>
+                                                
+
+                                                     <div class="form-group">
+                                                    <label class="col-md-3 control-label">Actual characters available</label>
+                                                    <div class="col-md-9">
+                                                        
+                                                 @Html.TextBoxFor(model => model.ActualCharacters, new { @id = "txtactcharacter", @class = "form-control", @placeholder = "Acchievement %", @autocomplete = "off", @required = "required",@maxlength="20" })
+
+                                                    </div>
+                                                </div>
+
+
+                                                  </div>
+                                                  <div class="col-md-6">
+
+                                                       <div class="form-group">
+                                                    <label class="col-md-3 control-label">Per Hour Indexing target</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                        </div>
+                                                      @Html.TextBoxFor(model => model.Indexingtarget, new { @id = "txtindexingtarget", @class = "form-control", @placeholder = "Per Hour Indexing target", @autocomplete = "off", @required = "required",@maxlength="20" })
+                                                    </div>
+                                                </div>
+                                                 
+                                                
+
+                                                
+                                               <div class="form-group">
+                                                    <label class="col-md-3 control-label">Immediate Target %</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                           @Html.TextBoxFor(model => model.TotaltargetP, new { @id = "txttotaltarget", @class = "form-control", @placeholder = "Immediate Target %", @autocomplete = "off", @required = "required",@maxlength="20" })
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+                                                  <div class="form-group">
+                                                    <label class="col-md-3 control-label">Immediate Completion target</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                             @Html.TextBoxFor(model => model.Completiontarget, new { @id = "txtcompletiontarget", @class = "form-control", @placeholder = "Completion target", @autocomplete = "off", @required = "required",@maxlength="20" })
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+                                                   <div class="form-group">
+                                                    <label class="col-md-3 control-label">Achievement till ref. date</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                        
+                                                       @Html.TextBoxFor(model => model.AchievetillRefdate, new { @id = "txtreference", @class = "form-control", @placeholder = "Reference Date", @autocomplete = "off", @required = "required",@maxlength="20" })
+   
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            
+                                                 
+
+
+                                                
+
+
+                                                      <div class="form-group">
+                                                    <label class="col-md-3 control-label">Today/s Achievement%</label>
+                                                    <div class="col-md-9">
+                                                        
+                                                  @Html.TextBoxFor(model => model.todayachieve, new { @id = "txttodayachieve", @class = "form-control", @placeholder = "Acchievement %", @autocomplete = "off", @required = "required",@maxlength="20" })
+
+
+                                                    </div>
+                                                </div>
+                                              
+
+                                                    
+
+                                                   
+
+
+
+
+                                                  </div>
+
+
+                                             </div>
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END SAMPLE FORM PORTLET-->
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+
+
+               @* <div class="md-checkbox" style="position: absolute">
+                    @Html.CheckBoxFor(model => model.IsActive, new { @id = "chkActive", @checked = "true", @class = "md-check", @autocomplete = "off" })
+                    <label for="chkActive">
+                        <span class="inc"></span>
+                        <span class="check"></span>
+                        <span class="box"></span>IsActive
+                    </label>
+                </div>*@
+                <button type="button" class="btn dark btn-outline" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn green">Submit</button>
+            </div>
+        </div>
+    }
+    <!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->
+
+
+
+
+
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="../assets/global/plugins/bootstrap-sweetalert/sweetalert.js"></script>
+<script src="../assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="../assets/pages/scripts/ui-extended-modals.min.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
+
+<script type="text/javascript">
+  
+    
+    $(document).ready(function () {
+        $("#btn").click(function () {
+            $("#inload").toggle();
+        });
+    });
+</script>
+
+<style>
+
+    .sweet-overlay {
+        z-index: 20000;
+    }
+
+    .sweet-alert {
+        z-index: 20000;
+    }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,170 @@
+﻿
+@model System.Data.DataTable
+@using System.Data;
+
+
+
+<div class="page-container" style="margin-top: 20px">
+    <!-- BEGIN SIDEBAR -->
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet light bordered">
+                <div class="m-heading-1 border-green m-bordered ">
+                    <div class="caption font-dark">
+                        <span class="caption-subject bold uppercase">Daily Operations Report</span>
+                    </div>
+                </div>
+@using (Html.BeginForm("Upload", "Admin", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()    
+    @Html.ValidationSummary()
+     
+
+  <div class="portlet-body">
+                    <div class="table-header">
+                        <div class="form-group">
+                            @if (@TempData["Msg"] != null)
+                            {
+                                <div class="alert alert-info" id="MsgDiv">
+                                    <button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button>
+                                    @TempData["Msg"]
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="table-toolbar">
+                       
+                       
+                        <div class="row">
+                            <div class="col-md-1">Date</div>
+                            <div class="col-md-3 valid-group">
+                               
+                                <div >
+
+                                  @*  @Html.TextBox("dt1", null, new {@class="date-picker",@id="ddate"})*@
+
+                                     <input type="text" id="from" name="dateFrom">
+
+@*                                  @Html.TextBoxFor(m => m.date, new { @class = "form-control", @placeholder = "Date", @autocomplete = "off", @required = "true" })*@
+                                    @*<span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>*@
+                                </div>
+                            </div>
+                          
+                            
+                            
+                          
+                            </div>
+
+                       <div style="height:10px"></div>
+
+                       <div class="row">
+                         <div class="form-group">
+                                                  
+                                                    <div class="col-md-3">
+                                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                            <div class="input-group input-large">
+                                                                <div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
+                                                                    <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                                    <span class="fileinput-filename"> </span>
+                                                                </div>
+                                                                <span class="input-group-addon btn default btn-file">
+                                                                <span class="fileinput-new"></span>
+                                                                <input type="hidden"><input type="file" id="dataFile" name="upload" /> </span>
+                                                               
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                        </div>
+
+                         <div class="col-md-3">
+                                <div class="btn-group">
+                                    <button type="submit" id="search" class="btn sbold green" >
+                                        Upload
+                                    <i class="fa fa-upload"></i>
+                                    </button>
+                                    
+                                    </div>
+                              
+
+                                </div>
+
+                     </div>
+
+                    </div>
+                   
+     if (Model != null)
+    {
+        <table>
+            <thead>
+                <tr>
+                    @foreach (DataColumn col in Model.Columns)
+                    {         
+                        <th>@col.ColumnName</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (DataRow row in Model.Rows)
+                {        
+                    <tr>
+                        @foreach (DataColumn col in Model.Columns)
+                        {             
+                            <td>@row[col.ColumnName]</td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
+
+     <div id="reportlist">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- END EXAMPLE TABLE PORTLET-->
+
+<script>
+    $(function () {
+        $("#from").datepicker("setDate", new Date());
+        $("#from").datepicker({
+            minDate: 0,
+            defaultDate: "+1w",
+            changeMonth: true,
+            numberOfMonths: 1,
+           
+        });
+       
+    });
+</script>
+
+
+
+
+
+
+
+<script>
+   
+   
+
+    jQuery(document).ready(function () {
+        setTimeout(function () {
+            $("#MsgDiv").slideUp(400);
+        }, 2000);
+        $('#divPhotolistpop').css('width', '55%');
+    });
+
+   
+
+</script>

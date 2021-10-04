@@ -1,0 +1,94 @@
+﻿@model BPOAttendanceProject.Models.DailyProductionViewModel
+
+<div class="page-container" style="margin-top: 20px">
+    <!-- BEGIN SIDEBAR -->
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet light bordered">
+                <div class="m-heading-1 border-green m-bordered ">
+                    <div class="caption font-dark">
+                        <span class="caption-subject bold uppercase">Daily Production View Report</span>
+                    </div>
+                </div>
+
+                <div class="portlet-body">
+                    <div class="table-header">
+                        <div class="form-group">
+                            @if (@TempData["Msg"] != null)
+                            {
+                                <div class="alert alert-info" id="MsgDiv">
+                                    <button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button>
+                                    @TempData["Msg"]
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="table-toolbar">
+                        <div class="row">
+                            <div class="col-md-4 valid-group">
+                                <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+
+                                    @Html.TextBoxFor(model => model.Date, new { @class = "form-control", @placeholder = "Date", @autocomplete = "off", @required = "true" })
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="btn-group">
+                                    <button id="search" class="btn sbold green" onclick="DailyProductionReport()">
+                                        Search
+                                    <i class="fa fa-search"></i>
+                                    </button>
+                                    </div>
+                                
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="reportlist">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- END EXAMPLE TABLE PORTLET-->
+
+<script>
+   
+    $('.date-picker').datepicker({
+        format: 'dd/mm/yyyy',
+        startDate: '-1d',
+        autoclose: true
+    });
+
+    jQuery(document).ready(function () {
+        setTimeout(function () {
+            $("#MsgDiv").slideUp(400);
+        }, 2000);
+        $('#divPhotolistpop').css('width', '55%');
+    });
+
+    function DailyProductionReport() {
+        var pathurl = '@Url.Action("DailyProductionReport", "Admin")';
+         $.ajax({
+             url: pathurl,
+             type: 'GET',
+             data: {
+                 date: $('#Date').val()
+             },
+             success: function (data) {
+                 $("#reportlist").html(data);
+             }
+         });
+     }
+
+    
+
+</script>

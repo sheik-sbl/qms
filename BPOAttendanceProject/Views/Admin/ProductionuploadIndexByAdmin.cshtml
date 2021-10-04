@@ -1,0 +1,302 @@
+﻿
+@model BPOAttendanceProject.Models.SummarySheetModel  
+@using System.Data;
+
+
+
+<div class="page-container" style="margin-top: 20px">
+    <!-- BEGIN SIDEBAR -->
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet light bordered">
+                <div class="m-heading-1 border-green m-bordered ">
+                    <div class="caption font-dark">
+                        <span class="caption-subject bold uppercase">Upload Daily Production</span>
+                    </div>
+                </div>
+@using (Html.BeginForm("ProductionUploadbyAdmin", "Admin", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken() 
+    @Html.ValidationSummary()
+     
+  
+     
+
+  <div class="portlet-body">
+                    <div class="table-header">
+                        <div class="form-group">
+                            @if (@TempData["Msg"] != null)
+                            {
+                                <div class="alert alert-info" id="MsgDiv">
+                                    <button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button>
+                                    @TempData["Msg"]
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="table-toolbar">
+                       
+                       
+                        <div class="row">
+                            <div class="col-md-1">Date</div>
+                            <div class="col-md-3 valid-group">
+                               
+                                <div >
+
+                                 
+ 
+                                    <input class="date form-control" style="width: 300px;" type="text" id="from" name="from">
+
+
+
+                                </div>
+                            </div>
+                          
+                            
+                            
+                          
+                            </div>
+
+
+                         <div style="height:20px"></div>
+                         <div class="row">
+                               <label class="col-md-1 ">Location</label>
+                                 <div class="col-md-3 valid-group">
+                                     <div>
+
+                        @Html.DropDownList("FooBarDropDown", new List<SelectListItem>
+                            {
+                                new SelectListItem{ Text = "All", Value = "0" },
+                                new SelectListItem{ Text = "KAKKANAD", Value = "6" },
+                                new SelectListItem{ Text = "MNS", Value = "5" },
+                                new SelectListItem{ Text = "MQC", Value = "4" },
+                                new SelectListItem{ Text = "MDS", Value = "3" },
+                                new SelectListItem {Text = "KNPY", Value = "2"},
+                                new SelectListItem{ Text = "TVM", Value = "1" },
+                              
+                             }, new { id = "ddlLocations", @class = "form-control" }) 
+ 
+                              </div>
+
+                           </div>
+                                       </div>                                                                            
+                                                                                                         
+                       
+                       <div style="height:20px"></div>
+
+                       <div class="row">
+                           <label class="col-md-1 ">File</label>
+                         <div class="form-group">
+                                                  
+                                                    <div class="col-md-3">
+                                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                            <div class="input-group input-large">
+                                                                <div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
+                                                                    <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                                    <span class="fileinput-filename"> </span>
+                                                                </div>
+                                                                <span class="input-group-addon btn default btn-file">
+                                                                <span class="fileinput-new"></span>
+                                                                <input type="hidden"><input type="file" id="dataFile" name="upload" /> </span>
+                                                               
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                        </div>
+
+                        <div style="height:20px"></div>
+                         <div class="row">
+                                <label class="col-md-1 ">Holiday</label>
+                                 <div class="col-md-6 valid-group">
+                                     <div>
+
+                                <span>Kakkanad: </span> @Html.CheckBox("Kakkanad", false)
+                                <span> | TVM: </span> @Html.CheckBox("TVM", false)
+                                <span> | KNPY: </span> @Html.CheckBox("KNPY", false)
+                                <span> | MDS: </span> @Html.CheckBox("MDS", false)
+                                <span> | MNS: </span> @Html.CheckBox("MNS", false)
+                                <span> | MQC: </span> @Html.CheckBox("MQC", false)
+                                    </div>
+
+                                </div>
+                            
+                             <label><input type="checkbox" onclick="onClickHandler();" id="chkINR" checked="checked" >INR</label>
+                             <label><input type="checkbox" onclick="onClickHandler();" id="chkETO">ETO</label>
+                          </div> 
+
+
+                         <div class="col-md-3">
+                                <div class="btn-group">
+                                    <button type="submit" id="search" class="btn sbold green" >
+                                        Upload
+                                    <i class="fa fa-upload"></i>
+                                    </button>
+                                    
+                                    </div>
+                              
+
+                                </div>
+
+                    <div><p style="color:red">@ViewBag.Strnot</p></div>
+                        
+                         </div>
+
+                    </div>
+                   
+     
+}
+<div id="reportlist"></div>
+
+     @* <table style="width:100%;border: 1px solid black;padding: 5px;">
+        <tr>
+        <th style="border: 1px solid black;padding: 5px;">Date</th>
+        <th style="border: 1px solid black;padding: 5px;">Location</th>
+        <th style="border: 1px solid black;padding: 5px;">Hours planned</th>
+        <th style="border: 1px solid black;padding: 5px;">Production planned/Hr Records</th>
+        <th style="border: 1px solid black;padding: 5px;">Production planned Records</th>
+        <th style="border: 1px solid black;padding: 5px;">Hours Worked</th>      
+        <th style="border: 1px solid black;padding: 5px;">Actual Production Records</th> 
+        <th style="border: 1px solid black;padding: 5px;">% Achievement</th> 
+        <th style="border: 1px solid black;padding: 5px;">TARGET REVENUE INR</th>
+        <th style="border: 1px solid black;padding: 5px;">ACTUAL REVENUE INR</th>
+        <th style="border: 1px solid black;padding: 5px;">% REVENUE ACHIEVEMENT</th>
+           
+
+        </tr>
+            
+                  @foreach (var item in Model.lstSummarySheetmodel)
+                  { 
+                
+                     <tr>
+                        <td style="border: 1px solid black;padding: 5px;">@item.Date</td>
+                        <td style="border: 1px solid black;padding: 5px;">@item.Location</td>
+                        <td style="border: 1px solid black;padding: 5px;">@item.hoursplanned</td>
+                        <td style="border: 1px solid black;padding: 5px;">@item.prodplanhrrecord</td>
+                        <td style="border: 1px solid black;padding: 5px;">@item.prodplanrecords</td>
+                        <td style="border: 1px solid black;padding: 5px;">@item.hoursworked</td>
+                        <td style="border: 1px solid black;padding: 5px;">@item.Actualprodrecord</td>
+                        <td style="border: 1px solid black;padding: 5px;">@item.Achievement</td>
+                        <td style="border: 1px solid black;padding: 5px;">@item.TarrevenueINR</td>
+                        <td style="border: 1px solid black;padding: 5px;">@item.ActrevenueINR</td>
+                        <td style="border: 1px solid black;padding: 5px;">@item.RevAchievement</td>
+                      </tr>  
+                  }          
+      
+      </table>
+    *@
+
+
+
+                    
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- END EXAMPLE TABLE PORTLET-->
+
+<script>
+    $(function () {
+       
+        $("#from").datepicker({
+           format: 'dd/mm/yyyy',
+            minDate: 0,
+            defaultDate: "+1w",
+            changeMonth: true,
+            numberOfMonths: 1,
+            
+           
+        });
+        //$("#from").datepicker("setDate", new Date());
+       
+        var date = new Date();
+        date.setTime(date.getTime() - (1000 * 60 * 60 * 24))
+        $('#from').datepicker("setDate", date);
+        $('#from').datepicker({ autoclose: true });
+       
+    }).on('change', function () {
+        $('.datepicker').hide();
+        var pathurl = '@Url.Action("Rep_Valid", "Admin")';
+        $.ajax(
+        {
+            url: pathurl,
+            type: 'GET',
+            data: {
+               
+                date: $('#from').val()
+
+            },
+            success: function (data) {
+                $("#reportlist").html(data);
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+
+
+    });
+   
+
+    jQuery(document).ready(function () {
+        setTimeout(function () {
+            $("#MsgDiv").slideUp(400);
+        }, 2000);
+        $('#divPhotolistpop').css('width', '55%');
+
+    });
+
+
+
+</script>
+
+@*<script type="text/javascript">
+    $('.date').datepicker({
+        format: 'dd/mm/yyyy'
+    });
+    $('.date').datepicker({ autoclose: true });
+</script>*@
+
+
+
+
+   
+
+    @*$("#ddlLocations").on("change", function () {
+
+       
+        var pathurl = '@Url.Action("Rep_Valid", "Admin")';
+        $.ajax(
+        {
+            url: pathurl,
+            type: 'GET',
+            data: {
+                LocationId: $("#ddlLocations option:selected").text(),
+                date: $('#from').val()
+
+            },
+            success: function (data) {
+                $("#reportlist").html(data);
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    });*@
+
+
+ 
+
+
+
+
+
+  
+
+
+

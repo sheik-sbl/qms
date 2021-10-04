@@ -1,0 +1,321 @@
+@model BPOAttendanceProject.Models.Projectmodel
+
+
+
+<div class="page-container" style="margin-top: 20px">
+    <!-- BEGIN SIDEBAR -->
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet light bordered">
+                <div class="m-heading-1 border-green m-bordered ">
+                    <div class="caption font-dark">
+                        <span class="caption-subject bold uppercase">Promotion Details Report</span>
+                    </div>
+                </div>
+
+                             <div class="portlet-body">
+                                  @if (@TempData["Msg"] != null)
+                            {
+                                <div class="alert alert-info" id="MsgDiv">
+                                    <button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button>
+                                    @TempData["Msg"]
+                                </div>
+                            }
+
+
+                   
+                                <div class="form-horizontal">
+                                    <div class="form-body">
+                                        <div class="row">
+                                           
+                                            <div class="col-md-6">
+
+                                                
+
+                                                
+
+                                                  <div class="form-group">
+                                                    <label class="col-md-3 control-label">Location</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                        
+                                                            @Html.DropDownListFor(m => m.Id , new SelectList(new List<SelectListItem> {
+                                                                                                         new SelectListItem { Text = "KAKKANAD", Value = "6"},       
+                                                                                                         new SelectListItem { Text = "MNS", Value = "5"}, 
+                                                                                                         new SelectListItem { Text = "MQC", Value = "4"}, 
+                                                                                                         new SelectListItem { Text = "MDS", Value = "3"},
+                                                                                                         new SelectListItem { Text = "KNPY", Value = "2"}, 
+                                                                                                         new SelectListItem { Text = "TVM", Value = "1"},                  
+                                                                                                         
+                                                                                                     }, "Value", "Text"), "ALL",new {style = "width: 100%;", @required = "required", @class = "btn dropdown-toggle btn-default", @autocomplete = "off", @id = "drpLocation" ,@onchange = "Getlocation(this.value);"  })
+
+
+
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                              
+                                                 <div class="form-group">
+                                                    <label class="col-md-3 control-label">Start Date</label>
+                                                    <div class="col-md-9">
+                                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                                        @Html.TextBoxFor(model => model.Startdate, new { @class = "form-control", @placeholder = "Date", @autocomplete = "off", @required = "true",@id = "startdate" })
+                                                       
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </span>
+                                                    </div>
+
+
+                                                    </div>
+                                                </div>
+
+                                                  <div class="form-group">
+                                                    <label class="col-md-3 control-label">TL</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                        
+                                                 @Html.DropDownList("Tls", (IEnumerable<SelectListItem>)ViewBag.Tls, "ALL", new { @class = "form-control", @id = "drptl" })
+
+                                              
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+                                               
+
+                                                 
+                                            </div>
+                                            <div class="col-md-6" id="projectlist">
+
+
+                                                 <div class="form-group">
+                                                    <label class="col-md-3 control-label">Project code</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                        
+                                                 @Html.DropDownList("Projectcodes", (IEnumerable<SelectListItem>)ViewBag.Projectcodes, "ALL", new { @class = "form-control", @id = "drpproject" })
+
+                                              
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+                                               
+
+
+
+
+
+
+
+                                                 <div class="form-group">
+                                                    <label class="col-md-3 control-label">End Date</label>
+                                                    <div class="col-md-9">
+                                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                                        @Html.TextBoxFor(model => model.Enddate, new { @class = "form-control", @placeholder = "Date", @autocomplete = "off", @required = "true",@id = "enddate" })
+                                                       
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </span>
+                                                    </div>
+
+
+                                                    </div>
+                                                </div>
+
+                                               
+                                                    <div class="form-group">
+                                                    <label class="col-md-3 control-label">Process</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                        
+                                                            @Html.DropDownListFor(m => m.Id , new SelectList(new List<SelectListItem> {
+                                                                                                         new SelectListItem { Text = "Indexing", Value = "6"},       
+                                                                                                         new SelectListItem { Text = "Qc2", Value = "5"}, 
+                                                                                                         new SelectListItem { Text = "Qc3", Value = "4"}, 
+                                                                                                         new SelectListItem { Text = "Audit", Value = "3"},
+                                                                                                         new SelectListItem { Text = "UAT", Value = "2"}, 
+                                                                                                         new SelectListItem { Text = "Training", Value = "1"},                  
+                                                                                                          new SelectListItem { Text = "Rework", Value = "1"}, 
+                                                                                                     }, "Value", "Text"), "ALL",new {style = "width: 100%;", @required = "required", @class = "btn dropdown-toggle btn-default", @autocomplete = "off", @id = "drpProcess"   })
+
+
+                                                      
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                                
+                                                
+                                                 <div class="form-group">
+                                                    <label class="col-md-3 control-label">Associates</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                        
+                                                 @Html.DropDownList("Associates", (IEnumerable<SelectListItem>)ViewBag.Associates, "ALL", new { @class = "form-control", @id = "drpAssociate" })
+
+                                              
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                            
+
+                                                
+
+                                            </div>
+
+                                           
+                                             
+                                        <div class="col-md-9">
+                                            
+                                                <div class="btn-group">
+                                                <button id="search" class="btn sbold green" onclick="ProductivityReport()">
+                                                    Ok
+                                                </button>
+                                                </div>
+                                             <div class="btn-group">
+                                                <button id="cancel" class="btn sbold green" onclick="Cancel()">
+                                                    Cancel
+                                                <i class="fa fa-cancel"></i>
+                                                </button>
+                                             </div>
+                                            @*<div class="btn-group">
+                                                <button id="graph" class="btn sbold green" onclick="getGraphReport()">
+                                                    Graph
+                                                <i class="fa fa-"></i>
+                                                </button>
+                                             </div>*@
+                                            
+
+                                       
+
+
+                                            </div>
+                                        
+                                        
+                                        
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                 </div>
+                   @* <div id="reportlist">
+                    </div>*@
+
+
+             @*<div class="portlet box green">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-gift"></i>Productivity Details
+                            </div>
+
+                        </div>
+                        <div class="portlet-body" id="reportlist">
+                        </div>
+                         
+              </div>*@
+
+         <div id="reportlist"> </div>
+         
+         <div id="wait" style="display:none;width:69px;height:89px;border:1px solid black;position:absolute;top:50%;left:50%;padding:2px;"><img src='../assets/pages/img/demo_wait.gif' width="64" height="64" /><br>Loading..</div>
+
+        </div>
+    </div>
+
+</div>
+
+   
+    <!-- END EXAMPLE TABLE PORTLET-->
+
+<script>
+   
+    
+
+
+   
+
+
+
+    jQuery(document).ready(function () {
+        setTimeout(function () {
+            $("#MsgDiv").slideUp(400);
+        }, 2000);
+        $('#divPhotolistpop').css('width', '55%');
+    });
+
+
+    
+
+
+    function ProductivityReport() {
+        $("#wait").css("display", "block");
+        var pathurl = '@Url.Action("PromotionDetailsReport", "Admin")';
+         $.ajax({
+             url: pathurl,
+             type: 'GET',
+             data: {
+                 Process: $("#drpProcess option:selected").text(),
+                 Location: $("#drpLocation option:selected").text(),
+                 projectcode:$("#drpproject option:selected").text(),
+                 sdate: $('#startdate').val(),
+                 enddate: $('#enddate').val(),
+                 Tl: $("#drptl option:selected").text(),
+                 Associate: $("#drpAssociate option:selected").text()
+                 
+             },
+             cache: false,
+             success: function (data) {
+                 $("#wait").css("display", "none");
+                 $("#reportlist").html("");
+                 $("#reportlist").html(data);
+                 
+             }
+         });
+     }
+
+
+   
+    
+
+    
+
+   
+
+    
+
+    
+
+
+</script>
+ 

@@ -1,0 +1,182 @@
+﻿@model BPOAttendanceProject.Models.SummarySheetModel 
+
+@if (Model.lstSummarySheetmodel != null)
+ {
+     if (Model.lstSummarySheetmodel.Count >0)
+            {    
+  <div class="portlet box grey">
+                                  <div class="portlet-title">
+                                        <div class="caption">
+                                            <i class="fa fa-gift"></i>@ViewBag.Yearlist
+                                        </div>
+                                 </div>
+  </div>
+    <div style="float:right;padding: 5px;"> 
+@*   <button type="button"  class="btn sbold green"    onclick="location.href='@Url.Action("DownloadYearlyReport", "Admin")'" >Export to Excel</button>*@
+  <a class="Yearreport" href="" ><button type="button" class="btn sbold green">Export to Excel</button> </a>
+  </div>
+  <table id="tbldisplay" style="width:100%;border: 1px solid black;padding: 5px;">
+        <tr>
+        <th style="border: 1px solid black;padding: 5px;">Month</th>
+      @*  <th style="border: 1px solid black;padding: 5px;">Location</th>*@
+        <th style="border: 1px solid black;padding: 5px;">Hours planned</th>
+        <th style="border: 1px solid black;padding: 5px;">Production planned/Hr Records</th>
+        <th style="border: 1px solid black;padding: 5px;">Production planned Records</th>
+        <th style="border: 1px solid black;padding: 5px;">Hours Worked</th>      
+        <th style="border: 1px solid black;padding: 5px;">Actual Production Records</th> 
+        <th style="border: 1px solid black;padding: 5px;">% Achievement</th> 
+        <th style="border: 1px solid black;padding: 5px;">Target Revenue INR</th>
+        <th style="border: 1px solid black;padding: 5px;">Actual Revenue INR</th>
+        <th style="border: 1px solid black;padding: 5px;">% Revenue Achievement</th>
+        <th style="border: 1px solid black;padding: 5px;" id="theto" class="theto" >ETO(USD)</th>
+        </tr>
+        <tbody>
+                  @foreach (var item in Model.lstSummarySheetmodel)
+                  { 
+                       
+                     <tr>
+                        <td style="border: 1px solid black;padding: 5px;">@item.Date</td>
+                     @*   <td style="border: 1px solid black;padding: 5px;">@item.Location</td>*@
+                        <td style="border: 1px solid black;padding: 5px;text-align:right">@item.hoursplanned</td>
+                        <td style="border: 1px solid black;padding: 5px;text-align:right">@item.prodplanhrrecord.ToString("#,##0")</td>
+                        <td style="border: 1px solid black;padding: 5px;text-align:right;">@item.prodplanrecords.ToString("#,##0")</td>
+                        <td style="border: 1px solid black;padding: 5px;text-align:right;">@item.hoursworked</td>
+                        <td style="border: 1px solid black;padding: 5px;text-align:right;">@item.Actualprodrecord.ToString("#,##0")</td>
+                        <td style="border: 1px solid black;padding: 5px;text-align:right;">@item.Achievement%</td>
+                        <td style="border: 1px solid black;padding: 5px;text-align:right;">@item.TarrevenueINR.ToString("#,##0")</td>
+                        <td style="border: 1px solid black;padding: 5px;text-align:right;">@item.ActrevenueINR.ToString("#,##0")</td>
+                        <td style="border: 1px solid black;padding: 5px;text-align:right;">@item.RevAchievement%</td>
+                        <td style="border: 1px solid black;padding: 5px;text-align:right;" id="tdeto" class="tdeto">@string.Format("{0:#.00}",(item.ActrevenueINR/item.Rate)/item.cnt)</td>
+                    
+                     </tr>
+                  }
+         
+               @if (Model.lstSummarySheetmodel.Count > 0)
+               {
+
+                if (Model.lstSummarySheetmodel.Sum(e => e.prodplanrecords) == 0)
+                {
+                 <tr><td style="border: 1px solid black;padding: 5px;font-weight: bold;">TOTAL</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.hoursplanned)</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.prodplanhrrecord).ToString("#,##0")</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.prodplanrecords).ToString("#,##0")</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.hoursworked)</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.Actualprodrecord).ToString("#,##0")</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;">0%</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.TarrevenueINR).ToString("#,##0")</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.ActrevenueINR).ToString("#,##0")</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;">0%</td><td></td></tr>
+                }
+               else
+               {
+                   
+                 <tr><td style="border: 1px solid black;padding: 5px;font-weight: bold;">TOTAL</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.hoursplanned)</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.prodplanhrrecord).ToString("#,##0")</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.prodplanrecords).ToString("#,##0")</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.hoursworked)</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.Actualprodrecord).ToString("#,##0")</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@(Math.Round(Model.lstSummarySheetmodel.Sum(e => e.Actualprodrecord)/Model.lstSummarySheetmodel.Sum(e => e.prodplanrecords)*100,0))%</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.TarrevenueINR).ToString("#,##0")</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.ActrevenueINR).ToString("#,##0")</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@(Math.Round(Model.lstSummarySheetmodel.Sum(e => e.ActrevenueINR)/Model.lstSummarySheetmodel.Sum(e => e.TarrevenueINR)*100,0))%</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right" id="tdAverageeto" class="tdAverageeto">@(Math.Round(Model.lstSummarySheetmodel.Sum(e => e.ActrevenueINR)/Model.lstSummarySheetmodel[0].Rate/Model.lstSummarySheetmodel.Sum(e => e.cnt),2))</td></tr>
+               }
+               }
+
+                </tbody>         
+                  
+                 
+   </table>
+    
+}
+ 
+   else
+                         {
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="alert alert-info">
+                                                        <strong>No Records Found</strong><br />
+                                                    </div>
+                                                </div>
+                                            </div>
+                         }
+ }
+
+ 
+ 
+<script type="text/javascript">
+
+    $(".Yearreport").click(function (event) {
+        event.preventDefault();
+        var url = '@Url.Action("DownloadYearlyReport", "Admin", new {PartId = "PARENT_ID"})';
+
+        if (chkyearETO.checked) {
+            url = url.replace("PARENT_ID", 10);
+        }
+        else {
+            url = url.replace("PARENT_ID", 11);
+        }
+        window.location.href = url;
+
+
+
+     });
+
+
+
+    jQuery(document).ready(function () {
+        var chkyearINR = document.getElementById("chkyearINR");
+        var chkyearETO = document.getElementById("chkyearETO");
+      
+        if (chkyearETO.checked) {
+
+            
+            $('#tbldisplay tr').each(function () {
+                $(this).find(".theto").show();
+            })
+
+
+            $('#tbldisplay tbody tr').each(function () {
+                $(this).find(".tdeto").show();
+                $(this).find(".tdAverageeto").show();
+            })
+            
+        }
+        else
+        {
+            $('#tbldisplay tr').each(function () {
+                $(this).find(".theto").hide();
+            })
+
+
+            $('#tbldisplay tbody tr').each(function () {
+                $(this).find(".tdeto").hide();
+                $(this).find(".tdAverageeto").hide();
+            })
+
+        }
+
+       });
+   
+    function onClickHandler() {
+        
+       
+        var chkyearINR = document.getElementById("chkyearINR");
+        var chkyearETO = document.getElementById("chkyearETO");
+
+        if (chkyearETO.checked)
+        {
+
+            $('#tbldisplay tr').each(function () {
+                $(this).find(".theto").show();
+            })
+
+
+            $('#tbldisplay tbody tr').each(function () {
+                $(this).find(".tdeto").show();
+                $(this).find(".tdAverageeto").show();
+            })
+
+        }
+        else
+        {
+            $('#tbldisplay tr').each(function () {
+                $(this).find(".theto").hide();
+            })
+
+
+            $('#tbldisplay tbody tr').each(function () {
+                $(this).find(".tdeto").hide();
+                $(this).find(".tdAverageeto").hide();
+            })
+
+        }
+
+
+
+    }
+
+</script>
+

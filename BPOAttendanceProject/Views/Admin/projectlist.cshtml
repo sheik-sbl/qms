@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "projectlist";
+}
+
+<title></title>
+     <style>
+        .highlight a{
+  background-color: #C8FBC7 !important;
+  color: #000400 !important;
+}
+  </style>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+        $(function () {
+            $.ajax({
+                type:'POST',
+                url: "Admin/GetProjectDate",
+                contentType: 'application/json;charset=utf-8',
+                dateType: "json",
+                success: function (data) {
+                    var v = eval(data.d);
+                    var selectd_Date = new Array();
+                    $.each(v, function (i, item) {
+                        selectd_Date.push(item.Date);
+                    })
+
+                    $("#txtStartDate").datepicker({
+                        dateFormat:"yyyy-mm-dd",
+                        beforeShowDay: function (date) {
+                            var mm = date.getMonth() + 1,
+                                dd = date.getDate(),
+                                yy = date.getFullYear();
+                            if (mm > 10) {
+                                var dt = yy + "-" + mm + "-" + dd;
+                            } else {
+                                var dt = yy + "-0" + mm + "-" + dd;
+                            }
+                            
+                            if ($.inArray(dt, selectd_Date) >= 0) {
+                                var color="";
+                                var tooltip="";
+                                $.each(v, function (i, item) {
+                                    if (dt == item.Date) {
+                                        color = item.Color;
+                                        tooltip = item.Tooltip;
+                                    }
+                                })
+                                return [true, color, tooltip];
+                            } else {
+                                return [false, ""];
+                            }
+                          
+                        }
+                    });
+                }
+               
+
+            })
+        })
+    </script>

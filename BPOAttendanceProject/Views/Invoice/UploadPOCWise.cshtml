@@ -1,0 +1,214 @@
+﻿
+
+@model BPOAttendanceProject.Models.InvoiceModel
+@using System.Data;
+
+
+
+<div class="page-container" style="margin-top: 20px">
+    <!-- BEGIN SIDEBAR -->
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet light bordered">
+                <div class="m-heading-1 border-green m-bordered ">
+                    <div class="caption font-dark">
+                        <span class="caption-subject bold uppercase">Upload POC Data</span>
+                    </div>
+                </div>
+@using (Html.BeginForm("Pocwisedata", "Invoice", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken() 
+    @Html.ValidationSummary()
+     
+  
+     
+
+  <div class="portlet-body">
+                    <div class="table-header">
+                        <div class="form-group">
+                            @if (@TempData["Msg"] != null)
+                            {
+                                <div class="alert alert-info" id="MsgDiv">
+                                    <button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button>
+                                    @TempData["Msg"]
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="table-toolbar">
+                       
+                       
+                        <div class="row">
+                            <div class="col-md-1">Month</div>
+                            <div class="col-md-3 valid-group">
+                                 @Html.DropDownListFor(model => model.MonthName , new SelectList(new List<SelectListItem> { 
+                                                                                                         new SelectListItem { Text = "January", Value = "January"}, 
+                                                                                                         new SelectListItem { Text = "February", Value = "February"}, 
+                                                                                                         new SelectListItem { Text = "March", Value = "March"}, 
+                                                                                                         new SelectListItem { Text = "April", Value = "April"},                   
+                                                                                                         new SelectListItem { Text = "May", Value = "May"},
+                                                                                                         new SelectListItem { Text = "June", Value = "June"}, 
+                                                                                                         new SelectListItem { Text = "July", Value = "July"}, 
+                                                                                                         new SelectListItem { Text = "August", Value = "August"}, 
+                                                                                                         new SelectListItem { Text = "September", Value = "September"},                   
+                                                                                                         new SelectListItem { Text = "October", Value = "October"},
+                                                                                                         new SelectListItem { Text = "November", Value = "November"},
+                                                                                                         new SelectListItem { Text = "December", Value = "December"}
+                                                                                                     }, "Value", "Text"), "Select",new {style = "width: 100%;", @required = "required", @class = "btn dropdown-toggle btn-default", @autocomplete = "off", @id = "drpMonth"  })
+                                                       
+                               
+                            </div>
+                          
+                            
+                            
+                          
+                            </div>
+
+
+                         <div style="height:20px"></div>
+                         <div class="row">
+                               <label class="col-md-1 ">Year</label>
+                                 <div class="col-md-3 valid-group">
+                                     <div>
+
+                                 
+                                                      @Html.DropDownListFor(model => model.YearName , new SelectList(new List<SelectListItem> {
+                                                                                                           new SelectListItem { Text = "2022", Value = "2022"}, 
+                                                                                                          new SelectListItem { Text = "2021", Value = "2021"}, 
+                                                                                                         new SelectListItem { Text = "2020", Value = "2020"},
+                                                                                                         new SelectListItem { Text = "2019", Value = "2019"},
+                                                                                                     }, "Value", "Text"), "Select",new {style = "width: 100%;", @required = "required", @class = "btn dropdown-toggle btn-default", @autocomplete = "off", @id = "drpYear",@onchange = "BindMonthlyPocdetails();" })
+                                                       
+ 
+                              </div>
+
+                           </div>
+                                       </div>                                                                            
+                                                                                                         
+                       
+                       <div style="height:20px"></div>
+
+                       <div class="row">
+                           <label class="col-md-1 ">File</label>
+                         <div class="form-group">
+                                                  
+                                                    <div class="col-md-3">
+                                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                            <div class="input-group input-large">
+                                                                <div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
+                                                                    <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                                    <span class="fileinput-filename"> </span>
+                                                                </div>
+                                                                <span class="input-group-addon btn default btn-file">
+                                                                <span class="fileinput-new"></span>
+                                                                <input type="hidden"><input type="file" id="dataFile" name="upload" /> </span>
+                                                               
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                        </div>
+
+                        <div style="height:20px"></div>
+                      
+
+
+                         <div class="col-md-3">
+                                <div class="btn-group">
+                                    <button type="submit" id="search" class="btn sbold green" >
+                                        Upload
+                                    <i class="fa fa-upload"></i>
+                                    </button>
+
+                                   @*<button id="yearcancel" class="btn sbold green" onclick="UploadReport()">
+                                                   List
+                                                <i class="fa fa-cancel"></i>
+                                                </button>*@
+                                    
+                                  </div>
+                              
+
+                                </div>
+
+                    <div><p style="color:red">@ViewBag.Strnot</p></div>
+                        
+                         </div>
+
+                    </div>
+                   
+     
+}
+
+
+    
+
+
+                    
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- END EXAMPLE TABLE PORTLET-->
+
+<script>
+   
+    function UploadReport() {
+
+        var pathurl = '@Url.Action("DisplayPOCdata", "Invoice")';
+        $.ajax(
+        {
+            url: pathurl,
+            type: 'GET',
+            data: {
+
+                month: $('#drpMonth').val(),
+                year: $('#drpYear').val()
+
+            },
+            success: function (data) {
+                $("#reportlist").html(data);
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+
+    }
+  
+   
+
+    jQuery(document).ready(function () {
+        setTimeout(function () {
+            $("#MsgDiv").slideUp(400);
+        }, 2000);
+        $('#divPhotolistpop').css('width', '55%');
+
+    });
+
+
+
+</script>
+
+
+
+
+
+   
+
+  
+
+ 
+
+
+
+
+
+  
+
+
+

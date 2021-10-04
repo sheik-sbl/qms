@@ -1,0 +1,129 @@
+﻿@model BPOAttendanceProject.Models.SummarySheetModel 
+
+
+  <div class="modal-content">
+              <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>  
+            <div class="modal-body">
+
+        @if (Model.lstSummarySheetmodel != null)
+        {
+
+            if (Model.lstSummarySheetmodel.Count > 0)
+            {
+             <div class="portlet box grey">
+                                  <div class="portlet-title">
+                                        <div class="caption">
+                                            <i class="fa fa-gift"></i>@TempData["dailylist"]
+                                        </div>
+                                 </div>
+                           </div>
+            
+    
+  <table id="tblproject" style="width:100%;padding: 5px;">
+        <thead> 
+      
+      <tr>
+       
+        <th style="border: 1px solid black;padding: 5px;">Project Code</th>
+        <th style="border: 1px solid black;padding: 5px;">Event </th>
+        <th style="border: 1px solid black;padding: 5px;">Process </th>
+        <th style="border: 1px solid black;padding: 5px;">Hours planned</th>
+        <th style="border: 1px solid black;padding: 5px;">Production planned/Hr Records</th>
+        <th style="border: 1px solid black;padding: 5px;">Production planned Records</th>
+        <th style="border: 1px solid black;padding: 5px;">Hours Worked</th>      
+        <th style="border: 1px solid black;padding: 5px;">Actual Production Records</th> 
+        <th style="border: 1px solid black;padding: 5px;">% Achievement</th> 
+        <th style="border: 1px solid black;padding: 5px;">Target Revenue INR</th>
+        <th style="border: 1px solid black;padding: 5px;">Actual Revenue INR</th>
+        <th style="border: 1px solid black;padding: 5px;">% Revenue Achievement</th>
+            
+               @if (Model.lstSummarySheetmodel.Sum(e => e.ETO) > 0)
+                {
+              
+                 <th style="border: 1px solid black;padding: 5px;" id="USDETo"  >ETO(USD)</th>
+               }
+      
+      </tr>
+      </thead>   
+         <tbody>
+                  @foreach (var item in Model.lstSummarySheetmodel)
+                  { 
+                       
+                     <tr>
+                      
+                        <td style="border: 1px solid black;padding: 5px;">@item.projectcode</td>
+                        <td style="border: 1px solid black;padding: 5px;">@item.eventcode</td>
+                         <td style="border: 1px solid black;padding: 5px;">@item.process</td>
+                        <td style="border: 1px solid black;padding: 5px;text-align:right">@item.hoursplanned</td>
+                        <td style="border: 1px solid black;padding: 5px;text-align:right">@item.prodplanhrrecord.ToString("#,##0")</td>
+                        <td style="border: 1px solid black;padding: 5px;text-align:right;">@item.prodplanrecords.ToString("#,##0")</td>
+                        <td style="border: 1px solid black;padding: 5px;text-align:right;">@item.hoursworked</td>
+                        <td style="border: 1px solid black;padding: 5px;text-align:right;">@item.Actualprodrecord.ToString("#,##0")</td>
+                        <td style="border: 1px solid black;padding: 5px;text-align:right;">@item.Achievement%</td>
+                        <td style="border: 1px solid black;padding: 5px;text-align:right;">@item.TarrevenueINR.ToString("#,##0")</td>
+                        <td style="border: 1px solid black;padding: 5px;text-align:right;">@item.ActrevenueINR.ToString("#,##0")</td>
+                        <td style="border: 1px solid black;padding: 5px;text-align:right;">@item.RevAchievement%</td>
+                          @if (item.ETO == 1)
+                          {
+                          <td style="border: 1px solid black;padding: 5px;text-align:right;" id="tdeto" class="tdeto">@string.Format("{0:#.00}", (item.ActrevenueINR / item.Rate) / item.cnt)</td>
+                          }
+                     </tr>
+                  }
+         
+               @if (Model.lstSummarySheetmodel.Count > 0)
+               {
+
+                   if (Model.lstSummarySheetmodel.Sum(e => e.prodplanrecords) == 0)
+                   {
+                 <tr><td></td><td></td><td style="border: 1px solid black;padding: 5px;font-weight: bold;">TOTAL</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.hoursplanned)</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.prodplanhrrecord).ToString("#,##0")</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.prodplanrecords).ToString("#,##0")</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.hoursworked)</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.Actualprodrecord).ToString("#,##0")</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;">0%</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.TarrevenueINR).ToString("#,##0")</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.ActrevenueINR).ToString("#,##0")</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;">0%</td><td></td></tr>
+                   }
+                   else
+                   {
+                   
+                 <tr><td></td><td></td><td style="border: 1px solid black;padding: 5px;font-weight: bold;">TOTAL</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.hoursplanned)</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.prodplanhrrecord).ToString("#,##0")</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.prodplanrecords).ToString("#,##0")</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.hoursworked)</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.Actualprodrecord).ToString("#,##0")</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@(Math.Round(Model.lstSummarySheetmodel.Sum(e => e.Actualprodrecord) / Model.lstSummarySheetmodel.Sum(e => e.prodplanrecords) * 100, 0))%</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.TarrevenueINR).ToString("#,##0")</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.ActrevenueINR).ToString("#,##0")</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@(Math.Round(Model.lstSummarySheetmodel.Sum(e => e.ActrevenueINR) / Model.lstSummarySheetmodel.Sum(e => e.TarrevenueINR) * 100, 0))%</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right" id="tdAverageeto" class="tdAverageeto">@(Math.Round(Model.lstSummarySheetmodel.Sum(e => e.ActrevenueINR) / Model.lstSummarySheetmodel[0].Rate / Model.lstSummarySheetmodel.Sum(e => e.cnt), 2))     </td>        </tr>
+                   }
+               }
+
+                </tbody>         
+                  
+                 
+      </table>
+    
+            }
+
+
+
+            else
+            {
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="alert alert-info">
+                                                        <strong>No Records Found</strong><br />
+                                                    </div>
+                                                </div>
+                                            </div>
+            }
+
+
+        }
+
+ </div>  
+        </div>  
+   
+<script>      
+
+
+ //jQuery(function ($) {
+ //    $('#tblproject').dataTable({
+
+ //            "aoColumns": [
+ //                              null, null, null, null, null, null, null,null,null,null,null,null
+
+ //            ]
+
+ //        });
+
+ //});
+
+    
+</script>

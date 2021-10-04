@@ -1,0 +1,69 @@
+﻿@{
+    Layout = null;
+}
+
+
+
+
+   
+   
+
+
+    <div>
+        <h1>Example 1 Using FormData with ajax</h1>
+        Enter Name : <input type="text" id="txtName" /> <br />
+        Upload Photo : <input type="file" id="photo" name="photo" /><br />
+        <input type="submit" value="Submit" id="btnSubmit" />
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Infromation Dialog</h4>
+                </div>
+                <div class="modal-body">
+                   <p id="txtMessage"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+//Start of the document ready function
+            $("#btnSubmit").click(function () {
+                var frmData = new FormData();
+                var filebase = $("#photo").get(0);
+                var files = filebase.files;
+                frmData.append("firstname", "hi");
+                frmData.append(files[0].name, files[0]);
+                $.ajax({
+                    url: '/Admin/SaveEmployee',
+                    type: "POST",
+                    contentType: false,
+                    processData: false, 
+                    data: frmData,
+                    success: function (data) {
+                        $('#myModal').modal('show');
+                        $('#txtMessage').html(data.message);
+                        if (data.success) {
+                            $('.modal-header').addClass('alert alert-success');
+                        } else {
+                            $('.modal-header').addClass('alert alert-info');
+                        }
+                    },
+                    error: function (err) {
+                        $('#myModal').modal('show');
+                        $('.modal-header').addClass('alert alert-danger');
+                        $('#txtMessage').html(err.statusText);
+                    }
+                });
+            });
+
+//End of the document ready function...
+        });
+    </script>

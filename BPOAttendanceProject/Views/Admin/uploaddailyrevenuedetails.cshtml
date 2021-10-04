@@ -1,0 +1,113 @@
+﻿
+@model System.Data.DataTable
+@using System.Data;
+
+
+
+<div class="page-container" style="margin-top: 20px">
+    <!-- BEGIN SIDEBAR -->
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet light bordered">
+                <div class="m-heading-1 border-green m-bordered ">
+                    <div class="caption font-dark">
+                        <span class="caption-subject bold uppercase">Upload Revenue Details</span>
+                    </div>
+                </div>
+@using (Html.BeginForm("UploadRevenueReport1", "Admin", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken() 
+    @Html.ValidationSummary()
+     
+  
+     
+
+  <div class="portlet-body">
+                    <div class="table-header">
+                        <div class="form-group">
+                           
+                        </div>
+                    </div>
+
+                    <div class="table-toolbar">
+                       
+                       
+                            <div class="form-group">
+                                                    <label class="col-md-3 control-label">File<span  style="color:red"> *</span></label>
+                                                    <div class="col-md-9">
+                                                        
+                                                             <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                            <div class="input-group input-large">
+                                                                <div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
+                                                                    <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                                    <span class="fileinput-filename">Upload Excel file </span>
+                                                                </div>
+                                                                <span class="input-group-addon btn default btn-file">
+                                                                <span class="fileinput-new"></span>
+                                                                <input type="hidden"><input type="file" id="dataFile" name="upload"  required /> </span>
+                                                               
+                                                            </div>
+                                                        </div>
+                                                            
+                                                        </div>
+                                                     <span style="color:blue"   class="help-block">Excel sheet date format should be in  'dd/mm/yyyy'.</span>
+
+                                                    </div>
+
+                         <div class="col-md-6">
+                                <div class="btn-group">
+                                    <button type="submit" id="search" class="btn sbold green" >
+                                        Upload
+                                    <i class="fa fa-upload"></i>
+                                    </button>
+                                    @* <a href="@Url.Action("GenerateRevenue", "Admin")" ><button type="button" class="btn sbold green">Revenue List</button> </a>*@
+                                    
+                                    </div>
+                              
+
+                                </div>
+
+                     </div>
+
+                    </div>
+                   
+    
+}
+
+   
+                    
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- END EXAMPLE TABLE PORTLET-->
+
+
+
+<script>
+   
+   
+
+    jQuery(document).ready(function () {
+        setTimeout(function () {
+            $("#MsgDiv").slideUp(400);
+        }, 2000);
+        $('#divPhotolistpop').css('width', '55%');
+    });
+
+
+   
+ 
+
+
+
+
+
+  
+
+
+
+</script>

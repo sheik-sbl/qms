@@ -1,0 +1,139 @@
+﻿@model BPOAttendanceProject.Models.DailyTeamViewModel
+@{
+    
+}
+
+
+<div class="page-container" style="margin-top: 20px">
+    <!-- BEGIN SIDEBAR -->
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet light bordered">
+                <div class="m-heading-1 border-green m-bordered ">
+                    <div class="caption font-dark">
+                        <span class="caption-subject bold uppercase">Daily Team View Report</span>
+                    </div>
+                </div>
+
+                <div class="portlet-body">
+                   
+                                <div class="form-horizontal">
+                                    <div class="form-body">
+                                        <div class="row">
+                                           
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Date</label>
+                                                    <div class="col-md-9">
+                                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                                        @Html.TextBoxFor(model => model.Date, new { @class = "form-control", @placeholder = "Date", @autocomplete = "off", @required = "true" })
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </span>
+                                                    </div>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">TL</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                        
+                                                           @*  @Html.DropDownListFor(m => m.TL , new SelectList(new List<SelectListItem> {                  
+                                                                                                         new SelectListItem { Text = "Nikhil", Value = "1"},                   
+                                                                                                         new SelectListItem { Text = "Keerthi", Value = "0"}
+                                                                                                     }, "Value", "Text"), "Select",new {style = "width: 100%;", @required = "required", @class = "btn dropdown-toggle btn-default", @autocomplete = "off", @id = "drpTl"  })*@
+
+
+                                                         @Html.DropDownListFor(model => model.Id, new SelectList(Model.UserList, "Id", "FirstName"), "Select", new { style = "width: 100%;", @required = "required", @class = "btn dropdown-toggle btn-default", @autocomplete = "off", @id = "drpuserId" })
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+                                                
+
+                                            </div>
+                                            
+                                        <div class="col-md-4">
+                                            <div class="btn-group">
+                                                <button id="search" class="btn sbold green" onclick="DailyTeamViewReport()">
+                                                    Search
+                                                <i class="fa fa-search"></i>
+                                                </button>
+                                                </div>
+                                             <div class="btn-group">
+                                                <button id="cancel" class="btn sbold green" onclick="Cancel()">
+                                                    Cancel
+                                                <i class="fa fa-cancel"></i>
+                                                </button>
+                                                 </div>
+
+                                            </div>
+                                        
+                                        
+                                        
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                 </div>
+                    <div id="reportlist">
+                    </div>
+  
+                </div>
+        </div>
+
+</div>
+
+   
+    <!-- END EXAMPLE TABLE PORTLET-->
+
+<script>
+   
+    //$('.date-picker').datepicker({
+    //    format: 'dd/mm/yyyy',
+    //    startDate: '-1d',
+    //    autoclose: true
+    //});
+
+    jQuery(document).ready(function () {
+        setTimeout(function () {
+            $("#MsgDiv").slideUp(400);
+        }, 2000);
+        $('#divPhotolistpop').css('width', '55%');
+    });
+
+    function DailyTeamViewReport() {
+
+
+        var pathurl = '@Url.Action("DailyTeamViewReport", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'GET',
+            data: {
+                date: $('#Date').val(),
+                UserId: $("#drpuserId option:selected").text()
+            },
+            success: function (data) {
+                $("#reportlist").html(data);
+            }
+        });
+    }
+
+   
+
+</script>

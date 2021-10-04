@@ -1,0 +1,29 @@
+﻿ @model  BPOAttendanceProject.Models.DailymasterProductionViewModel 
+
+<table class="table table-striped table-bordered table-hover table-checkable order-column" id="tblPreprocess">
+        <thead>
+            <tr>
+                <th style="width:5%">PSN </th>
+                <th style="width:20%">Name </th>
+                <th style="width:5%">Attendance </th>
+                <th style="width:5%">Project</th>
+                <th style="width:5%">Total Target</th>
+                <th style="width:5%">Total Production</th>
+                <th style="width:5%">Total Hours</th>
+                <th style="width:5%">Character Count</th>
+                <th style="width:5%">Avg Records/Hr</th>
+                <th style="width:5%">Avg Character/Hr</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.LstDailymasterProductionReport)
+            {
+               
+                          <tr class="odd gradeX" style="color:red">
+                            <td>@item.psn</td>
+                            <td>@item.project</td>
+                            
+                        </tr>
+            }
+            </tbody>
+ </table>

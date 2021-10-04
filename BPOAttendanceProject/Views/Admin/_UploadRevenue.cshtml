@@ -1,0 +1,267 @@
+﻿@model BPOAttendanceProject.Models.SummarySheetModel 
+@{
+   
+    double hoursplanned = 0.0;
+    double prodplanhrrecord = 0.0;
+    double prodplanrecords = 0.0;
+    double hoursworked = 0.0;
+    double Actualprodrecord = 0.0;
+    double Achievement = 0.0;
+    double TarrevenueINR = 0.0;
+    double ActrevenueINR = 0.0;
+    double RevAchievement = 0.0;
+   
+}
+
+
+
+        @if (Model.lstSummarySheetmodel != null)
+        {
+
+  <table id="tbldisplay" style="width:100%;border: 1px solid black;padding: 5px;">
+        <tr>
+        <th style="border: 1px solid black;padding: 5px;">Date</th>
+        <th style="border: 1px solid black;padding: 5px;">Location</th>
+        <th style="border: 1px solid black;padding: 5px;">Hours planned</th>
+        <th style="border: 1px solid black;padding: 5px;">Production planned/Hr Records</th>
+        <th style="border: 1px solid black;padding: 5px;">Production planned Records</th>
+        <th style="border: 1px solid black;padding: 5px;">Hours Worked</th>      
+        <th style="border: 1px solid black;padding: 5px;">Actual Production Records</th> 
+        <th style="border: 1px solid black;padding: 5px;">% Achievement</th> 
+        <th style="border: 1px solid black;padding: 5px;">Target Revenue INR</th>
+        <th style="border: 1px solid black;padding: 5px;">Actual Revenue INR</th>
+        <th style="border: 1px solid black;padding: 5px;">% Revenue Achievement</th>
+        <th style="border: 1px solid black;padding: 5px;" id="theto" class="theto" >ETO(USD)</th>
+        </tr>
+         <tbody>
+                  @foreach (var item in Model.lstSummarySheetmodel)
+                  { 
+                       
+                     <tr>
+                        <td style="border: 1px solid black;padding: 5px;">@item.Date</td>
+                        <td style="border: 1px solid black;padding: 5px;">@item.Location</td>
+                        <td style="border: 1px solid black;padding: 5px;text-align:right">@item.hoursplanned</td>
+                        <td style="border: 1px solid black;padding: 5px;text-align:right">@item.prodplanhrrecord</td>
+                        <td style="border: 1px solid black;padding: 5px;text-align:right;">@item.prodplanrecords</td>
+                        <td style="border: 1px solid black;padding: 5px;text-align:right;">@item.hoursworked</td>
+                        <td style="border: 1px solid black;padding: 5px;text-align:right;">@item.Actualprodrecord</td>
+                        <td style="border: 1px solid black;padding: 5px;text-align:right;">@item.Achievement%</td>
+                        <td style="border: 1px solid black;padding: 5px;text-align:right;">@item.TarrevenueINR</td>
+                        <td style="border: 1px solid black;padding: 5px;text-align:right;">@item.ActrevenueINR</td>
+                        <td style="border: 1px solid black;padding: 5px;text-align:right;">@item.RevAchievement%</td>
+                        <td style="border: 1px solid black;padding: 5px;text-align:right;" id="tdeto" class="tdeto">@string.Format("{0:#.00}",(item.ActrevenueINR/item.Rate)/item.cnt)</td>
+                    
+                     </tr>
+                  }
+         
+               @if (Model.lstSummarySheetmodel.Count > 0)
+               {
+
+                if (Model.lstSummarySheetmodel.Sum(e => e.prodplanrecords) == 0)
+                {
+                 <tr><td></td><td style="border: 1px solid black;padding: 5px;font-weight: bold;">TOTAL</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.hoursplanned)</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.prodplanhrrecord)</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.prodplanrecords)</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.hoursworked)</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.Actualprodrecord)</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;">0%</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.TarrevenueINR)</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.ActrevenueINR)</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;">0%</td><td></td></tr>
+                 }
+               else
+               {
+                   
+                 <tr><td></td><td style="border: 1px solid black;padding: 5px;font-weight: bold;">TOTAL</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.hoursplanned)</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.prodplanhrrecord)</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.prodplanrecords)</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.hoursworked)</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.Actualprodrecord)</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@(Math.Round(Model.lstSummarySheetmodel.Sum(e => e.Actualprodrecord)/Model.lstSummarySheetmodel.Sum(e => e.prodplanrecords)*100,0))%</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.TarrevenueINR)</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@Model.lstSummarySheetmodel.Sum(e => e.ActrevenueINR)</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right">@(Math.Round(Model.lstSummarySheetmodel.Sum(e => e.ActrevenueINR)/Model.lstSummarySheetmodel.Sum(e => e.TarrevenueINR)*100,0))%</td><td style="border: 1px solid black;padding: 5px;font-weight: bold;text-align:right" id="tdAverageeto" class="tdAverageeto">@(Math.Round(Model.lstSummarySheetmodel.Sum(e => e.ActrevenueINR)/Model.lstSummarySheetmodel[0].Rate/Model.lstSummarySheetmodel.Sum(e => e.cnt),2))</td></tr>
+               }
+               }
+
+                </tbody>         
+                   @if (Model.lstSummarySheetmodel.Count == 0)
+                   {
+                        <tr>
+                        <td style="border: 1px solid black;padding: 5px;">@ViewBag.Date</td>
+                        <td style="border: 1px solid black;padding: 5px;">KKND</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;" hidden="hidden">0</td>
+                      </tr> 
+                      
+                       <tr>
+                        <td style="border: 1px solid black;padding: 5px;">@ViewBag.Date</td>
+                        <td style="border: 1px solid black;padding: 5px;">KNPY</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;" hidden="hidden">0</td>
+                      </tr> 
+                       <tr>
+                        <td style="border: 1px solid black;padding: 5px;">@ViewBag.Date</td>
+                        <td style="border: 1px solid black;padding: 5px;">MDS</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;" hidden="hidden">0</td>
+                      </tr> 
+                       <tr>
+                        <td style="border: 1px solid black;padding: 5px;">@ViewBag.Date</td>
+                        <td style="border: 1px solid black;padding: 5px;">MNS</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;" hidden="hidden">0</td>
+                      </tr>  
+                    <tr>
+                        <td style="border: 1px solid black;padding: 5px;">@ViewBag.Date</td>
+                        <td style="border: 1px solid black;padding: 5px;">MQC</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;" hidden="hidden">0</td>
+                      </tr>
+                        <tr>
+                        <td style="border: 1px solid black;padding: 5px;">@ViewBag.Date</td>
+                        <td style="border: 1px solid black;padding: 5px;">TVM</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                        <td style="border: 1px solid black;padding: 5px;" hidden="hidden">0</td>
+                      </tr> 
+                       
+                   }
+      </table>
+    
+        }
+
+ @if (ViewBag.llocation != null)
+ {
+     <table style="width:100%;border: 1px solid black;padding: 5px;">
+        <tr style="background-color:lightgrey"><td>@ViewBag.llocation - Holiday</td></tr>
+
+     </table>
+ }
+ 
+<script type="text/javascript">
+
+
+    jQuery(document).ready(function () {
+        var chkINR = document.getElementById("chkINR");
+        var chkETO = document.getElementById("chkETO");
+      
+
+        
+        
+       
+        if (chkETO.checked) {
+
+            
+            $('#tbldisplay tr').each(function () {
+                $(this).find(".theto").show();
+            })
+
+
+            $('#tbldisplay tbody tr').each(function () {
+                $(this).find(".tdeto").show();
+                $(this).find(".tdAverageeto").show();
+            })
+            
+        }
+        else
+        {
+            $('#tbldisplay tr').each(function () {
+                $(this).find(".theto").hide();
+            })
+
+
+            $('#tbldisplay tbody tr').each(function () {
+                $(this).find(".tdeto").hide();
+                $(this).find(".tdAverageeto").hide();
+            })
+
+           
+
+            //("#tdAverageeto").hide();
+
+        }
+
+            });
+   
+    function onClickHandler() {
+        
+       
+        $('#tbldisplay  tr').each(function () {
+            $(this).find(".theto").show();
+        })
+
+        $('#tbldisplay tbody tr').each(function () {
+            $(this).find(".tdeto").show();
+        })
+
+
+
+    }
+
+
+
+
+    function Deletemisentry(_ID) {
+       
+        swal({
+            title: "Are you sure?",
+            showCancelButton: true,
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "Delete",
+
+            closeOnConfirm: false
+        },
+  function () {
+
+      $.ajax({
+          url: '@Url.Action("Deletemisentry", "Admin")',
+                  type: 'POST',
+                  data: { ID: _ID },
+                  success: function (data) {
+                      window.location.reload();
+                     
+                  },
+                  error: function (result) {
+                  },
+                  complete: function (result) {
+                  }
+              })
+      //}
+  });
+      }
+
+
+
+</script>

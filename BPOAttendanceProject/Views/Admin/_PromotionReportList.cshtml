@@ -1,0 +1,83 @@
+﻿@model  BPOAttendanceProject.Models.PromotionDetailModel                     
+
+ 
+@if (Model.lstpromotionDetail.Count > 0)
+{
+   
+    
+    
+     <table class="table table-striped table-bordered table-hover table-checkable order-column" id="tblPreprocess">
+        <thead>
+            <tr>
+               
+
+                <th style="width:5%">Project Code </th>
+                <th style="width:5%">Event Code</th>
+                <th style="width:5%">Location</th>
+                <th style="width:5%">No of batches</th>
+                <th style="width:5%">Total Promotion/Uploaded</th>
+                <th style="width:5%">Revenue</th>
+
+                
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.lstpromotionDetail)
+            {
+
+               
+                 <tr class="odd gradeX">
+                    <td>@item.project</td>
+                    <td>@item.eventcode</td>
+                    <td>@item.location</td>
+                    <td style="text-align:right">@item.batches</td>
+                    <td style="text-align:right">@item.promotion</td>
+                    <td style="text-align:right">@item.revenue.ToString("0.00")</td>
+                </tr>
+
+                       
+            }
+          <tr><td colspan="5" style="text-align:right;font-weight: bold;">Total</td><td style="text-align:right;font-weight: bold;">@Model.lstpromotionDetail.Sum(e => e.revenue)</td></tr>
+
+        
+        </tbody>
+</table>
+   
+ 
+       
+    
+  
+    
+    
+    
+    
+}
+else
+{
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="alert alert-info">
+                <strong>No Promotion details found on this date</strong><br />
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+
+
+    jQuery(function ($) {
+        $('#tblPreprocess').dataTable({
+
+            "aoColumns": [
+                              null, null, null, null, null,null
+
+            ]
+
+        });
+
+    });
+
+</script>
+

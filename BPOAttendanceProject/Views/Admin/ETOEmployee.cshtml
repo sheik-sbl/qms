@@ -1,0 +1,435 @@
+﻿@model BPOAttendanceProject.Models.Projectmodel
+
+
+
+<div class="page-container" style="margin-top: 20px">
+    <!-- BEGIN SIDEBAR -->
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet light bordered">
+                <div class="m-heading-1 border-green m-bordered ">
+                    <div class="caption font-dark">
+                        <span class="caption-subject bold uppercase">ETO Calculation LocationWise</span>
+                    </div>
+                </div>
+
+                             <div class="portlet-body">
+                                  @if (@TempData["Msg"] != null)
+                            {
+                                <div class="alert alert-info" id="MsgDiv">
+                                    <button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button>
+                                    @TempData["Msg"]
+                                </div>
+                            }
+
+
+                   
+                                <div class="form-horizontal">
+                                    <div class="form-body">
+                                        <div class="row">
+                                           
+                                            <div class="col-md-6">
+
+                                                 <div class="form-group">
+                                                    <label class="col-md-3 control-label">Start Date</label>
+                                                    <div class="col-md-9">
+                                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                                        @Html.TextBoxFor(model => model.Startdate, new { @class = "form-control", @placeholder = "Date", @autocomplete = "off", @required = "true",@id = "startdate" })
+                                                       
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </span>
+                                                    </div>
+
+
+                                                    </div>
+                                                </div>
+
+                                                  <div class="form-group">
+                                                    <label class="col-md-3 control-label">End Date</label>
+                                                    <div class="col-md-9">
+                                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                                        @Html.TextBoxFor(model => model.Enddate, new { @class = "form-control", @placeholder = "Date", @autocomplete = "off", @required = "true",@id = "enddate" })
+                                                       
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </span>
+                                                    </div>
+
+
+                                                    </div>
+                                                </div>
+
+
+                                                 
+                                            </div>
+                                            <div class="col-md-6" id="projectlist">
+
+                                               
+                                                    <div class="form-group">
+                                                    <label class="col-md-3 control-label">Location</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                        
+                                                            @Html.DropDownListFor(m => m.Id , new SelectList(new List<SelectListItem> {
+                                                                                                         new SelectListItem { Text = "KAKKANAD", Value = "6"},       
+                                                                                                         new SelectListItem { Text = "MNS", Value = "5"}, 
+                                                                                                         new SelectListItem { Text = "MQC", Value = "4"}, 
+                                                                                                         new SelectListItem { Text = "MDS", Value = "3"},
+                                                                                                         new SelectListItem { Text = "KNPY", Value = "2"}, 
+                                                                                                         new SelectListItem { Text = "TVM", Value = "1"},                  
+                                                                                                         
+                                                                                                     }, "Value", "Text"), "All",new {style = "width: 100%;", @required = "required", @class = "btn dropdown-toggle btn-default", @autocomplete = "off", @id = "drpLocation" ,@onchange = "Getlocation(this.value);"  })
+
+
+@*                                                         @Html.DropDownListFor(model => model.Id, new SelectList(Model.UserList, "Id", "FirstName"), "Select", new { style = "width: 100%;", @required = "required", @class = "btn dropdown-toggle btn-default", @autocomplete = "off", @id = "drpuserId" })*@
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+
+
+                                                 <div class="form-group">
+                                                    <label class="col-md-3 control-label">Project</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+@*                                                        @Html.DropDownListFor(model => model.Projectcode, new SelectList(Model.ProjectList, "value", "text", Model.Projectcode), "Select", new {style = "width: 100%;", @class = "form-control", @id = "drpProject"})*@
+                                                            
+                                                            <select id="ddlproject" name="ddlproject"  style = "width: 100%;"} > </select>
+
+   
+                                                            
+                                                             </div>
+
+
+                                                    </div>
+                                                </div>
+                                                
+                                                 <div class="form-group">
+                                                    <label class="col-md-3 control-label">Display</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+
+@*                                                           @Html.DropDownListFor(model => model.SpeceisId, new SelectList(Model.SpeciesList, "Id", "Name"), "Select", new { style = "width: 100%;", @required = "required", @class = "btn dropdown-toggle btn-default", @autocomplete = "off", @id = "drpSpeciesId" })*@
+                                                            @Html.DropDownList("FooBarDropDown", new List<SelectListItem>
+                                                            {
+                                                                new SelectListItem{ Text="Tabular", Value = "1" },
+                                                                new SelectListItem{ Text="Trend", Value = "2" },
+                                                               
+                                                             }, "Select", new { style = "width: 100%;", @required = "required", @class = "btn dropdown-toggle btn-default", @autocomplete = "off", @id = "drpTypeId" }) 
+
+
+
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                                
+                                                
+                                            
+
+                                                
+
+                                            </div>
+                                             
+                                        <div class="col-md-9">
+                                            
+                                                <div class="btn-group">
+                                                <button id="search" class="btn sbold green" onclick="ETOReport()">
+                                                    Ok
+                                                </button>
+                                                </div>
+                                             <div class="btn-group">
+                                                <button id="cancel" class="btn sbold green" onclick="Cancel()">
+                                                    Cancel
+                                                <i class="fa fa-cancel"></i>
+                                                </button>
+                                             </div>
+                                           @* <div class="btn-group">
+                                                <button id="graph" class="btn sbold green" onclick="getGraphReport()">
+                                                    Graph
+                                                <i class="fa fa-"></i>
+                                                </button>
+                                             </div>*@
+                                            
+
+                                       
+
+
+                                            </div>
+                                        
+                                        
+                                        
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                 </div>
+                   @* <div id="reportlist">
+                    </div>*@
+
+
+             <div class="portlet box green">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-gift"></i>ETO Details
+                            </div>
+
+                        </div>
+                        <div class="portlet-body" id="reportlist">
+                        </div>
+                         <div class="portlet-body" id="chartview">
+                        </div>
+              </div>
+
+
+            <div id="EditTransDetailForm" class="modal fade bs-modal-lg container" tabindex="-1">
+           </div>
+
+         <div id="wait" style="display:none;width:69px;height:89px;border:1px solid black;position:absolute;top:50%;left:50%;padding:2px;"><img src='../assets/pages/img/demo_wait.gif' width="64" height="64" /><br>Loading..</div>
+
+        </div>
+    </div>
+
+</div>
+
+   
+    <!-- END EXAMPLE TABLE PORTLET-->
+
+<script>
+   
+    
+    $(function () {
+
+        $("#startdate").datepicker({
+            format: 'dd/mm/yyyy',
+            minDate: 0,
+            defaultDate: "+1w",
+            changeMonth: true,
+            numberOfMonths: 1,
+
+
+        });
+
+        $("#enddate").datepicker({
+            format: 'dd/mm/yyyy',
+            minDate: 0,
+            defaultDate: "+1w",
+            changeMonth: true,
+            numberOfMonths: 1,
+
+
+        });
+        var date = new Date();
+        date.setTime(date.getTime() - (1000 * 60 * 60 * 24))
+        $('#startdate').datepicker("setDate", date);
+        $('#startdate').datepicker({ autoclose: true });
+        $('#enddate').datepicker("setDate", date);
+        $('#enddate').datepicker({ autoclose: true });
+    });
+
+   
+
+
+
+    jQuery(document).ready(function () {
+        setTimeout(function () {
+            $("#MsgDiv").slideUp(400);
+        }, 2000);
+        $('#divPhotolistpop').css('width', '55%');
+    });
+
+
+    function getReport() {
+
+
+        var pathurl = '@Url.Action("GetprojectwiseChart", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'GET',
+            data: {},
+            cache: false,
+            success: function (data) {
+
+                document.getElementById("testImg").src = 'data:image/png;base64,' + data;
+
+            },
+            error: function (data) {
+                // alert("error");
+
+            }
+        });
+    }
+
+
+
+    function Validatedata() {
+        
+        var pathurl = '@Url.Action("DailyValidationinProject", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'GET',
+            data: {
+                date: $('#startdate').val(),
+                LocationId: $("#drpLocation option:selected").text()
+            },
+            success: function (data) {
+              $("#reportlist").html(data);
+            }
+        });
+
+    }
+
+
+
+
+    function Getlocation(location) {
+        $("#wait").css("display", "block");
+        var pathurl = '@Url.Action("Bindproject", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'POST',
+            data: {
+                date: $('#startdate').val(),
+                LocationId: $("#drpLocation option:selected").text()
+            },
+            success: function (data) {
+                $("#wait").css("display", "none");
+                var markup = "<option value='0'>All</option>";
+                for (var x = 0; x < data.length; x++) {
+                    markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                }
+                $("#ddlproject").html(markup).show();
+
+            }
+        });
+        
+    }
+
+
+    function ETOReport() {
+        $("#wait").css("display", "block");
+        var pathurl = '@Url.Action("DailyETOLocationwise", "Admin")';
+         $.ajax({
+             url: pathurl,
+             type: 'GET',
+             data: {
+                 Project: $("#ddlproject option:selected").text(),
+                 LocationId: $("#drpLocation option:selected").text(),
+                 sdate: $('#startdate').val(),
+                 enddate: $('#enddate').val(),
+                 Type: $("#drpTypeId option:selected").text()
+             },
+             cache: false,
+             success: function (data) {
+                 $("#wait").css("display", "none");
+                 $("#reportlist").html("");
+                 $("#reportlist").html(data);
+                 getlocationReport();
+             }
+         });
+     }
+
+
+   
+    
+
+    function getGraphReport() {
+        var pathurl = '@Url.Action("locationwiseReport", "Admin")';
+        
+         $.ajax({
+             url: pathurl,
+             type: 'GET',
+             data: {
+                 
+
+             },
+             cache: false,
+             success: function (data) {
+                
+                 $("#chartview").html("");
+                 $("#chartview").html(data);
+                 getlocationReport();
+
+
+             },
+             error: function (data) {
+                 //alert("error");
+
+             }
+         });
+     }
+
+    function getlocationReport() {
+
+
+        var pathurl = '@Url.Action("locationetoChart", "Admin")';
+         $.ajax({
+             url: pathurl,
+             type: 'GET',
+             data: {},
+             cache: false,
+             success: function (data) {
+
+                 document.getElementById("testImg").src = 'data:image/png;base64,' + data;
+
+             },
+             error: function (data) {
+                 // alert("error");
+
+             }
+         });
+     }
+
+
+    
+
+    function GetDetailPopup(Date, Location,Project) {
+
+        
+
+            $("#wait").css("display", "block");
+            var pathurl = '@Url.Action("EmployeeETOReport", "Admin")';
+            $.ajax({
+                url: pathurl,
+                type: 'GET',
+                data: {
+                    Date: Date,
+                    Location: Location,
+                    Project: Project
+                },
+                success: function (data) {
+                    $("#wait").css("display", "none");
+                    $("#EditTransDetailForm").html(data);
+                    $("#EditTransDetailForm").modal({                    // wire up the actual modal functionality and show the dialog
+                        "backdrop": "static",
+                        "keyboard": true,
+                        "show": true                     // ensure the modal is shown immediately
+                    });
+                }
+            });
+        }
+    
+   
+
+
+</script>
+ 

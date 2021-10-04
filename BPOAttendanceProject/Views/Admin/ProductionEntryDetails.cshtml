@@ -1,0 +1,39 @@
+﻿
+@model  BPOAttendanceProject.Models.SlowModel  
+
+ @if (Model != null)
+                     {
+<table>
+     <tr> 
+         <th>PSN</th>
+          <th>Employee Name</th>
+
+     </tr>
+
+      @foreach (var item in Model.EmployeeList)
+     {
+
+     <tr> 
+          <td>@item.PSN</td>
+          <td>@item.Associatename</td>
+
+     </tr>
+      }
+  
+
+    
+
+     
+</table>
+ }
+
+ else
+                         {
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="alert alert-info">
+                                                        <strong>No records Found</strong><br />
+                                                    </div>
+                                                </div>
+                                            </div>
+                         }

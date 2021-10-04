@@ -1,0 +1,89 @@
+﻿@model   BPOAttendanceProject.Models.TeamwiseMRMModel  
+
+
+  <div class="modal-content">
+             
+            <div class="modal-body">
+
+        @if (Model.TeamwiseModel != null)
+        {
+
+            if (Model.TeamwiseModel.LstItems.Count > 0)
+            {
+             <div class="portlet box grey">
+                                  <div class="portlet-title">
+                                        <div class="caption">
+                                            Staff utilization  of -@Model.TeamwiseModel.month  @Model.TeamwiseModel.year 
+                                        </div>
+                                 </div>
+            </div>
+            
+   <div style="float:left;padding: 5px;">
+          <label style="font-weight: bold;text-align:left;color:#337ab7;"><b>Team - @Model.TeamwiseModel.empname</b></label>   
+   </div>   
+  <table id="tblproject" style="width:100%;padding: 5px;">
+        <thead> 
+      
+      <tr>
+       
+        <th style="border: 1px solid black;padding: 5px;">Week </th>
+        <th style="border: 1px solid black;padding: 5px;">Employee Count</th>
+        <th style="border: 1px solid black;padding: 5px;">Billable Hrs </th>
+        <th style="border: 1px solid black;padding: 5px;">External Billed Hrs</th>
+        <th style="border: 1px solid black;padding: 5px;">Approved Internal Billied Hrs</th>
+        <th style="border: 1px solid black;padding: 5px;">Unbilled Hrs</th>
+       
+            
+      </tr>
+      </thead>   
+         <tbody>
+                    @foreach (var item in Model.TeamwiseModel.LstItems)
+                    {
+                     <tr>
+                      
+                        <td style="border: 1px solid black;padding: 5px;">@item.weekinmonth</td>
+                        <td style="border: 1px solid black;padding: 5px;text-align:center"">@item.Empcount</td>
+                        <td style="border: 1px solid black;padding: 5px;text-align:center"">@item.Billablehrs</td>
+                        <td style="border: 1px solid black;padding: 5px;text-align:center">@item.Externalhrs</td>
+                        <td style="border: 1px solid black;padding: 5px;text-align:center">@item.Appinternalhrs</td>
+                        <td style="border: 1px solid black;padding: 5px;text-align:center">@item.unbilledhrs</td>
+                     </tr>
+                    }
+         
+             
+
+                </tbody>         
+                  
+                 
+      </table>
+    
+            }
+
+
+
+            else
+            {
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="alert alert-info">
+                                                        <strong>No Records Found</strong><br />
+                                                    </div>
+                                                </div>
+                                            </div>
+            }
+
+
+        }
+
+ </div>  
+        </div>  
+  <div class="modal-footer">
+       <button type="button" class="btn dark btn-outline " data-dismiss="modal" >Close</button>  
+  </div>
+<script>      
+
+
+ 
+
+    
+</script>

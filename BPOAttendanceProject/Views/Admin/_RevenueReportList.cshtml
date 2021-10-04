@@ -1,0 +1,85 @@
+﻿@model  BPOAttendanceProject.Models.RevenuelistModel                     
+
+ 
+@if (Model.RevenueModelList.Count > 0)
+{
+   
+    
+    
+     <table class="table table-striped table-bordered table-hover table-checkable order-column" id="tblPreprocess">
+        <thead>
+            <tr>
+               
+                <th style="width:5%">Date </th>
+                <th style="width:5%">Project Code </th>
+                <th style="width:5%">Event Code</th>
+                <th style="width:5%">Location</th>
+                <th style="width:5%">No of batches</th>
+                <th style="width:5%">Invoiced</th>
+                <th style="width:5%">Pending</th>
+                <th style="width:5%">Total</th>
+                
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.RevenueModelList)
+            {
+
+               
+                 <tr class="odd gradeX">
+                    <td>@item.upldate</td>
+                     <td>@item.projectcode</td>
+                    <td>@item.eventcode</td>
+                    <td>@item.Location</td>
+                    <td style="text-align:right">@item.noofbatches</td>
+                    <td style="text-align:right">@item.invoicedcharacter</td>
+                    <td style="text-align:right">@(item.actualprodrecord-item.promotionrecord)</td>
+                    <td style="text-align:right">@(item.invoicedcharacter + (item.actualprodrecord-item.promotionrecord))</td>
+                </tr>
+
+                       
+            }
+@*          <tr><td colspan="7" style="text-align:right;font-weight: bold;">Total</td><td style="text-align:right;font-weight: bold;">@Model.RevenueModelList.Sum(e => e.Total)</td></tr>*@
+
+        
+        </tbody>
+</table>
+   
+ 
+       
+    
+  
+    
+    
+    
+    
+}
+else
+{
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="alert alert-info">
+                <strong>No Revenue details found on this date</strong><br />
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+
+
+    jQuery(function ($) {
+        $('#tblPreprocess').dataTable({
+
+            "aoColumns": [
+                              null, null, null, null, null,null,null,null
+
+            ]
+
+        });
+
+    });
+
+</script>
+

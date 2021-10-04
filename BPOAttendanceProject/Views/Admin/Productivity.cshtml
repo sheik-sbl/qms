@@ -1,0 +1,1592 @@
+﻿@model BPOAttendanceProject.Models.Projectmodel
+  
+<div class="page-container" style="margin-top: 20px">
+    <!-- BEGIN SIDEBAR -->
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet light bordered">
+                <div class="m-heading-1 border-green m-bordered ">
+                    <div class="caption font-dark">
+                        <span class="caption-subject bold uppercase">Reports</span>
+                    </div>
+                </div>
+
+  
+     
+
+   <div class="portlet-body">
+                            <ul class="nav nav-tabs">
+                                            <li class="active"><a href="#tab_1_1" data-toggle="tab">Projectwise </a> </li>
+                                            <li><a href="#tab_1_2" data-toggle="tab"> Resourcewise  </a> </li>
+                                            <li><a href="#tab_1_3" data-toggle="tab"> TLwise  </a> </li>
+                                           
+                            </ul>
+
+       <div class="tab-content">
+             <div class="tab-pane fade active in" id="tab_1_1">
+              
+                              <div class="portlet light bordered">
+                <div class="m-heading-1 border-green m-bordered ">
+                    <div class="caption font-dark">
+                        <span class="caption-subject bold uppercase">ProjectWise Productivity</span>
+                    </div>
+                </div>
+
+                             <div class="portlet-body">
+                                  @if (@TempData["Msg"] != null)
+                            {
+                                <div class="alert alert-info" id="MsgDiv">
+                                    <button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button>
+                                    @TempData["Msg"]
+                                </div>
+                            }
+
+
+                   
+                                <div class="form-horizontal">
+                                    <div class="form-body">
+                                              <div class="row">
+
+                                                  <div class="col-md-4"> 
+                                                     
+                                                   <div class="form-group">
+                                                    <label class="col-md-3 control-label">Start Date</label>
+                                                    <div class="col-md-9">
+                                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                                        @Html.TextBoxFor(model => model.Startdate, new { @class = "form-control", @placeholder = "Date", @autocomplete = "off", @required = "true",@id = "startdate" })
+                                                       
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </span>
+                                                    </div>
+
+
+                                                    </div>
+                                                </div>   
+                                                     
+                                                     
+                                                     
+                                                        
+                                              
+                                                </div>
+
+                                                   <div class="col-md-4">    
+                                                 <div class="form-group">
+                                                    <label class="col-md-3 control-label">End Date</label>
+                                                    <div class="col-md-9">
+                                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                                        @Html.TextBoxFor(model => model.Enddate, new { @class = "form-control", @placeholder = "Date", @autocomplete = "off", @required = "true",@id = "enddate" })
+                                                       
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </span>
+                                                    </div>
+
+
+                                                    </div>
+                                                </div>
+
+                                                </div>
+                                               
+                                                   <div class="col-md-4" >
+                                           
+                                                  <div class="form-group">
+                                                    <label class="col-md-3 control-label">Location</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                        
+                                                            @Html.DropDownListFor(m => m.Id , new SelectList(new List<SelectListItem> {
+                                                                                                         new SelectListItem { Text = "KAKKANAD", Value = "6"},       
+                                                                                                         new SelectListItem { Text = "MNS", Value = "5"}, 
+                                                                                                         new SelectListItem { Text = "MQC", Value = "4"}, 
+                                                                                                         new SelectListItem { Text = "MDS", Value = "3"},
+                                                                                                         new SelectListItem { Text = "KNPY", Value = "2"}, 
+                                                                                                         new SelectListItem { Text = "TVM", Value = "1"},                  
+                                                                                                         
+                                                                                                     }, "Value", "Text"), "ALL",new {style = "width: 100%;", @required = "required", @class = "btn dropdown-toggle btn-default", @autocomplete = "off", @id = "drpLocation" ,@onchange = "BindClientbyLocation()"  })
+
+
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                                </div>
+                                  
+                                                   
+                                            </div>
+                                 
+                                              <div class="row" >
+
+                                                <div class="col-md-4">
+                                                        <div class="form-group">
+                                                    <label class="col-md-3 control-label">Client Code</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+  
+                                                         <select class="form-control" id="drpclient" name="drpclient"  style = "width: 100%;", onchange = "GetProjectcode(this.value);" > </select>
+
+@*                                                       @Html.DropDownList("Clientcodes", (IEnumerable<SelectListItem>)ViewBag.ClientCodes, "ALL", new { @class = "form-control", @id = "drpclient",@onchange = "GetProjectcode(this.value);"})*@
+
+                                                        </div>
+
+
+                                                    </div>
+
+                                                    
+                                                </div>
+
+
+
+
+                                                </div>
+                                                  
+                                                 <div class="col-md-4">
+                                                   
+                                                  <div class="form-group">
+                                                        <label class="col-md-3 control-label">Project code</label>
+                                                        <div class="col-md-9">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">
+                                                                    <i class="fa fa-envelope"></i>
+                                                                </span>
+                                                        
+@*                                                                  @Html.DropDownList("Projectcodes", (IEnumerable<SelectListItem>)ViewBag.Projectcodes, "ALL", new { @class = "form-control", @id = "drpproject" })*@
+                                                        <select  class="form-control"  id="ddlproject" name="ddlproject"  style = "width: 100%;" onchange = "GetEvent();"  ><option>ALL</option> </select>
+
+                                                                    
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                
+                                                 <div class="col-md-4" >
+                                           
+                                                     <div class="form-group">
+                                                    <label class="col-md-3 control-label">Event</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                        
+
+                                                             <select class="form-control" id="ddlevent" name="ddlevent"  style = "width: 100%;"  ><option>ALL</option> </select>
+
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                                   </div>
+                                                  
+                                                  
+                                                
+                                                
+                                              
+
+                                            </div>
+                                             
+                                              <div class="row">
+
+                                                 <div class="col-md-4">
+                                                     <div class="form-group">
+                                                    <label class="col-md-3 control-label">Process</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                        
+                                                            @Html.DropDownListFor(m => m.Id , new SelectList(new List<SelectListItem> {
+                                                                                                         new SelectListItem { Text = "Indexing", Value = "6"},       
+                                                                                                         new SelectListItem { Text = "Qc2", Value = "5"}, 
+                                                                                                         new SelectListItem { Text = "Qc3", Value = "4"}, 
+                                                                                                         new SelectListItem { Text = "Audit", Value = "3"},
+                                                                                                         new SelectListItem { Text = "UAT", Value = "2"}, 
+                                                                                                         new SelectListItem { Text = "Training", Value = "1"},                  
+                                                                                                          new SelectListItem { Text = "Rework", Value = "1"}, 
+                                                                                                     }, "Value", "Text"), "ALL",new {style = "width: 100%;", @required = "required", @class = "btn dropdown-toggle btn-default", @autocomplete = "off", @id = "drpProcess"   })
+
+
+                                                      
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                                 </div>
+
+
+                                              
+                                                <div class="col-md-9">
+                                            
+                                                <div class="btn-group">
+                                                <button id="search" class="btn sbold green" onclick="projectProductivityReport()">
+                                                    Ok
+                                                </button>
+                                                </div>
+                                             <div class="btn-group">
+                                                <button id="cancel" class="btn sbold green" onclick="PrCancel()">
+                                                    Cancel
+                                                <i class="fa fa-cancel"></i>
+                                                </button>
+                                             </div>
+                                           
+                                            
+
+                                       
+
+
+                                            </div>  
+                                              </div>
+                                        
+                                            
+                                        
+                                        
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                             <div style="height:15px;"></div>
+                          
+                             <div id="reportlist"> </div>
+                            <div id="wait" style="display:none;width:69px;height:89px;border:1px solid black;position:absolute;top:50%;left:50%;padding:2px;"><img src='../assets/pages/img/demo_wait.gif' width="64" height="64" /><br>Loading..</div>
+             
+             </div>
+
+             <div class="tab-pane fade" id="tab_1_2">
+              
+                              <div class="portlet-body">
+                                  @if (@TempData["Msg"] != null)
+                            {
+                                <div class="alert alert-info" id="MsgDiv">
+                                    <button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button>
+                                    @TempData["Msg"]
+                                </div>
+                            }
+
+
+                   
+                                <div class="form-horizontal">
+                                    <div class="form-body">
+                                        <div class="row">
+                                           
+                                            <div class="col-md-3">
+
+                                                  <div class="form-group">
+                                                    <label class="col-md-3 control-label">Start Date</label>
+                                                    <div class="col-md-9">
+                                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                                        @Html.TextBoxFor(model => model.Startdate, new { @class = "form-control", @placeholder = "Date", @autocomplete = "off", @required = "true",@id = "Rsstartdate" })
+                                                       
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </span>
+                                                    </div>
+
+
+                                                    </div>
+                                                </div>
+                                                  <div class="form-group">
+                                                    <label class="col-md-3 control-label">Resource</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                        
+@*                                                        @Html.DropDownListFor(model => model.Id, new SelectList(Model.PecodeModelList, "Id", "pecode", "Select"), "Select Projectcode", new { @class = "form-control", @placeholder = "Project", @autocomplete = "off", @id = "drpproject" })*@
+
+                                                        <select class="form-control" id="ddlresource" name="ddlresource"  style = "width: 100%;" onchange = "GetClientcodebyResource();"  > </select>
+
+
+
+@*                                                       @Html.DropDownList("ProjectCodes", (IEnumerable<SelectListItem>)ViewBag.ProjectCodes, "ALL", new { @class = "form-control", @id = "drpproject", @onchange = "GetEvent(this.value);" })*@
+
+                                                        </div>
+
+
+                                                    </div>
+
+                                                    
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3">
+
+                                                 <div class="form-group">
+                                                    <label class="col-md-3 control-label">End Date</label>
+                                                    <div class="col-md-9">
+                                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                                        @Html.TextBoxFor(model => model.Enddate, new { @class = "form-control", @placeholder = "Date", @autocomplete = "off", @required = "true",@id = "Rsenddate" })
+                                                       
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </span>
+                                                    </div>
+
+
+                                                    </div>
+                                                </div>
+                                                 <div class="form-group">
+                                                    <label class="col-md-3 control-label">Client Code</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+  
+                                                        <select class="form-control" id="drpRsclient" name="drpRsclient"  style = "width: 100%;", onchange = "GetRsProjectcode();" > </select>
+
+                                                        </div>
+
+
+                                                    </div>
+
+                                                    
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="col-md-3">
+                                                 <div class="form-group">
+                                                    <label class="col-md-3 control-label">Location</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                        
+                                                            @Html.DropDownListFor(m => m.Id , new SelectList(new List<SelectListItem> {
+                                                                                                         new SelectListItem { Text = "KAKKANAD", Value = "6"},       
+                                                                                                         new SelectListItem { Text = "MNS", Value = "5"}, 
+                                                                                                         new SelectListItem { Text = "MQC", Value = "4"}, 
+                                                                                                         new SelectListItem { Text = "MDS", Value = "3"},
+                                                                                                         new SelectListItem { Text = "KNPY", Value = "2"}, 
+                                                                                                         new SelectListItem { Text = "TVM", Value = "1"},                  
+                                                                                                         
+                                                                                                     }, "Value", "Text"), "ALL",new {style = "width: 100%;", @required = "required", @class = "btn dropdown-toggle btn-default", @autocomplete = "off", @id = "drpRsLocation" ,@onchange = "BindResourceTLandLocation();"  })
+
+
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                         
+                                                  <div class="form-group">
+                                                    <label class="col-md-3 control-label">Project code</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                      <select class="form-control"   id="drpRsproject" name="drpRsproject"  style = "width: 100%;" onchange = "GetResourcebyEvent();" > </select>
+                                                      
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3">
+                                             <div class="form-group">
+                                                    <label class="col-md-3 control-label">TL</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                        
+                                                      
+@*                                                          @Html.DropDownList("TLs", (IEnumerable<SelectListItem>)ViewBag.TLs, "ALL", new { @class = "form-control", @id = "drptl"})*@
+                                                         <select  class="form-control"  id="ddlReTL" name="ddlReTL"  style = "width: 100%;", onchange = "GetResource();" > </select>
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                         
+                                             <div class="form-group">
+                                                    <label class="col-md-3 control-label">Event</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                        
+                                                            <select  class="form-control"   id="ddlRsevent" name="ddlRsevent"  style = "width: 100%;"> </select>
+
+
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+
+                                            </div>  
+                                              <div class="col-md-3">
+                                                    <div class="form-group">
+                                                    <label class="col-md-3 control-label">Process</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                        
+                                                            @Html.DropDownListFor(m => m.Id , new SelectList(new List<SelectListItem> {
+                                                                                                         new SelectListItem { Text = "Indexing", Value = "6"},       
+                                                                                                         new SelectListItem { Text = "Qc2", Value = "5"}, 
+                                                                                                         new SelectListItem { Text = "Qc3", Value = "4"}, 
+                                                                                                         new SelectListItem { Text = "Audit", Value = "3"},
+                                                                                                         new SelectListItem { Text = "UAT", Value = "2"}, 
+                                                                                                         new SelectListItem { Text = "Training", Value = "1"},                  
+                                                                                                          new SelectListItem { Text = "Rework", Value = "1"}, 
+                                                                                                     }, "Value", "Text"), "ALL",new {style = "width: 100%;", @required = "required", @class = "btn dropdown-toggle btn-default", @autocomplete = "off", @id = "drpRsProcess"   })
+
+
+                                                      
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>  
+
+                                              </div>
+                                        
+                                        <div class="col-md-9">
+                                            
+                                                <div class="btn-group">
+                                                <button id="Research" class="btn sbold green" onclick="ResourceProductivityReport();">
+                                                    Ok
+                                                </button>
+                                                </div>
+                                             <div class="btn-group">
+                                                <button id="Recancel" class="btn sbold green" onclick="ResourceCancel()">
+                                                    Cancel
+                                                <i class="fa fa-cancel"></i>
+                                                </button>
+                                             </div>
+                                            
+                                            </div>
+                                        
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                         
+                             <div style="height:15px;"></div>
+                             
+                             <div id="reportresourcelist"> </div>
+
+                            <div id="monthwait" style="display:none;width:69px;height:89px;border:1px solid black;position:absolute;top:50%;left:50%;padding:2px;"><img src='../assets/pages/img/demo_wait.gif' width="64" height="64" /><br>Loading..</div>
+             
+             </div>
+
+             <div class="tab-pane fade" id="tab_1_3">
+              
+                            <div class="portlet light bordered">
+                <div class="m-heading-1 border-green m-bordered ">
+                    <div class="caption font-dark">
+                        <span class="caption-subject bold uppercase">TLWise Productivity</span>
+                    </div>
+                </div>
+
+                             <div class="portlet-body">
+                                  @if (@TempData["Msg"] != null)
+                            {
+                                <div class="alert alert-info" id="MsgDiv">
+                                    <button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button>
+                                    @TempData["Msg"]
+                                </div>
+                            }
+
+
+                   
+                                <div class="form-horizontal">
+                                    <div class="form-body">
+                                        <div class="row">
+                                           
+                                            <div class="col-md-3">
+
+                                                    <div class="form-group">
+                                                    <label class="col-md-3 control-label">Start Date</label>
+                                                    <div class="col-md-9">
+                                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                                        @Html.TextBoxFor(model => model.Startdate, new { @class = "form-control", @placeholder = "Date", @autocomplete = "off", @required = "true",@id = "TLstartdate" })
+                                                       
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </span>
+                                                    </div>
+
+
+                                                    </div>
+                                                </div>
+
+                                                     <div class="form-group">
+                                                    <label class="col-md-3 control-label">Client Code</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+  
+
+@*                                                       @Html.DropDownList("Clientcodes", (IEnumerable<SelectListItem>)ViewBag.ClientCodes, "ALL", new { @class = "form-control", @id = "drptlwiseclient",@onchange = "GetTlProjectcode();"})*@
+                                                         <select class="form-control" id="drptlwiseclient" name="drptlwiseclient"  style = "width: 100%;", onchange = "GetTlProjectcode();" > </select>
+
+                                                        </div>
+
+
+                                                    </div>
+
+                                                    
+                                                </div>
+
+                                                 
+                                              
+                                             
+
+                                               
+                                                 
+                                            </div>
+                                            <div class="col-md-3" >
+                                                   <div class="form-group">
+                                                    <label class="col-md-3 control-label">End Date</label>
+                                                    <div class="col-md-9">
+                                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                                        @Html.TextBoxFor(model => model.Enddate, new { @class = "form-control", @placeholder = "Date", @autocomplete = "off", @required = "true",@id = "TLenddate" })
+                                                       
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </span>
+                                                    </div>
+
+
+                                                    </div>
+                                                </div>
+
+                                                 <div class="form-group">
+                                                    <label class="col-md-3 control-label">Project code</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                        
+
+                                                            <select  class="form-control"    id="drpTLproject" name="drpTLproject"  style = "width: 100%;" onchange = "GetTlEvent(this.value);"  > </select>
+
+
+
+                                                      
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+                                              
+
+                                               
+                                                 
+                                                
+                                                
+                                                
+                                            
+
+                                                
+
+                                            </div>
+                                            <div class="col-md-3">
+                                                 <div class="form-group">
+                                                    <label class="col-md-3 control-label">Location</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                        
+                                                            @Html.DropDownListFor(m => m.Id , new SelectList(new List<SelectListItem> {
+                                                                                                         new SelectListItem { Text = "KAKKANAD", Value = "6"},       
+                                                                                                         new SelectListItem { Text = "MNS", Value = "5"}, 
+                                                                                                         new SelectListItem { Text = "MQC", Value = "4"}, 
+                                                                                                         new SelectListItem { Text = "MDS", Value = "3"},
+                                                                                                         new SelectListItem { Text = "KNPY", Value = "2"}, 
+                                                                                                         new SelectListItem { Text = "TVM", Value = "1"},                  
+                                                                                                         
+                                                                                                     }, "Value", "Text"), "ALL",new {style = "width: 100%;", @required = "required", @class = "btn dropdown-toggle btn-default", @autocomplete = "off", @id = "drpTLLocation" ,@onchange = "Gettlwiselocation();"  })
+
+
+@*                                                         @Html.DropDownListFor(model => model.Id, new SelectList(Model.UserList, "Id", "FirstName"), "Select", new { style = "width: 100%;", @required = "required", @class = "btn dropdown-toggle btn-default", @autocomplete = "off", @id = "drpuserId" })*@
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+                                                     <div class="form-group">
+                                                    <label class="col-md-3 control-label">Event</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                        
+                                                            <select   class="form-control"  id="ddlTlevent" name="ddlTlevent"  style = "width: 100%;"> </select>
+
+
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+
+
+
+
+                                            </div>
+                                            <div class="col-md-3">
+                                                    <div class="form-group">
+                                                    <label class="col-md-3 control-label">TL</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                        
+                                                            <select class="form-control"   id="ddlTLwise" name="ddlTLwise"  style = "width: 100%;" onchange = "GetClientcodetlwise();"    > </select>
+
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+                                                    
+                                                    <div class="form-group">
+                                                    <label class="col-md-3 control-label">Process</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                        
+                                                            @Html.DropDownListFor(m => m.Id , new SelectList(new List<SelectListItem> {
+                                                                                                         new SelectListItem { Text = "Indexing", Value = "6"},       
+                                                                                                         new SelectListItem { Text = "Qc2", Value = "5"}, 
+                                                                                                         new SelectListItem { Text = "Qc3", Value = "4"}, 
+                                                                                                         new SelectListItem { Text = "Audit", Value = "3"},
+                                                                                                         new SelectListItem { Text = "UAT", Value = "2"}, 
+                                                                                                         new SelectListItem { Text = "Training", Value = "1"},                  
+                                                                                                          new SelectListItem { Text = "Rework", Value = "1"}, 
+                                                                                                     }, "Value", "Text"), "ALL",new {style = "width: 100%;", @required = "required", @class = "btn dropdown-toggle btn-default", @autocomplete = "off", @id = "drpTLProcess"   })
+
+
+                                                      
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                             
+                                        <div class="col-md-9">
+                                            
+                                                <div class="btn-group">
+                                                <button id="TLsearch" class="btn sbold green" onclick="TLProductivityReport()">
+                                                    Ok
+                                                </button>
+                                                </div>
+                                             <div class="btn-group">
+                                                <button id="TLcancel" class="btn sbold green" onclick="TLCancel()">
+                                                    Cancel
+                                                <i class="fa fa-cancel"></i>
+                                                </button>
+                                             </div>
+                                            
+                                            </div>
+                                        
+                                        
+                                        
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                 </div>
+                            <div style="height:15px;"></div>
+                           
+                            <div id="reporttllist"> </div>
+                            <div id="yearwait" style="display:none;width:69px;height:89px;border:1px solid black;position:absolute;top:50%;left:50%;padding:2px;"><img src='../assets/pages/img/demo_wait.gif' width="64" height="64" /><br>Loading..</div>
+             
+             </div>
+       </div>
+
+         
+ </div>
+
+    
+ </div>
+
+ </div>
+
+</div>
+  </div>
+    <!-- END EXAMPLE TABLE PORTLET-->
+
+<script>
+   
+    $(function () {
+
+        $("#startdate").datepicker({
+            format: 'dd/mm/yyyy',
+            minDate: 0,
+            defaultDate: "+1w",
+            changeMonth: true,
+            numberOfMonths: 1,
+
+
+        });
+
+        $("#enddate").datepicker({
+            format: 'dd/mm/yyyy',
+            minDate: 0,
+            defaultDate: "+1w",
+            changeMonth: true,
+            numberOfMonths: 1,
+
+
+        });
+
+        $("#TLstartdate").datepicker({
+            format: 'dd/mm/yyyy',
+            minDate: 0,
+            defaultDate: "+1w",
+            changeMonth: true,
+            numberOfMonths: 1,
+
+
+        });
+
+        $("#TLenddate").datepicker({
+            format: 'dd/mm/yyyy',
+            minDate: 0,
+            defaultDate: "+1w",
+            changeMonth: true,
+            numberOfMonths: 1,
+
+
+        });
+
+        
+
+        $("#Rsstartdate").datepicker({
+            format: 'dd/mm/yyyy',
+            minDate: 0,
+            defaultDate: "+1w",
+            changeMonth: true,
+            numberOfMonths: 1,
+
+
+        });
+
+        $("#Rsenddate").datepicker({
+            format: 'dd/mm/yyyy',
+            minDate: 0,
+            defaultDate: "+1w",
+            changeMonth: true,
+            numberOfMonths: 1,
+
+
+        });
+
+        var date = new Date();
+        date.setTime(date.getTime() - (1000 * 60 * 60 * 24))
+        $('#startdate').datepicker("setDate", date);
+        $('#startdate').datepicker({ autoclose: true });
+        $('#enddate').datepicker("setDate", date);
+        $('#enddate').datepicker({ autoclose: true });
+        $('#TLstartdate').datepicker("setDate", date);
+        $('#TLstartdate').datepicker({ autoclose: true });
+        $('#TLenddate').datepicker("setDate", date);
+        $('#TLenddate').datepicker({ autoclose: true });
+        $('#Rsstartdate').datepicker("setDate", date);
+        $('#Rsstartdate').datepicker({ autoclose: true });
+        $('#Rsenddate').datepicker("setDate", date);
+        $('#Rsenddate').datepicker({ autoclose: true });
+
+    });
+
+
+       
+    $(document).ready(function () {
+
+
+        var pathurl = '@Url.Action("BindClientcode", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'POST',
+            data: {
+
+
+            },
+            success: function (data) {
+                $("#wait").css("display", "none");
+                var markup = "<option value='0'>ALL</option>";
+                for (var x = 0; x < data.length; x++) {
+                    if (data[x].Text != "undefined") {
+                        markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                    }
+                }
+                $("#drpclient").html(markup).show();
+                $("#drpRsclient").html(markup).show();
+                $("#drptlwiseclient").html(markup).show();
+                
+       
+            }
+        });
+
+     
+        var pathurl = '@Url.Action("BindProductivityProject", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'POST',
+            data: {
+                Clientcode:'ALL' 
+            },
+
+            success: function (data) {
+                $("#wait").css("display", "none");
+                var markup = "<option value='0'>ALL</option>";
+                for (var x = 0; x < data.length; x++) {
+                    if (data[x].Text != "undefined") {
+                        markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                    }
+                }
+                $("#ddlproject").html(markup).show();
+                $("#drpRsproject").html(markup).show();
+                $("#drpTLproject").html(markup).show();
+                
+                
+
+            }
+        });
+
+
+        var pathurl = '@Url.Action("BindEvent", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'POST',
+            data: {
+
+                ProjectId: 'ALL'
+            },
+            success: function (data) {
+                $("#wait").css("display", "none");
+                var markup = "<option value='0'>ALL</option>";
+                for (var x = 0; x < data.length; x++) {
+                    if (data[x].Text != "undefined") {
+                        markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                    }
+                }
+                $("#ddlevent").html(markup).show();
+                $("#ddlRsevent").html(markup).show();
+                $("#ddlTlevent").html(markup).show();
+                
+                
+              
+            }
+        });
+
+
+        var pathurl = '@Url.Action("BindClientcode", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'POST',
+            data: {
+
+                
+            },
+            success: function (data) {
+                $("#wait").css("display", "none");
+                var markup = "<option value='0'>ALL</option>";
+                for (var x = 0; x < data.length; x++) {
+                    if (data[x].Text != "undefined") {
+                        markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                    }
+                }
+                $("#drpclient").html(markup).show();
+              
+
+
+
+            }
+        });
+
+
+
+        var pathurl = '@Url.Action("BindTL", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'POST',
+            data: {
+                LocationId: 'ALL'
+            },
+
+            success: function (data) {
+                $("#wait").css("display", "none");
+                var markup = "<option value='0'>ALL</option>";
+                for (var x = 0; x < data.length; x++) {
+                    if (data[x].Text != "undefined") {
+                        markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                    }
+                }
+                $("#ddlReTL").html(markup).show();
+                $("#ddlTLwise").html(markup).show();
+                
+
+            }
+        });
+
+        var pathurl = '@Url.Action("BindNamePSNResource", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'POST',
+            data: {
+                TL: 'ALL'
+            },
+            success: function (data) {
+                $("#wait").css("display", "none");
+                var markup = "<option value='0'>ALL</option>";
+                for (var x = 0; x < data.length; x++) {
+                    if (data[x].Text != "undefined") {
+                        markup += "<option value=" + data[x].Text + ">" + data[x].Text + "[" + data[x].Value + "]</option>";
+                    }
+                }
+                $("#ddlresource").html(markup).show();
+
+            }
+        });
+
+
+    });
+
+    function GetProjectcode() {
+
+        var pathurl = '@Url.Action("BindProjectProductivity", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'POST',
+            data: {
+                Clientcode: $("#drpclient option:selected").text(),
+                fromdate:$('#startdate').val(),
+                enddate: $('#enddate').val(),
+                Location: $("#drpLocation option:selected").text()
+            },
+
+            success: function (data) {
+                $("#wait").css("display", "none");
+                var markup = "<option value='0'>ALL</option>";
+                for (var x = 0; x < data.length; x++) {
+                    if (data[x].Text != "undefined") {
+                        markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                    }
+                }
+                $("#ddlproject").html(markup).show();
+                
+            }
+        });
+
+
+
+    }
+
+   
+
+
+    
+
+    function GetResource() {
+        GetResourcePageClientcode();
+        var pathurl = '@Url.Action("BindNamePSNResourcePage", "Admin")';
+         $.ajax({
+             url: pathurl,
+             type: 'POST',
+             data: {
+                 TL: $("#ddlReTL option:selected").text(),
+                 fromdate: $('#Rsstartdate').val(),
+                 enddate: $('#Rsenddate').val(),
+                 Location: $("#drpRsLocation option:selected").text()
+             },
+
+             success: function (data) {
+                 $("#wait").css("display", "none");
+                 var markup = "<option value='0'>ALL</option>";
+                 for (var x = 0; x < data.length; x++) {
+                     if (data[x].Text != "undefined") {
+                         markup += "<option value=" + data[x].Text + ">" + data[x].Text + "[" + data[x].Value + "]</option>";
+                     }
+                 }
+                 $("#ddlresource").html(markup).show();
+
+             }
+         });
+
+
+
+     }
+
+
+   
+
+    function GetResourceEvent(project) {
+
+        $("#wait").css("display", "block");
+        var pathurl = '@Url.Action("BindEvent", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'POST',
+            data: {
+
+                ProjectId: project,
+                fromdate: $('#Rsstartdate').val(),
+                Clientcode: $("#drpRsclient option:selected").text()
+            },
+            success: function (data) {
+                $("#wait").css("display", "none");
+                var markup = "<option value='0'>ALL</option>";
+                for (var x = 0; x < data.length; x++) {
+                    if (data[x].Text != "undefined") {
+                        markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                    }
+                }
+                $("#ddlRsevent").html(markup).show();
+
+
+
+            }
+        });
+
+    }
+
+    function GetTlEvent(project) {
+
+        $("#wait").css("display", "block");
+        var pathurl = '@Url.Action("BindEventTLwise", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'POST',
+            data: {
+
+              
+               
+                Clientcode: $("#drptlwiseclient option:selected").text(),
+                LocationId: $("#drpTLLocation option:selected").text(),
+                fromdate: $('#TLstartdate').val(),
+                enddate: $('#TLenddate').val(),
+                TL: $("#ddlTLwise option:selected").text(),
+                ProjectId: $("#drpTLproject option:selected").text(),
+
+
+
+            },
+            success: function (data) {
+                $("#wait").css("display", "none");
+                var markup = "<option value='0'>ALL</option>";
+                for (var x = 0; x < data.length; x++) {
+                    if (data[x].Text != "undefined") {
+                        markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                    }
+                }
+                $("#ddlTlevent").html(markup).show();
+
+
+
+            }
+        });
+
+    }
+
+    
+
+    
+
+
+    function GetTlProjectcode() {
+       
+        var pathurl = '@Url.Action("BindProductivityyProject", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'POST',
+            data: {
+                Clientcode: $("#drptlwiseclient option:selected").text(),
+                LocationId: $("#drpTLLocation option:selected").text(),
+                fromdate: $('#TLstartdate').val(),
+                enddate: $('#TLenddate').val(),
+                TL: $("#ddlTLwise option:selected").text()
+            },
+
+            success: function (data) {
+                $("#wait").css("display", "none");
+                var markup = "<option value='0'>ALL</option>";
+                for (var x = 0; x < data.length; x++) {
+                    if (data[x].Text != "undefined") {
+                        markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                    }
+                }
+                $("#drpTLproject").html(markup).show();
+
+            }
+        });
+
+
+
+    }
+
+
+
+
+
+    function GetRsProjectcode() {
+
+        var pathurl = '@Url.Action("GetClientprojectcodebyResource", "Admin")';
+         $.ajax({
+             url: pathurl,
+             type: 'POST',
+             data: {
+                 
+                 fromdate: $('#Rsstartdate').val(),
+                 enddate: $('#Rsenddate').val(),
+                 Location: $("#drpRsLocation option:selected").text(),
+                 TL: $("#ddlReTL option:selected").text(),
+                 Resource: $("#ddlresource option:selected").text(),
+                 Clientcode: $("#drpRsclient option:selected").text(),
+             },
+
+             success: function (data) {
+                 $("#wait").css("display", "none");
+                 var markup = "<option value='0'>ALL</option>";
+                 for (var x = 0; x < data.length; x++) {
+                     if (data[x].Text != "undefined") {
+                         markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                     }
+                 }
+                 $("#drpRsproject").html(markup).show();
+
+             }
+         });
+
+
+
+     }
+
+    function GetClientcodetlwise() {
+
+        var pathurl = '@Url.Action("BindTLwiseClientcode", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'POST',
+            data: {
+                LocationId: $("#drpTLLocation option:selected").text(),
+                fromdate: $('#TLstartdate').val(),
+                enddate: $('#TLenddate').val(),
+                TL: $("#ddlTLwise option:selected").text()
+            },
+            cache: false,
+            success: function (data) {
+                $("#wait").css("display", "none");
+                var markup = "<option value='0'>ALL</option>";
+                for (var x = 0; x < data.length; x++) {
+                    if (data[x].Text != "undefined") {
+                        markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                    }
+                }
+                $("#drptlwiseclient").html(markup).show();
+
+            }
+        });
+
+
+    }
+
+    function Gettlwiselocation() {
+
+        GetClientcodetlwise();
+
+
+        var pathurl = '@Url.Action("BindTLwise", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'POST',
+            data: {
+                LocationId: $("#drpTLLocation option:selected").text(),
+                fromdate: $('#TLstartdate').val(),
+                enddate: $('#TLenddate').val(),
+            },
+            cache: false,
+            success: function (data) {
+                $("#wait").css("display", "none");
+                var markup = "<option value='0'>ALL</option>";
+                for (var x = 0; x < data.length; x++) {
+                    if (data[x].Text != "undefined") {
+                        markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                    }
+                }
+                $("#ddlTLwise").html(markup).show();
+
+            }
+        });
+
+    }
+
+
+
+   
+
+    function Gettlwiselocation() {
+
+        GetClientcodetlwise();
+
+
+        var pathurl = '@Url.Action("BindTLwise", "Admin")';
+         $.ajax({
+             url: pathurl,
+             type: 'POST',
+             data: {
+                 LocationId: $("#drpTLLocation option:selected").text(),
+                 fromdate: $('#TLstartdate').val(),
+                 enddate: $('#TLenddate').val(),
+             },
+             cache: false,
+             success: function (data) {
+                 $("#wait").css("display", "none");
+                 var markup = "<option value='0'>ALL</option>";
+                 for (var x = 0; x < data.length; x++) {
+                     if (data[x].Text != "undefined") {
+                         markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                     }
+                 }
+                 $("#ddlTLwise").html(markup).show();
+
+             }
+         });
+
+     }
+
+    
+   
+
+
+    function TLProductivityReport() {
+
+       
+        $("#yearwait").css("display", "block");
+        var pathurl = '@Url.Action("TLproductivityReport", "Admin")';
+         $.ajax({
+             url: pathurl,
+             type: 'GET',
+             data: {
+                 Process: $("#drpTLProcess option:selected").text(),
+                 Location: $("#drpTLLocation option:selected").text(),
+                 projectcode: $("#drpTLproject option:selected").text(),
+                 TL: $("#ddlTLwise option:selected").text(),
+                 clientcode:$("#drptlwiseclient option:selected").text(),
+                 sdate: $('#TLstartdate').val(),
+                 enddate: $('#TLenddate').val(),
+                 eventcode: $("#ddlTlevent option:selected").text(),
+                 
+             },
+             cache: false,
+             success: function (data) {
+                 $("#yearwait").css("display", "none");
+                 $("#reporttllist").html("");
+                 $("#reporttllist").html(data);
+                 
+             }
+         });
+     }
+
+
+   
+    function projectProductivityReport() {
+        $("#wait").css("display", "block");
+        var pathurl = '@Url.Action("ProjectwiseproductivityReport", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'GET',
+            data: {
+                Process: $("#drpProcess option:selected").text(),
+                Location: $("#drpLocation option:selected").text(),
+                Project: $("#ddlproject option:selected").text(),
+                clientcode: $("#drpclient option:selected").text(),
+                eventcode: $("#ddlevent option:selected").text(),
+                sdate: $('#startdate').val(),
+                enddate: $('#enddate').val()
+
+            },
+            cache: false,
+            success: function (data) {
+                $("#wait").css("display", "none");
+                $("#reportlist").html("");
+                $("#reportlist").html(data);
+
+            }
+        });
+    }
+
+    
+
+    function ResourceProductivityReport() {
+       
+        $("#monthwait").css("display", "block");
+        var pathurl = '@Url.Action("ResourcewiseproductivityReport", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'GET',
+            data: {
+                Process: $("#drpRsProcess option:selected").text(),
+                Location: $("#drpRsLocation option:selected").text(),
+                projectcode: $("#drpRsproject option:selected").text(),
+                TL: $("#ddlReTL option:selected").text(),
+                Resource: $("#ddlresource option:selected").text(),
+                clientcode: $("#drpRsclient option:selected").text(),
+                sdate: $('#Rsstartdate').val(),
+                enddate: $('#Rsenddate').val(),
+                eventcode: $("#ddlRsevent option:selected").text(),
+
+            },
+            cache: false,
+            success: function (data) {
+                $("#monthwait").css("display", "none");
+                $("#reportresourcelist").html("");
+                $("#reportresourcelist").html(data);
+
+            }
+        });
+    }
+
+
+    function BindClientbyLocation() {
+        $("#wait").css("display", "block");
+        var pathurl = '@Url.Action("BindClientbyLocationinProductivity", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'POST',
+            data: {
+
+                Location: $("#drpLocation option:selected").text(),
+                fromdate: $('#startdate').val(),
+            },
+            success: function (data) {
+                $("#wait").css("display", "none");
+                var markup = "<option value='0'>ALL</option>";
+                for (var x = 0; x < data.length; x++) {
+                    if (data[x].Text != "undefined") {
+                        markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                    }
+                }
+                $("#drpclient").html(markup).show();
+               
+            }
+        });
+
+
+
+    }
+    
+    function GetEvent() {
+
+        $("#wait").css("display", "block");
+        var pathurl = '@Url.Action("BindprojectproductivityEvent", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'POST',
+            data: {
+
+                ProjectId: $("#ddlproject option:selected").text(),
+                fromdate: $('#startdate').val(),
+                enddate: $('#enddate').val(),
+                Clientcode: $("#drpclient option:selected").text()
+            },
+            success: function (data) {
+                $("#wait").css("display", "none");
+                var markup = "<option value='0'>ALL</option>";
+                for (var x = 0; x < data.length; x++) {
+                    if (data[x].Text != "undefined") {
+                        markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                    }
+                }
+                $("#ddlevent").html(markup).show();
+
+
+
+            }
+        });
+
+    }
+    
+    function BindResourceTLandLocation() {
+        GetResourcePagelocation();
+        GetResourcePageClientcode();
+
+    }
+
+   
+    function GetResourcePagelocation() {
+
+        var pathurl = '@Url.Action("BindTLResourcePage", "Admin")';
+         $.ajax({
+             url: pathurl,
+             type: 'POST',
+             data: {
+                 LocationId: $("#drpRsLocation option:selected").text(),
+                 fromdate: $('#Rsstartdate').val(),
+                 enddate: $('#Rsenddate').val()
+             },
+             cache: false,
+             success: function (data) {
+                 $("#wait").css("display", "none");
+                 var markup = "<option value='0'>ALL</option>";
+                 for (var x = 0; x < data.length; x++) {
+                     if (data[x].Text != "undefined") {
+                         markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                     }
+                 }
+                 $("#ddlReTL").html(markup).show();
+
+             }
+         });
+
+     }
+
+    function GetResourcePageClientcode() {
+
+        var pathurl = '@Url.Action("BindResourcePageClientcode", "Admin")';
+         $.ajax({
+             url: pathurl,
+             type: 'POST',
+             data: {
+                 LocationId: $("#drpRsLocation option:selected").text(),
+                 fromdate: $('#Rsstartdate').val(),
+                 enddate: $('#Rsenddate').val(),
+                 TL: $("#ddlReTL option:selected").text()
+             },
+             cache: false,
+             success: function (data) {
+                 $("#wait").css("display", "none");
+                 var markup = "<option value='0'>ALL</option>";
+                 for (var x = 0; x < data.length; x++) {
+                     if (data[x].Text != "undefined") {
+                         markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                     }
+                 }
+                 $("#drpRsclient").html(markup).show();
+
+             }
+         });
+
+     }
+
+    
+
+    function GetClientcodebyResource() {
+       
+        var pathurl = '@Url.Action("GetClientcodebyResource", "Admin")';
+         $.ajax({
+             url: pathurl,
+             type: 'POST',
+             data: {
+                 Location: $("#drpRsLocation option:selected").text(),
+                 fromdate: $('#Rsstartdate').val(),
+                 enddate: $('#Rsenddate').val(),
+                 TL: $("#ddlReTL option:selected").text(),
+                 Resource: $("#ddlresource option:selected").text()
+             },
+             cache: false,
+             success: function (data) {
+                 $("#wait").css("display", "none");
+                 var markup = "<option value='0'>ALL</option>";
+                 for (var x = 0; x < data.length; x++) {
+                     if (data[x].Text != "undefined") {
+                         markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                     }
+                 }
+                 $("#drpRsclient").html(markup).show();
+
+             }
+         });
+
+     }
+
+    function GetResourcebyEvent() {
+
+        $("#wait").css("display", "block");
+        var pathurl = '@Url.Action("BindResourcebyEvent", "Admin")';
+        $.ajax({
+            url: pathurl,
+            type: 'POST',
+            data: {
+
+                Location: $("#drpRsLocation option:selected").text(),
+                fromdate: $('#Rsstartdate').val(),
+                enddate: $('#Rsenddate').val(),
+                TL: $("#ddlReTL option:selected").text(),
+                Resource: $("#ddlresource option:selected").text(),
+                Clientcode:$("#drpRsclient option:selected").text(),
+                Project: $("#drpRsproject option:selected").text()
+            },
+            success: function (data) {
+                $("#wait").css("display", "none");
+                var markup = "<option value='0'>ALL</option>";
+                for (var x = 0; x < data.length; x++) {
+                    if (data[x].Text != "undefined") {
+                        markup += "<option value=" + data[x].Text + ">" + data[x].Text + "</option>";
+                    }
+                }
+                $("#ddlRsevent").html(markup).show();
+
+
+
+            }
+        });
+
+    }
+
+
+
+
+</script>
+
+ 

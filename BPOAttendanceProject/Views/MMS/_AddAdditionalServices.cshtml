@@ -1,0 +1,630 @@
+﻿          <link href="../assets/global/plugins/bootstrap-sweetalert/sweetalert.css" rel="stylesheet" />
+<link href="../assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css" />
+<link href="../assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css" />
+
+@model BPOAttendanceProject.Models.MMSAdditional
+
+<div>
+    @using (Html.BeginForm("SaveAdditionalService", "MMS", FormMethod.Post, new { @classs = "invoiceform", @id = "form" }))
+    {
+        <div class="modal-content">
+            <div class="modal-body">
+                <div>
+                    <div>
+                        <!-- BEGIN SAMPLE FORM PORTLET-->
+                        <div class="portlet light bordered">
+                            <div class="m-heading-1 border-green m-bordered">
+                                <div class="caption">
+                                    <i class="fa fa-edit"></i>
+
+                                    @if (Model.Id == 0)
+                                    {
+                                        <span class="caption-subject font-dark sbold uppercase">Add </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="caption-subject font-dark sbold uppercase">Edit </span>
+                                    }
+
+
+                                </div>
+                            </div>
+                            <div class="portlet-body form">
+                                <div class="form-horizontal">
+                                    <div class="form-body">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                               
+                                                    @Html.HiddenFor(model => model.Id, new { @Id = "Id" })
+                                                  
+                                               <div class="form-group">
+                                                    <label class="col-md-3 control-label">Month </label>
+                                                    <div class="col-md-9 valid-group">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+
+
+                                                            @Html.DropDownListFor(model => model.Month, new SelectList(new List<SelectListItem> {
+                                                                                                                 new SelectListItem { Text = "January", Value = "1"},
+                                                                                                                 new SelectListItem { Text = "February", Value = "2"},
+                                                                                                                 new SelectListItem { Text = "March", Value = "3"},
+                                                                                                                 new SelectListItem { Text = "April", Value = "4"},
+                                                                                                                 new SelectListItem { Text = "May", Value = "5"},
+                                                                                                                 new SelectListItem { Text = "June", Value = "6"},
+                                                                                                                 new SelectListItem { Text = "July", Value = "7"},
+                                                                                                                 new SelectListItem { Text = "August", Value = "8"},
+                                                                                                                 new SelectListItem { Text = "September", Value = "9"},
+                                                                                                                 new SelectListItem { Text = "October", Value = "10"},
+                                                                                                                 new SelectListItem { Text = "November", Value = "11"},
+                                                                                                                 new SelectListItem { Text = "December", Value = "12"}
+                                                                                                             }, "Value", "Text"), "Select", new { style = "width: 100%;", @required = "required", @class = "btn dropdown-toggle btn-default", @autocomplete = "off", @id = "drpMonth" })
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                              <div class="form-group">
+                                                    <label class="col-md-3 control-label">Year</label>
+                                                    <div class="col-md-9 valid-group">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.DropDownListFor(model => model.Year, new SelectList(new List<SelectListItem> {
+                                                                                                                new SelectListItem { Text = "2021", Value = "1"},
+                                                                                                               new SelectListItem { Text = "2020", Value = "2"},
+                                                                                                               new SelectListItem { Text = "2019", Value = "3"},
+                                                                                                           }, "Value", "Text"), "Select", new { style = "width: 100%;", @required = "required", @class = "btn dropdown-toggle btn-default", @autocomplete = "off", @id = "drpYear" })
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-4">
+                                               
+                                                    <div class="form-group">
+                                                    <label class="col-md-3 control-label">Target</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.Target, new { @class = "form-control", @autocomplete = "off", @required = "required", @maxlength = "10",  onkeypress = "return isNumber(event)" })
+
+                                                        </div>
+
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Attrition</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.Attrition, new { @class = "form-control", @autocomplete = "off", @required = "required", @maxlength = "10" })
+
+                                                        </div>
+
+
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Team Size</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.TeamSize, new { @class = "form-control", @autocomplete = "off", @required = "required", @maxlength = "10",  onkeypress = "return isNumber(event)" })
+
+                                                        </div>
+
+
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Resigned</label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            @Html.TextBoxFor(model => model.Resigned, new { @class = "form-control", @autocomplete = "off", @required = "required", @maxlength = "10",  onkeypress = "return isNumber(event)" })
+
+                                                        </div>
+
+
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            @*<div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Target</label>
+                                                        <div class="col-md-9">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">
+                                                                    <i class="fa fa-envelope"></i>
+                                                                </span>
+                                                                @Html.TextBoxFor(model => model.Target, new { @class = "form-control", @autocomplete = "off", @required = "required", @maxlength = "10", onchange = "CalculateProduction();", onkeypress = "return isNumber(event)" })
+
+                                                            </div>
+
+
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>*@
+
+                                            @*<div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Actual</label>
+                                                        <div class="col-md-9">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">
+                                                                    <i class="fa fa-envelope"></i>
+                                                                </span>
+                                                                @Html.TextBoxFor(model => model.Actual, new { @class = "form-control", @autocomplete = "off", @required = "required", @maxlength = "10", onchange = "CalculateProduction();", onkeypress = "return isNumber(event)" })
+
+                                                            </div>
+
+
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>*@
+
+
+
+
+                                        </div>
+
+                                        <div class="row">
+
+                                            <fieldset>
+                                                <legend>BPO Online Department: </legend>
+                                                @*<div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label class="col-md-3 control-label">Department</label>
+                                                            <div class="col-md-9">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon">
+                                                                        <i class="fa fa-envelope"></i>
+                                                                    </span>
+                                                                    @Html.TextBoxFor(model => model.Department, new { @class = "form-control", @autocomplete = "off", @required = "required", @maxlength = "10", onchange = "CalculateProduction();", onkeypress = "return isNumber(event)" })
+
+                                                                </div>
+
+
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>*@
+
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Size</label>
+                                                        <div class="col-md-9">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">
+                                                                    <i class="fa fa-envelope"></i>
+                                                                </span>
+                                                                @Html.TextBoxFor(model => model.Size, new { @class = "form-control", @autocomplete = "off", @required = "required", @maxlength = "10",  onkeypress = "return isNumber(event)" })
+
+                                                            </div>
+
+
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Billable</label>
+                                                        <div class="col-md-9">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">
+                                                                    <i class="fa fa-envelope"></i>
+                                                                </span>
+                                                                @Html.TextBoxFor(model => model.Billable, new { @class = "form-control", @autocomplete = "off", @required = "required", @maxlength = "10",  onkeypress = "return isNumber(event)" })
+
+                                                            </div>
+
+
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Non-Billable</label>
+                                                        <div class="col-md-9">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">
+                                                                    <i class="fa fa-envelope"></i>
+                                                                </span>
+                                                                @Html.TextBoxFor(model => model.NonBillable, new { @class = "form-control", @autocomplete = "off", @required = "required", @maxlength = "10",  onkeypress = "return isNumber(event)" })
+
+                                                            </div>
+
+
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label class="col-md-3 control-label">Comments</label>
+                                                            <div class="col-md-9">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon">
+                                                                        <i class="fa fa-envelope"></i>
+                                                                    </span>
+                                                                    @Html.TextAreaFor(model => model.BPOComments, new { @id = "txtetobpo", @class = "form-control", @autocomplete = "off"})
+                                                                </div>
+
+
+
+                                                            </div>
+                                                        </div>
+
+                                                 </div>
+                                            </fieldset>
+                                        </div>
+                                        <div class="row">
+
+                                            <fieldset>
+                                                <legend>MMS Department: </legend>
+                                                @*<div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label class="col-md-3 control-label">Department</label>
+                                                            <div class="col-md-9">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon">
+                                                                        <i class="fa fa-envelope"></i>
+                                                                    </span>
+                                                                    @Html.TextBoxFor(model => model.Department, new { @class = "form-control", @autocomplete = "off", @required = "required", @maxlength = "10", onchange = "CalculateProduction();", onkeypress = "return isNumber(event)" })
+
+                                                                </div>
+
+
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>*@
+
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Size</label>
+                                                        <div class="col-md-9">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">
+                                                                    <i class="fa fa-envelope"></i>
+                                                                </span>
+                                                                @Html.TextBoxFor(model => model.MMSSize, new { @class = "form-control", @autocomplete = "off", @required = "required", @maxlength = "10",  onkeypress = "return isNumber(event)" })
+
+                                                            </div>
+
+
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Billable</label>
+                                                        <div class="col-md-9">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">
+                                                                    <i class="fa fa-envelope"></i>
+                                                                </span>
+                                                                @Html.TextBoxFor(model => model.MMSBillable, new { @class = "form-control", @autocomplete = "off", @required = "required", @maxlength = "10", onkeypress = "return isNumber(event)" })
+                                                            </div>
+
+
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Non-Billable</label>
+                                                        <div class="col-md-9">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">
+                                                                    <i class="fa fa-envelope"></i>
+                                                                </span>
+                                                                @Html.TextBoxFor(model => model.MMSNonBillable, new { @class = "form-control", @autocomplete = "off", @required = "required", @maxlength = "10",  onkeypress = "return isNumber(event)" })
+                                                            </div>
+
+
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-4">
+                                                 <div class="form-group">
+                                                            <label class="col-md-3 control-label">Comments</label>
+                                                            <div class="col-md-9">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon">
+                                                                        <i class="fa fa-envelope"></i>
+                                                                    </span>
+                                                                    @Html.TextAreaFor(model => model.MMSComments, new { @id = "txtetobpo", @class = "form-control", @autocomplete = "off"})
+                                                                </div>
+
+
+
+                                                            </div>
+                                                        </div>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+
+                                         <div class="row">
+
+                                            <fieldset>
+                                                <legend>Call centre Department: </legend>
+                                               
+
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Size</label>
+                                                        <div class="col-md-9">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">
+                                                                    <i class="fa fa-envelope"></i>
+                                                                </span>
+                                                                @Html.TextBoxFor(model => model.CallSize, new { @class = "form-control", @autocomplete = "off", @required = "required", @maxlength = "10",  onkeypress = "return isNumber(event)" })
+
+                                                            </div>
+
+
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Billable</label>
+                                                        <div class="col-md-9">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">
+                                                                    <i class="fa fa-envelope"></i>
+                                                                </span>
+                                                                @Html.TextBoxFor(model => model.CallBillable, new { @class = "form-control", @autocomplete = "off", @required = "required", @maxlength = "10", onkeypress = "return isNumber(event)" })
+                                                            </div>
+
+
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Non-Billable</label>
+                                                        <div class="col-md-9">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">
+                                                                    <i class="fa fa-envelope"></i>
+                                                                </span>
+                                                                @Html.TextBoxFor(model => model.CallNonBillable, new { @class = "form-control", @autocomplete = "off", @required = "required", @maxlength = "10",  onkeypress = "return isNumber(event)" })
+                                                            </div>
+
+
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-4">
+                                                 <div class="form-group">
+                                                            <label class="col-md-3 control-label">Comments</label>
+                                                            <div class="col-md-9">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon">
+                                                                        <i class="fa fa-envelope"></i>
+                                                                    </span>
+                                                                    @Html.TextAreaFor(model => model.CallComments, new { @id = "txtetobpo", @class = "form-control", @autocomplete = "off"})
+                                                                </div>
+
+
+
+                                                            </div>
+                                                        </div>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END SAMPLE FORM PORTLET-->
+                </div>
+
+            </div>
+        </div>
+        <div class="modal-footer">
+
+
+
+            <button type="button" class="btn dark btn-outline" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn green">Save</button>
+        </div>
+
+    }
+    <!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="../assets/global/plugins/bootstrap-sweetalert/sweetalert.js"></script>
+<script src="../assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="../assets/pages/scripts/ui-extended-modals.min.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
+
+<script type="text/javascript">
+    var result = "";
+
+
+    $(function () {
+        $('#form').validate({
+
+            rules: {
+                Month: {
+                    required: true
+                },
+                Year: {
+                    required: true
+                },
+                softwareservices: {
+                    required: true
+                },
+                internalbilling: {
+                    required: true
+                },
+                externalbilling: {
+                    required: true
+                },
+                Resources: {
+                    required: true
+                }
+
+        },
+
+            messages: {
+                Month: {
+                    required: " Select Month."
+                },
+                Year: {
+                    required: "Select Year."
+                },
+                softwareservices: {
+                    required: "Required"
+                },
+                internalbilling: {
+                    required: "Resources no required."
+                },
+                externalbilling: {
+                    required: "Resources no required."
+                },
+                Resources: {
+                    required: "Resources no required."
+                }
+
+
+
+            },
+
+            invalidHandler: function (event, validator) {
+
+                $('.alert-danger', $('#form')).show();
+            },
+
+            highlight: function (element) { // hightlight error inputs
+                $(element).closest('.valid-group').addClass('has-error'); // set error class to the control group
+            },
+
+            success: function (label) {
+                label.closest('.valid-group').removeClass('has-error');
+                label.remove();
+            },
+
+            errorPlacement: function (error, element) {
+                error.addClass('text-danger');
+                error.insertAfter(element.closest('.input-group'));
+            },
+
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+    });
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+</script>
+<style>
+
+    .sweet-overlay {
+        z-index: 20000;
+    }
+
+    .sweet-alert {
+        z-index: 20000;
+    }
+
+    #errmsg {
+        color: red;
+    }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

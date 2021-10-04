@@ -1,0 +1,70 @@
+﻿@model  BPOAttendanceProject.Models.DailyETO    
+
+@if (Model.LstDailyETO.Count > 0)
+{
+    <table class="table table-striped table-bordered table-hover table-checkable order-column" id="tblPreprocess">
+        <thead>
+            <tr>
+                <th style="width:15%">Date </th>
+                <th style="width:20%">Actual Revenue(INR) </th>
+                <th style="width:20%">Actual Revenue(USD) </th>
+                <th style="width:20%">Employee ETO </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+         @foreach (var item in Model.LstDailyETO)
+                             {
+             
+            
+         <tr class="odd gradeX">
+                            <td>@item.Date</td>
+                            <td>@Math.Round(item.Actualrevenue,2)</td>
+                             @if(item.Actualrevenue!=0)
+                             {
+                            <td>@Math.Round((item.Actualrevenue/item.dollarrate),2)</td>
+                             }
+                             else
+                             {
+                             <td>0</td>
+                             }
+             
+                             @if(item.Actualrevenue!=0)
+                             {
+                                
+                            <td><a href="javascript:;"   onclick="GetDetailPopup('@item.Date');" >@Math.Round(((item.Actualrevenue/item.dollarrate)/item.Employeeno),2)</a></td>
+                             }
+                            else
+                            {
+                             <td>0</td>
+                            }
+                                 
+                                 <td> <button type="button"    onclick="location.href='@Url.Action("DownloadETO", "Admin",new {DDate =@item.Date})'" >Export to Excel</button></td>
+               @*         
+                @using (Html.BeginForm("DownloadETO", "Admin", new { date = @item.Date }, FormMethod.Post))
+                {
+                  <td> <button class="btn btn-default" type="submit"> Excel <span class="glyphicon glyphicon-export"></span></button></td> 
+                }*@
+
+
+@*                          <td><a href="javascript:;"   onclick="GetDetailPopup('@item.Date','@item.Location','@item.Projectcode',);" >@Math.Round((item.ETOActualrevenue/item.Employeeno),2) </a></td>
+                            <td> <button type="button"    onclick="location.href='@Url.Action("DownloadETO", "Admin",new {date =@item.Date,location=@item.Location,projectcode=@item.Projectcode})'" >Export to Excel</button></td>*@
+           </tr>
+             
+         }
+            
+ </tbody>
+  </table>
+}
+
+ else
+                         {
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="alert alert-info">
+                                                        <strong>No Records Found</strong><br />
+                                                    </div>
+                                                </div>
+                                            </div>
+                         }

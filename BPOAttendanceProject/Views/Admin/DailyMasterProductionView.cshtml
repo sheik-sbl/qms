@@ -1,0 +1,117 @@
+﻿@model  BPOAttendanceProject.Models.DailymasterProductionViewModel  
+@{
+    double  d = 0.0;
+    string s2 = "";
+}
+ 
+@if (Model.LstDailymasterProductionReport.Count > 0)
+{
+   
+     <a href='@Url.Action("DailyPrintReport", "Admin")'><b>Export to Excel</b></a>
+    
+     <table class="table table-striped table-bordered table-hover table-checkable order-column" id="tblPreprocess">
+        <thead>
+            <tr>
+                @*<th style="width:5%">TL </th>*@
+                <th style="width:5%">PSN </th>
+                <th style="width:10%">Associates Name</th>
+               
+                <th style="width:5%">Process</th>
+                <th style="width:5%">Project</th>
+                <th style="width:5%">Project Code</th>
+                <th style="width:5%">Event code</th>
+                <th style="width:5%">TL's Name</th>
+                <th style="width:5%">Hours planned</th>
+                <th style="width:5%">Production planned/Hr Records</th>
+                <th style="width:5%">Production planned Records</th>
+                <th style="width:5%">Hours Worked</th>
+                <th style="width:5%">Actual Production</th>
+                <th style="width:5%">Achievement</th>
+                <th style="width:5%">Remarks</th>
+                <th style="width:5%">Location</th>
+                <th style="width:5%">Date</th>
+                <th style="width:5%">Target Revenue</th>
+                <th style="width:5%">Actual Revenue</th>
+                <th style="width:5%">Revenue Achievement</th>
+               <th style="width:5%"> PECODE</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.LstDailymasterProductionReport)
+            {
+
+                //d = ((item.Actualproduction * 1.89) / (item.productionplanrecord * 1.89) * 100);
+                 <tr class="odd gradeX">
+                    <td>@item.psn</td>
+                    <td>@item.associate</td>
+                   
+                    <td>@item.process</td>
+                    <td>@item.project</td>
+                    <td>@item.projectcode</td>
+                    <td>@item.eventcode</td>
+                    <td>@item.tlname</td>
+                    <td>@item.plannedhrs</td>
+                    <td>@item.plannedhrrecord </td>
+                   <td>@item.plannedprodrecord</td>
+                    <td>@item.workedhrs</td>
+                    <td>@item.actualprodrecord</td>
+                    <td>@item.achievement</td>
+                    <td>@item.remarks</td>
+                     <td>@item.location</td>
+                     <td>@item.date</td>
+
+                  @if (item.process != null)
+                  {
+
+                     <td>@(item.targetrevenue * item.plannedprodrecord)</td>
+                     <td>@((item.actualprodrecord * item.targetrevenue) + (item.targetrevenue * item.workathome)) </td>
+                     <td>@(Math.Round((item.actualprodrecord * item.targetrevenue) / (item.targetrevenue * item.plannedprodrecord), 2) * 100)</td>
+                  }
+
+                     <td>@(item.projectcode + item.eventcode)</td>
+                 
+                </tr>
+                       
+            }
+
+          
+        </tbody>
+</table>
+    
+ 
+       
+    
+  
+    
+    
+    
+    
+}
+else
+{
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="alert alert-info">
+                <strong>No Daily Production Found on this date</strong><br />
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+
+
+    jQuery(function ($) {
+        $('#tblPreprocess').dataTable({
+
+            "aoColumns": [
+                              null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,null
+
+            ]
+
+        });
+
+    });
+
+</script>
+
