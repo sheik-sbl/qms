@@ -152,13 +152,73 @@ namespace BPOAttendanceProject.Controllers
             var result = new { rate = rate };
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult DownloadExcelReport(string month, string year)
+        {
+            if (Session["MonthYear"] != null)
+            {
+                month = Session["MonthYear"].ToString().Split(',')[0];
+                year = Session["MonthYear"].ToString().Split(',')[1];
+            }
+            string constr = ConfigurationManager.ConnectionStrings["MySQLConnString"].ConnectionString;
+            string query = "select Agent.Name as agentname, count(agentname) as CallsAudited, sum(Total) as TOTALSCORE, "
+                + "round((sum(total)/ (count(agentname)*100)*100),2) as QualityScore"
+                + " from Softwareservice " +
+                " inner join `Agent` on Agent.Id = Softwareservice.AGENTNAME where month(Date)=" + month + " and year(Date)="
+                + year + " group by agentname;" +
+                "select count(agentname) as CallsAudited, sum(Total) as TOTALSCORE,round((sum(total) / (count(agentname)" +
+                " * 100) * 100), 2) as QualityScore from Softwareservice  where month(Date) = " + month +
+                " and year(Date)= " + year + "; ";
+            using (MySqlConnection con = new MySqlConnection(constr))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(query))
+                {
+                    using (MySqlDataAdapter sda = new MySqlDataAdapter())
+                    {
+                        cmd.Connection = con;
+                        sda.SelectCommand = cmd;
+                        using (DataSet ds = new DataSet())
+                        {
+                            sda.Fill(ds);
 
+                            //Set Name of DataTables.
+
+                            using (XLWorkbook wb = new XLWorkbook())
+                            {
+                                DataTable dt = new DataTable();
+                                dt = ds.Tables[0];
+                                dt.Rows.Add("Total",ds.Tables[1].Rows[0]["CallsAudited"].ToString(), ds.Tables[1].Rows[0]["TOTALSCORE"].ToString(), ds.Tables[1].Rows[0]["QualityScore"].ToString());
+                                wb.Worksheets.Add(dt);
+                                //foreach (DataTable dt in ds.Tables)
+                                //{
+                                //    wb.Worksheets.Add(dt);
+                                //}
+                                string[] strArr = null;
+                                char[] splitchar = { '/' };
+                                Response.Buffer = true;
+                                Response.Charset = "";
+                                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                                Response.AddHeader("content-disposition", "attachment;filename=DashboardExport-" + month + "/" + year + ".xlsx");
+                                // Response.AddHeader("content-disposition", "attachment;filename=Master Report.xlsx");
+                                using (MemoryStream MyMemoryStream = new MemoryStream())
+                                {
+                                    wb.SaveAs(MyMemoryStream);
+                                    MyMemoryStream.WriteTo(Response.OutputStream);
+                                    Response.Flush();
+                                    Response.End();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return View("ConsolidatedProductionReport");
+        }
         public ActionResult GetSoftwareservice(string ID)
         {
             int Id = Convert.ToInt16(ID);
             SoftwareServices Model = new SoftwareServices();
             string connString = ConfigurationManager.ConnectionStrings["MySQLConnString"].ConnectionString;
-            string Command = "SELECT Softwareservice.id,DATE_FORMAT(Softwareservice.Date, '%m/%d/%Y') as DATE,AGENTNAME, CALLFROM,CALLTO,TicketNumber,RecordingURL,CALLREVIEW,TICKETREVIEW,Greeting,REMARKS,Probing,REMARKS2,`Tagging`, "
+            string Command = "SELECT Softwareservice.id,DATE_FORMAT(Softwareservice.Date, '%d/%m/%Y') as DATE,AGENTNAME, CALLFROM,CALLTO,TicketNumber,RecordingURL,CALLREVIEW,TICKETREVIEW,Greeting,REMARKS,Probing,REMARKS2,`Tagging`, "
                 + " REMARKS3,Details,REMARKS4,Solution,REMARKS5,reminder,REMARKS6,Timeline,REMARKS8,listening,REMARKS9,Phone,REMARKS10,Grammar,REMARKS11,"
                 + " Professionalism,REMARKS12,tools,rude,Tagging2,mistakes,TOTAL,ACTIONTAKEN,Closing,RemarksClosing from `Softwareservice`"
                 + " inner join `Agent` on Agent.Id = Softwareservice.AGENTNAME where Softwareservice.id=" + Id;
@@ -258,13 +318,19 @@ namespace BPOAttendanceProject.Controllers
             }
             return PartialView("/Views/MRM/_AddSoftwareservice.cshtml", Model);
         }
-        public ActionResult SoftwareServices()
+        public ActionResult SoftwareServices(SoftwareServices modl)
         {
             SoftwareServices Model = new SoftwareServices();
+            if (string.IsNullOrEmpty(modl.Year))
+                modl.Year = DateTime.Today.Year.ToString();
+            if (string.IsNullOrEmpty(modl.Month))
+                modl.Month = DateTime.Today.Month.ToString();
             string connString = ConfigurationManager.ConnectionStrings["MySQLConnString"].ConnectionString;
             string Command = "SELECT Softwareservice.id, DATE_FORMAT(Softwareservice.Date, '%d/%m/%y') as DATE,Agent.Name as AGENTNAME,CALLFROM,CALLTO, TicketNumber" +
                 ",SUBSTRING(recordingurl,1,30) as RecordingURL,SUBSTRING(CALLREVIEW,1,20)as CALLREVIEW" +
-                ", TICKETREVIEW from `Softwareservice` inner join `Agent` on Agent.Id = Softwareservice.AGENTNAME";
+                ", TICKETREVIEW from `Softwareservice` inner join `Agent` on Agent.Id = Softwareservice.AGENTNAME " +
+                " where month(Date)=" + modl.Month + " and year(Date)="
+                + modl.Year + " order by Softwareservice.DATE";
             using (MySqlConnection mConnection = new MySqlConnection(connString))
             {
                 mConnection.Open();
@@ -274,10 +340,65 @@ namespace BPOAttendanceProject.Controllers
                 adapter.Fill(ds.Tables[0]);
                 DataTable dtt = ds.Tables[0];
                 Model.LstSoftwareServices = dtt.DataTableToList<SoftwareServices>();
+                Model.Month = modl.Month;
+                Model.Year = modl.Year;
                 return View("SoftwareServices", Model);
             }
         }
+        public ActionResult DownloadExcelReportQA(string month, string year)
+        {
+            string constr = ConfigurationManager.ConnectionStrings["MySQLConnString"].ConnectionString;
+            string query = "SELECT Softwareservice.id,DATE_FORMAT(Softwareservice.Date, '%d/%m/%y') as DATE,Agent.Name as AGENTNAME, CALLFROM,CALLTO,TicketNumber,RecordingURL,CALLREVIEW,TICKETREVIEW,Greeting,REMARKS,Probing,REMARKS2,`Tagging`, "
+                + " REMARKS3,Details,REMARKS4,Solution,REMARKS5,reminder,REMARKS6,Timeline,REMARKS8,listening,REMARKS9,Phone,REMARKS10,Grammar,REMARKS11,"
+                + " Professionalism,REMARKS12,tools,rude,Tagging2,mistakes,total,actiontaken"
+                + " from `Softwareservice` inner join `Agent` on Agent.Id = Softwareservice.AGENTNAME"
+                + " where month(Date)=" + month + " and year(Date)="
+                + year + " order by Softwareservice.DATE desc";
+            using (MySqlConnection con = new MySqlConnection(constr))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(query))
+                {
+                    using (MySqlDataAdapter sda = new MySqlDataAdapter())
+                    {
+                        cmd.Connection = con;
+                        sda.SelectCommand = cmd;
+                        using (DataSet ds = new DataSet())
+                        {
+                            sda.Fill(ds);
 
+                            //Set Name of DataTables.
+
+                            using (XLWorkbook wb = new XLWorkbook())
+                            {
+                                DataTable dt = new DataTable();
+                                dt = ds.Tables[0];
+                                //dt.Rows.Add("Total", ds.Tables[1].Rows[0]["CallsAudited"].ToString(), ds.Tables[1].Rows[0]["TOTALSCORE"].ToString(), ds.Tables[1].Rows[0]["QualityScore"].ToString());
+                                wb.Worksheets.Add(dt);
+                                //foreach (DataTable dt in ds.Tables)
+                                //{
+                                //    wb.Worksheets.Add(dt);
+                                //}
+                                string[] strArr = null;
+                                char[] splitchar = { '/' };
+                                Response.Buffer = true;
+                                Response.Charset = "";
+                                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                                Response.AddHeader("content-disposition", "attachment;filename=QAExport-" + month + "/" + year + ".xlsx");
+                                // Response.AddHeader("content-disposition", "attachment;filename=Master Report.xlsx");
+                                using (MemoryStream MyMemoryStream = new MemoryStream())
+                                {
+                                    wb.SaveAs(MyMemoryStream);
+                                    MyMemoryStream.WriteTo(Response.OutputStream);
+                                    Response.Flush();
+                                    Response.End();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return View("ConsolidatedProductionReport");
+        }
         public ActionResult AddSoftwareservice()
         {
             SoftwareServices model = new SoftwareServices();
@@ -320,7 +441,7 @@ namespace BPOAttendanceProject.Controllers
             model.Closing = "0";
             model.Grammar = "0";
             model.REMARKS11 = String.Empty;
-            model.Professionalism = String.Empty;
+            model.Professionalism = "0";
             model.REMARKS12 = String.Empty;
             model.tools = "0";
             model.rude = "0";
@@ -509,22 +630,30 @@ namespace BPOAttendanceProject.Controllers
                 modl.Month = DateTime.Today.Month.ToString();
             string connString = ConfigurationManager.ConnectionStrings["MySQLConnString"].ConnectionString;
             string Command = "select Agent.Name as agentname, count(agentname) as CallsAudited, sum(Total) as TOTALSCORE, "
-                + "(sum(total)/ (count(agentname)*100)*100) as QualityScore"
+                + "round((sum(total)/ (count(agentname)*100)*100),2) as QualityScore"
                 + " from Softwareservice " +
                 " inner join `Agent` on Agent.Id = Softwareservice.AGENTNAME where month(Date)=" + modl.Month + " and year(Date)="
-                + modl.Year + " group by agentname";
+                + modl.Year + " group by agentname;" +
+                "select count(agentname) as CallsAudited, sum(Total) as TOTALSCORE,round((sum(total) / (count(agentname)" +
+                " * 100) * 100), 2) as QualityScore from Softwareservice  where month(Date) = " + modl.Month +
+                " and year(Date)= " + modl.Year + "; ";
 
             using (MySqlConnection mConnection = new MySqlConnection(connString))
             {
                 mConnection.Open();
                 MySqlDataAdapter adapter = new MySqlDataAdapter(Command, mConnection);
                 DataSet ds = new DataSet();
-                ds.Tables.Add(new DataTable());
-                adapter.Fill(ds.Tables[0]);
+                //ds.Tables.Add(new DataTable());
+                //adapter.Fill(ds.Tables[0]);
+                adapter.Fill(ds);
                 DataTable dtt = ds.Tables[0];
                 Model.LstMonthlyswservice = dtt.DataTableToList<Monthlyswservice>();
                 Model.Year = modl.Year;
                 Model.Month = modl.Month;
+                Model.CallsAudited = ds.Tables[1].Rows[0]["CallsAudited"].ToString();
+                Model.TotalScore = ds.Tables[1].Rows[0]["TOTALSCORE"].ToString();
+                Model.QualityScore = ds.Tables[1].Rows[0]["QualityScore"].ToString();
+                Session["MonthYear"] = modl.Month + "," + modl.Year;
                 return View("Monthlysoftwareservice", Model);
             }
         }
@@ -536,47 +665,6 @@ namespace BPOAttendanceProject.Controllers
             return PartialView("_AddMonthlysoftwareservice", model);
 
         }
-
-
-        //public JsonResult FillTargetMonthly(string month, string year)
-        //{
-
-
-
-        //    string connString = ConfigurationManager.ConnectionStrings["MySQLConnString"].ConnectionString;
-
-
-
-        //    double budgeINR = 0.0;
-
-
-        //    string Command = "SELECT `target` from  `monthlystaffAugTarget` where `month`='" + month + "' and year='" + year + "'";
-        //    using (MySqlConnection mConnection = new MySqlConnection(connString))
-        //    {
-        //        MySqlCommand cmd = new MySqlCommand(Command, mConnection);
-        //        mConnection.Open();
-        //        MySqlDataReader reader = cmd.ExecuteReader();
-
-        //        if (reader.HasRows)
-        //        {
-        //            while (reader.Read())
-        //            {
-        //                budgeINR = reader.GetDouble("target");
-
-        //            }
-        //        }
-        //    }
-
-
-        //    var result = new { budgeINR = budgeINR };
-        //    return Json(result, JsonRequestBehavior.AllowGet);
-
-
-        //}
-
-
-
-
 
         public ActionResult Savemrmswservice(Monthlyswservice model)
         {

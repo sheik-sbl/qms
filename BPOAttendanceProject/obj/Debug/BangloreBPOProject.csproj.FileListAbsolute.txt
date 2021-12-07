@@ -1,9 +1,7 @@
+E:\Banglore Project\BPOAttendanceProject\obj\Debug\BangloreBPOProject.csproj.CoreCompileInputs.cache
 E:\Banglore Project\BPOAttendanceProject\bin\Web.config
 E:\Banglore Project\BPOAttendanceProject\bin\Web.Debug.config
 E:\Banglore Project\BPOAttendanceProject\bin\Web.Release.config
-E:\Banglore Project\BPOAttendanceProject\bin\BangloreBPOProject.dll.config
-E:\Banglore Project\BPOAttendanceProject\bin\BangloreBPOProject.dll
-E:\Banglore Project\BPOAttendanceProject\bin\BangloreBPOProject.pdb
 E:\Banglore Project\BPOAttendanceProject\bin\Antlr3.Runtime.dll
 E:\Banglore Project\BPOAttendanceProject\bin\BouncyCastle.Crypto.dll
 E:\Banglore Project\BPOAttendanceProject\bin\ClosedXML.dll
@@ -58,8 +56,10 @@ E:\Banglore Project\BPOAttendanceProject\bin\DotNetOpenAuth.OAuth.Consumer.xml
 E:\Banglore Project\BPOAttendanceProject\bin\DotNetOpenAuth.OAuth.xml
 E:\Banglore Project\BPOAttendanceProject\bin\DotNetOpenAuth.OpenId.xml
 E:\Banglore Project\BPOAttendanceProject\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
-E:\Banglore Project\BPOAttendanceProject\obj\Debug\BangloreBPOProject.csproj.CoreCompileInputs.cache
 E:\Banglore Project\BPOAttendanceProject\obj\Debug\BangloreBPOProject.csproj.CopyComplete
-E:\Banglore Project\BPOAttendanceProject\obj\Debug\BangloreBPOProject.dll
-E:\Banglore Project\BPOAttendanceProject\obj\Debug\BangloreBPOProject.pdb
+E:\Banglore Project\BPOAttendanceProject\bin\QMSCallCenter.dll.config
+E:\Banglore Project\BPOAttendanceProject\bin\QMSCallCenter.dll
+E:\Banglore Project\BPOAttendanceProject\bin\QMSCallCenter.pdb
+E:\Banglore Project\BPOAttendanceProject\obj\Debug\QMSCallCenter.dll
+E:\Banglore Project\BPOAttendanceProject\obj\Debug\QMSCallCenter.pdb
 E:\Banglore Project\BPOAttendanceProject\obj\Debug\BangloreBPOProject.csproj.AssemblyReference.cache

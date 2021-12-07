@@ -11,8 +11,8 @@
     <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BangloreBPOProject</RootNamespace>
-    <AssemblyName>BangloreBPOProject</AssemblyName>
+    <RootNamespace>QMSCallCenter</RootNamespace>
+    <AssemblyName>QMSCallCenter</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -208,10 +208,12 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\GISController.cs" />
+    <Compile Include="Controllers\HCCBController.cs" />
     <Compile Include="Controllers\MMSController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InvoiceController.cs" />
+    <Compile Include="Controllers\QMSController.cs" />
     <Compile Include="Controllers\MRMController.cs" />
     <Compile Include="Controllers\StaffAugController.cs" />
     <Compile Include="Customvalidation\ValidateFileAttribute.cs" />
@@ -657,6 +659,16 @@
     <Content Include="Views\MMS\_AddUpdates.cshtml" />
     <Content Include="Views\MMS\NewClientList.cshtml" />
     <Content Include="Views\MMS\_ViewClientCalllist.cshtml" />
+    <Content Include="Views\QMS\OutQAServices.cshtml" />
+    <Content Include="Views\QMS\OutDashboard.cshtml" />
+    <Content Include="Views\QMS\_AddOutQAService.cshtml" />
+    <Content Include="Views\QMS\_ViewOutQAService.cshtml" />
+    <Content Include="Views\HCCB\_AddOutQAService.cshtml" />
+    <Content Include="Views\HCCB\_ViewOutQAService.cshtml" />
+    <Content Include="Views\HCCB\OutDashboard.cshtml" />
+    <Content Include="Views\HCCB\OutQAServices.cshtml" />
+    <Content Include="Views\HCCB\OutParameters.cshtml" />
+    <Content Include="Views\QMS\OutParameters.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -683,7 +695,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:60062/</IISUrl>
+          <IISUrl>http://localhost:60063/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

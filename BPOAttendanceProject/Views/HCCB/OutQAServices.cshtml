@@ -1,4 +1,5 @@
-﻿@model  BPOAttendanceProject.Models.SoftwareServices
+﻿
+@model  BPOAttendanceProject.Models.SoftwareServices
 
 @{
     ViewBag.Title = "Users";
@@ -27,11 +28,11 @@
                 <div class="portlet-title">
                     <div class="caption font-dark">
                         <i class="icon-settings font-dark"></i>
-                        <span class="caption-subject bold uppercase">QA Info</span>
+                        <span class="caption-subject bold uppercase">Out QA Info</span>
                     </div>
 
                 </div>
-                @using (Html.BeginForm("SoftwareServices", "MRM", FormMethod.Post, new { @classs = "invoiceform", @id = "form" }))
+                @using (Html.BeginForm("OutQAServices", "QMS", FormMethod.Post, new { @classs = "invoiceform", @id = "form" }))
                 {
                     <div class="row">
                         <div class="col-md-1">Month</div>
@@ -50,8 +51,11 @@
                                                                                                     new SelectListItem { Text = "November", Value = "11"},
                                                                                                     new SelectListItem { Text = "December", Value = "12"}
                                                                                                 }, "Value", "Text"), "Select", new { style = "width: 100%;", @required = "required", @class = "btn dropdown-toggle btn-default", @autocomplete = "off", @id = "drpMonth" })
+
+
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="col-md-1">Year</div>
                         <div class="col-md-3 valid-group">
@@ -62,6 +66,10 @@
                                                                                                }, "Value", "Text"), "Select", new { style = "width: 100%;", @required = "required", @class = "btn dropdown-toggle btn-default", @autocomplete = "off", @id = "drpYear" })
 
                         </div>
+
+
+
+
                     </div>
                     <div class="row">
                         <div class="col-md-9" style="padding-top: 10px;">
@@ -72,10 +80,11 @@
                                 </button>
                             </div>
                             <div class="btn-group">
-                                <a href='@Url.Action("DownloadExcelReportQA", "MRM", new { month = Model.Month, year=Model.Year})' class="btn sbold green"><b>Export to Excel</b></a>
+                                <a href='@Url.Action("DownloadExcelReportQA", "QMS", new { month = Model.Month, year=Model.Year})' class="btn sbold green"><b>Export to Excel</b></a>
                             </div>
                         </div>
                     </div>
+
                 }
                 <div class="portlet-body">
                     @if (Model != null)
@@ -112,7 +121,7 @@
 
                                 </div>
                             </div>
-                            <table class="table table-striped table-bordered table-hover table-checkable order-column " id="tbluser">
+                            <table class="table table-striped table-bordered table-hover table-checkable order-column " id="tblOutQA">
                                 <thead>
                                     <tr>
                                         <th style="background-color:#ADD8E6">Date</th>
@@ -206,7 +215,7 @@
     function GetServicePopup(_ID) {
         debugger;
 
-        var pathurl = '@Url.Action("GetSoftwareservice", "MRM")';
+        var pathurl = '@Url.Action("GetOutQAService", "QMS")';
         $.ajax({
             url: pathurl,
             type: 'GET',
@@ -238,7 +247,7 @@
   function () {
 
               $.ajax({
-                    url: '@Url.Action("DeleteService", "MRM")',
+                    url: '@Url.Action("DeleteService", "QMS")',
                     type: 'POST',
                     data: { ID: _ID },
                     success: function (data) {
@@ -257,7 +266,7 @@
 
     function AddSoftware() {
 
-        var pathurl = '@Url.Action("Addsoftwareservice", "MRM")';
+        var pathurl = '@Url.Action("AddOutQAService", "QMS")';
         $.ajax({
             url: pathurl,
             type: 'GET',
@@ -274,7 +283,7 @@
     }
 
     function ViewDetails(_ID) {
-        var pathurl = '@Url.Action("GetSoftwareViewDetails", "MRM")';
+        var pathurl = '@Url.Action("ViewOutQAService", "QMS")';
          $.ajax({
              url: pathurl,
              type: 'GET',
@@ -293,14 +302,12 @@
              }
          });
      }
-
     jQuery(function ($) {
-        $('#tbluser').dataTable({
+        $('#tblOutQA').dataTable({
             "paging": true,
             "ordering": false,
         });
     });
-
     jQuery(document).ready(function () {
         setTimeout(function () {
             $("#MsgDiv").slideUp(400);
