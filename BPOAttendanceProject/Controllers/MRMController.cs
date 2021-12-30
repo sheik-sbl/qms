@@ -39,10 +39,10 @@ namespace BPOAttendanceProject.Controllers
             int Id = Convert.ToInt16(ID);
             SoftwareServices Model = new SoftwareServices();
             string connString = ConfigurationManager.ConnectionStrings["MySQLConnString"].ConnectionString;
-            string Command = "SELECT Softwareservice.id,DATE_FORMAT(Softwareservice.Date, '%d/%m/%y') as DATE,Agent.Name as AGENTNAME, CALLFROM,CALLTO,TicketNumber,RecordingURL,CALLREVIEW,TICKETREVIEW,Greeting,REMARKS,Probing,REMARKS2,`Tagging`, "
+            string Command = "SELECT MainQA.id,DATE_FORMAT(MainQA.Date, '%d/%m/%y') as DATE,Agent.Name as AGENTNAME, CALLFROM,CALLTO,TicketNumber,RecordingURL,CALLREVIEW,TICKETREVIEW,Greeting,REMARKS,Probing,REMARKS2,`Tagging`, "
                 + " REMARKS3,Details,REMARKS4,Solution,REMARKS5,reminder,REMARKS6,Timeline,REMARKS8,listening,REMARKS9,Phone,REMARKS10,Grammar,REMARKS11,"
                 + " Professionalism,REMARKS12,tools,rude,Tagging2,mistakes,total,actiontaken"
-                + " from `Softwareservice` inner join `Agent` on Agent.Id = Softwareservice.AGENTNAME where Softwareservice.id=" + Id;
+                + " from `MainQA` inner join `Agent` on Agent.Id = MainQA.AGENTNAME where MainQA.id=" + Id;
             using (MySqlConnection mConnection = new MySqlConnection(connString))
             {
                 mConnection.Open();
@@ -162,11 +162,11 @@ namespace BPOAttendanceProject.Controllers
             string constr = ConfigurationManager.ConnectionStrings["MySQLConnString"].ConnectionString;
             string query = "select Agent.Name as agentname, count(agentname) as CallsAudited, sum(Total) as TOTALSCORE, "
                 + "round((sum(total)/ (count(agentname)*100)*100),2) as QualityScore"
-                + " from Softwareservice " +
-                " inner join `Agent` on Agent.Id = Softwareservice.AGENTNAME where month(Date)=" + month + " and year(Date)="
+                + " from MainQA " +
+                " inner join `Agent` on Agent.Id = MainQA.AGENTNAME where month(Date)=" + month + " and year(Date)="
                 + year + " group by agentname;" +
                 "select count(agentname) as CallsAudited, sum(Total) as TOTALSCORE,round((sum(total) / (count(agentname)" +
-                " * 100) * 100), 2) as QualityScore from Softwareservice  where month(Date) = " + month +
+                " * 100) * 100), 2) as QualityScore from MainQA  where month(Date) = " + month +
                 " and year(Date)= " + year + "; ";
             using (MySqlConnection con = new MySqlConnection(constr))
             {
@@ -218,10 +218,10 @@ namespace BPOAttendanceProject.Controllers
             int Id = Convert.ToInt16(ID);
             SoftwareServices Model = new SoftwareServices();
             string connString = ConfigurationManager.ConnectionStrings["MySQLConnString"].ConnectionString;
-            string Command = "SELECT Softwareservice.id,DATE_FORMAT(Softwareservice.Date, '%d/%m/%Y') as DATE,AGENTNAME, CALLFROM,CALLTO,TicketNumber,RecordingURL,CALLREVIEW,TICKETREVIEW,Greeting,REMARKS,Probing,REMARKS2,`Tagging`, "
+            string Command = "SELECT MainQA.id,DATE_FORMAT(MainQA.Date, '%d/%m/%Y') as DATE,AGENTNAME, CALLFROM,CALLTO,TicketNumber,RecordingURL,CALLREVIEW,TICKETREVIEW,Greeting,REMARKS,Probing,REMARKS2,`Tagging`, "
                 + " REMARKS3,Details,REMARKS4,Solution,REMARKS5,reminder,REMARKS6,Timeline,REMARKS8,listening,REMARKS9,Phone,REMARKS10,Grammar,REMARKS11,"
-                + " Professionalism,REMARKS12,tools,rude,Tagging2,mistakes,TOTAL,ACTIONTAKEN,Closing,RemarksClosing from `Softwareservice`"
-                + " inner join `Agent` on Agent.Id = Softwareservice.AGENTNAME where Softwareservice.id=" + Id;
+                + " Professionalism,REMARKS12,tools,rude,Tagging2,mistakes,TOTAL,ACTIONTAKEN,Closing,RemarksClosing from `MainQA`"
+                + " inner join `Agent` on Agent.Id = MainQA.AGENTNAME where MainQA.id=" + Id;
             using (MySqlConnection mConnection = new MySqlConnection(connString))
             {
                 mConnection.Open();
@@ -326,11 +326,11 @@ namespace BPOAttendanceProject.Controllers
             if (string.IsNullOrEmpty(modl.Month))
                 modl.Month = DateTime.Today.Month.ToString();
             string connString = ConfigurationManager.ConnectionStrings["MySQLConnString"].ConnectionString;
-            string Command = "SELECT Softwareservice.id, DATE_FORMAT(Softwareservice.Date, '%d/%m/%y') as DATE,Agent.Name as AGENTNAME,CALLFROM,CALLTO, TicketNumber" +
+            string Command = "SELECT MainQA.id, DATE_FORMAT(MainQA.Date, '%d/%m/%y') as DATE,Agent.Name as AGENTNAME,CALLFROM,CALLTO, TicketNumber" +
                 ",SUBSTRING(recordingurl,1,30) as RecordingURL,SUBSTRING(CALLREVIEW,1,20)as CALLREVIEW" +
-                ", TICKETREVIEW from `Softwareservice` inner join `Agent` on Agent.Id = Softwareservice.AGENTNAME " +
+                ", TICKETREVIEW from `MainQA` inner join `Agent` on Agent.Id = MainQA.AGENTNAME " +
                 " where month(Date)=" + modl.Month + " and year(Date)="
-                + modl.Year + " order by Softwareservice.DATE";
+                + modl.Year + " order by MainQA.DATE";
             using (MySqlConnection mConnection = new MySqlConnection(connString))
             {
                 mConnection.Open();
@@ -348,12 +348,12 @@ namespace BPOAttendanceProject.Controllers
         public ActionResult DownloadExcelReportQA(string month, string year)
         {
             string constr = ConfigurationManager.ConnectionStrings["MySQLConnString"].ConnectionString;
-            string query = "SELECT Softwareservice.id,DATE_FORMAT(Softwareservice.Date, '%d/%m/%y') as DATE,Agent.Name as AGENTNAME, CALLFROM,CALLTO,TicketNumber,RecordingURL,CALLREVIEW,TICKETREVIEW,Greeting,REMARKS,Probing,REMARKS2,`Tagging`, "
+            string query = "SELECT MainQA.id,DATE_FORMAT(MainQA.Date, '%d/%m/%y') as DATE,Agent.Name as AGENTNAME, CALLFROM,CALLTO,TicketNumber,RecordingURL,CALLREVIEW,TICKETREVIEW,Greeting,REMARKS,Probing,REMARKS2,`Tagging`, "
                 + " REMARKS3,Details,REMARKS4,Solution,REMARKS5,reminder,REMARKS6,Timeline,REMARKS8,listening,REMARKS9,Phone,REMARKS10,Grammar,REMARKS11,"
                 + " Professionalism,REMARKS12,tools,rude,Tagging2,mistakes,total,actiontaken"
-                + " from `Softwareservice` inner join `Agent` on Agent.Id = Softwareservice.AGENTNAME"
+                + " from `MainQA` inner join `Agent` on Agent.Id = MainQA.AGENTNAME"
                 + " where month(Date)=" + month + " and year(Date)="
-                + year + " order by Softwareservice.DATE desc";
+                + year + " order by MainQA.DATE desc";
             using (MySqlConnection con = new MySqlConnection(constr))
             {
                 using (MySqlCommand cmd = new MySqlCommand(query))
@@ -454,7 +454,7 @@ namespace BPOAttendanceProject.Controllers
         {
             int Result = 0;
             string connString = ConfigurationManager.ConnectionStrings["MySQLConnString"].ConnectionString;
-            string Command = "SELECT count(*) as cnt FROM `Softwareservice`";
+            string Command = "SELECT count(*) as cnt FROM `MainQA`";
             using (MySqlConnection mConnection = new MySqlConnection(connString))
             {
                 mConnection.Open();
@@ -515,7 +515,7 @@ namespace BPOAttendanceProject.Controllers
             string Command = string.Empty;
             if (model.Id == 0)
             {
-                Command = "INSERT INTO `Softwareservice`(" +
+                Command = "INSERT INTO `MainQA`(" +
                     "`DATE`,`AGENTNAME`, `CALLFROM`,`CALLTO`,`TicketNumber`,`RecordingURL`,`CALLREVIEW`,`TICKETREVIEW`," +
                     "`Greeting`,`REMARKS`,`Probing`,`REMARKS2`,`Tagging` " +
                     ", `REMARKS3`,`Details`,`REMARKS4`,`Solution`,`REMARKS5`,`reminder`,`REMARKS6`,"
@@ -534,7 +534,7 @@ namespace BPOAttendanceProject.Controllers
                     + "','" + model.rude + "','" + model.Tagging2
                     + "','" + model.mistakes + "','" + model.Total + "','" + model.ActionTaken + "','" + model.Closing +
                 "');";
-                //Command = "INSERT INTO `Softwareservice`(`DATE`,`AGENTNAME`) VALUES ('" + (model.DATE.ToString()) + "','" + model.AGENTNAME + "');";
+                //Command = "INSERT INTO `MainQA`(`DATE`,`AGENTNAME`) VALUES ('" + (model.DATE.ToString()) + "','" + model.AGENTNAME + "');";
                 using (MySqlConnection mConnection = new MySqlConnection(connString))
                 {
                     mConnection.Open();
@@ -547,7 +547,7 @@ namespace BPOAttendanceProject.Controllers
             }
             else
             {
-                Command = "UPDATE Softwareservice set  `DATE`=STR_TO_DATE('" + model.DATE + "','%d/%m/%Y')"
+                Command = "UPDATE MainQA set  `DATE`=STR_TO_DATE('" + model.DATE + "','%d/%m/%Y')"
                     + ",AGENTNAME='" + model.AGENTNAME + "',CALLFROM='" + model.CALLFROM
                     + "', CALLTO='" + model.CALLTO + "',TicketNumber='" + model.TicketNumber
                     + "', RecordingURL ='" + model.RecordingURL + "',CALLREVIEW='" + model.CALLREVIEW
@@ -566,7 +566,7 @@ namespace BPOAttendanceProject.Controllers
                     + "',rude='" + model.rude + "',`Tagging2`='" + model.Tagging2
                     + "',mistakes='" + model.mistakes + "',Closing = '" + model.Closing
                     + "',total='" + model.Total + "',`ActionTaken`='" + model.ActionTaken
-                    + "' where Softwareservice.Id=" + model.Id;
+                    + "' where MainQA.Id=" + model.Id;
                 using (MySqlConnection mConnection = new MySqlConnection(connString))
                 {
                     mConnection.Open();
@@ -609,7 +609,7 @@ namespace BPOAttendanceProject.Controllers
                 mConnection.Open();
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = mConnection;
-                cmd.CommandText = "delete from `Softwareservice` where `Softwareservice`.id=" + Id;
+                cmd.CommandText = "delete from `MainQA` where `MainQA`.id=" + Id;
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
                 Result = "1";
@@ -631,11 +631,11 @@ namespace BPOAttendanceProject.Controllers
             string connString = ConfigurationManager.ConnectionStrings["MySQLConnString"].ConnectionString;
             string Command = "select Agent.Name as agentname, count(agentname) as CallsAudited, sum(Total) as TOTALSCORE, "
                 + "round((sum(total)/ (count(agentname)*100)*100),2) as QualityScore"
-                + " from Softwareservice " +
-                " inner join `Agent` on Agent.Id = Softwareservice.AGENTNAME where month(Date)=" + modl.Month + " and year(Date)="
+                + " from MainQA " +
+                " inner join `Agent` on Agent.Id = MainQA.AGENTNAME where month(Date)=" + modl.Month + " and year(Date)="
                 + modl.Year + " group by agentname;" +
                 "select count(agentname) as CallsAudited, sum(Total) as TOTALSCORE,round((sum(total) / (count(agentname)" +
-                " * 100) * 100), 2) as QualityScore from Softwareservice  where month(Date) = " + modl.Month +
+                " * 100) * 100), 2) as QualityScore from MainQA  where month(Date) = " + modl.Month +
                 " and year(Date)= " + modl.Year + "; ";
 
             using (MySqlConnection mConnection = new MySqlConnection(connString))
