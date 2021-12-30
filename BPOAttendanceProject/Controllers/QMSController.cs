@@ -38,11 +38,11 @@ namespace BPOAttendanceProject.Controllers
             string connString = ConfigurationManager.ConnectionStrings["MySQLConnString"].ConnectionString;
             string Command = "select Agent.Name as agentname, count(agentname) as CallsAudited, sum(Total) as TOTALSCORE, "
                 + "round((sum(total)/ (count(agentname)*100)*100),2) as QualityScore"
-                + " from OutboundQA " +
-                " inner join `Agent` on Agent.Id = OutboundQA.AGENTNAME where month(Date)=" + modl.Month + " and year(Date)="
+                + " from ShellQA " +
+                " inner join `Agent` on Agent.Id = ShellQA.AGENTNAME where month(Date)=" + modl.Month + " and year(Date)="
                 + modl.Year + " group by agentname;" +
                 "select count(agentname) as CallsAudited, sum(Total) as TOTALSCORE,round((sum(total) / (count(agentname)" +
-                " * 100) * 100), 2) as QualityScore from OutboundQA  where month(Date) = " + modl.Month +
+                " * 100) * 100), 2) as QualityScore from ShellQA  where month(Date) = " + modl.Month +
                 " and year(Date)= " + modl.Year + "; ";
 
             using (MySqlConnection mConnection = new MySqlConnection(connString))
@@ -72,11 +72,11 @@ namespace BPOAttendanceProject.Controllers
             if (string.IsNullOrEmpty(modl.Month))
                 modl.Month = DateTime.Today.Month.ToString();
             string connString = ConfigurationManager.ConnectionStrings["MySQLConnString"].ConnectionString;
-            string Command = "SELECT OutboundQA.id, DATE_FORMAT(OutboundQA.Date, '%d/%m/%y') as DATE,Agent.Name as AGENTNAME,CALLFROM,CALLTO, TicketNumber" +
+            string Command = "SELECT ShellQA.id, DATE_FORMAT(ShellQA.Date, '%d/%m/%y') as DATE,Agent.Name as AGENTNAME,CALLFROM,CALLTO, TicketNumber" +
                 ",SUBSTRING(recordingurl,1,30) as RecordingURL,SUBSTRING(CALLREVIEW,1,20)as CALLREVIEW" +
-                ", TICKETREVIEW from `OutboundQA` inner join `Agent` on Agent.Id = OutboundQA.AGENTNAME" +
+                ", TICKETREVIEW from `ShellQA` inner join `Agent` on Agent.Id = ShellQA.AGENTNAME" +
                 " where month(Date)=" + modl.Month + " and year(Date)="
-                + modl.Year + " order by OutboundQA.DATE";
+                + modl.Year + " order by ShellQA.DATE";
             using (MySqlConnection mConnection = new MySqlConnection(connString))
             {
                 mConnection.Open();
@@ -96,10 +96,10 @@ namespace BPOAttendanceProject.Controllers
             int Id = Convert.ToInt16(ID);
             SoftwareServices Model = new SoftwareServices();
             string connString = ConfigurationManager.ConnectionStrings["MySQLConnString"].ConnectionString;
-            string Command = "SELECT OutboundQA.id,DATE_FORMAT(OutboundQA.Date, '%d/%m/%y') as DATE,Agent.Name as AGENTNAME, CALLFROM,CALLTO,TicketNumber,RecordingURL,CALLREVIEW,TICKETREVIEW,Greeting,REMARKS,Probing,REMARKS2,`Tagging`, "
+            string Command = "SELECT ShellQA.id,DATE_FORMAT(ShellQA.Date, '%d/%m/%y') as DATE,Agent.Name as AGENTNAME, CALLFROM,CALLTO,TicketNumber,RecordingURL,CALLREVIEW,TICKETREVIEW,Greeting,REMARKS,Probing,REMARKS2,`Tagging`, "
                 + " REMARKS3,Details,REMARKS4,Solution,REMARKS5,reminder,REMARKS6,Timeline,REMARKS8,listening,REMARKS9,Phone,REMARKS10,Grammar,REMARKS11,"
                 + " Professionalism,REMARKS12,tools,rude,Tagging2,mistakes,total,actiontaken"
-                + " from `OutboundQA` inner join `Agent` on Agent.Id = OutboundQA.AGENTNAME where OutboundQA.id=" + Id;
+                + " from `ShellQA` inner join `Agent` on Agent.Id = ShellQA.AGENTNAME where ShellQA.id=" + Id;
             using (MySqlConnection mConnection = new MySqlConnection(connString))
             {
                 mConnection.Open();
@@ -268,7 +268,7 @@ namespace BPOAttendanceProject.Controllers
             string Command = string.Empty;
             if (model.Id == 0)
             {
-                Command = "INSERT INTO `OutboundQA`(" +
+                Command = "INSERT INTO `ShellQA`(" +
                     "`DATE`,`AGENTNAME`, `CALLFROM`,`CALLTO`,`TicketNumber`,`RecordingURL`,`CALLREVIEW`,`TICKETREVIEW`," +
                     "`Greeting`,`REMARKS`,`Probing`,`REMARKS2`,`Tagging` " +
                     ", `REMARKS3`,`Details`,`REMARKS4`,`Solution`,`REMARKS5`,`reminder`,`REMARKS6`,"
@@ -300,7 +300,7 @@ namespace BPOAttendanceProject.Controllers
             }
             else
             {
-                Command = "UPDATE OutboundQA set  `DATE`=STR_TO_DATE('" + model.DATE + "','%d/%m/%Y')"
+                Command = "UPDATE ShellQA set  `DATE`=STR_TO_DATE('" + model.DATE + "','%d/%m/%Y')"
                     + ",AGENTNAME='" + model.AGENTNAME + "',CALLFROM='" + model.CALLFROM
                     + "', CALLTO='" + model.CALLTO + "',TicketNumber='" + model.TicketNumber
                     + "', RecordingURL ='" + model.RecordingURL + "',CALLREVIEW='" + model.CALLREVIEW
@@ -319,7 +319,7 @@ namespace BPOAttendanceProject.Controllers
                     + "',rude='" + model.rude + "',`Tagging2`='" + model.Tagging2
                     + "',mistakes='" + model.mistakes + "',Closing = '" + model.Closing
                     + "',total='" + model.Total + "',`ActionTaken`='" + model.ActionTaken
-                    + "' where OutboundQA.Id=" + model.Id;
+                    + "' where ShellQA.Id=" + model.Id;
                 using (MySqlConnection mConnection = new MySqlConnection(connString))
                 {
                     mConnection.Open();
@@ -356,7 +356,7 @@ namespace BPOAttendanceProject.Controllers
                 mConnection.Open();
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = mConnection;
-                cmd.CommandText = "delete from `OutboundQA` where `OutboundQA`.id=" + Id;
+                cmd.CommandText = "delete from `ShellQA` where `ShellQA`.id=" + Id;
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
                 Result = "1";
@@ -367,7 +367,7 @@ namespace BPOAttendanceProject.Controllers
         {
             int Result = 0;
             string connString = ConfigurationManager.ConnectionStrings["MySQLConnString"].ConnectionString;
-            string Command = "SELECT count(*) as cnt FROM `OutboundQA`";
+            string Command = "SELECT count(*) as cnt FROM `ShellQA`";
             using (MySqlConnection mConnection = new MySqlConnection(connString))
             {
                 mConnection.Open();
@@ -388,10 +388,10 @@ namespace BPOAttendanceProject.Controllers
             int Id = Convert.ToInt16(ID);
             SoftwareServices Model = new SoftwareServices();
             string connString = ConfigurationManager.ConnectionStrings["MySQLConnString"].ConnectionString;
-            string Command = "SELECT OutboundQA.id,DATE_FORMAT(OutboundQA.Date, '%d/%m/%Y') as DATE,AGENTNAME, CALLFROM,CALLTO,TicketNumber,RecordingURL,CALLREVIEW,TICKETREVIEW,Greeting,REMARKS,Probing,REMARKS2,`Tagging`, "
+            string Command = "SELECT ShellQA.id,DATE_FORMAT(ShellQA.Date, '%d/%m/%Y') as DATE,AGENTNAME, CALLFROM,CALLTO,TicketNumber,RecordingURL,CALLREVIEW,TICKETREVIEW,Greeting,REMARKS,Probing,REMARKS2,`Tagging`, "
                 + " REMARKS3,Details,REMARKS4,Solution,REMARKS5,reminder,REMARKS6,Timeline,REMARKS8,listening,REMARKS9,Phone,REMARKS10,Grammar,REMARKS11,"
-                + " Professionalism,REMARKS12,tools,rude,Tagging2,mistakes,TOTAL,ACTIONTAKEN,Closing,RemarksClosing from `OutboundQA`"
-                + " inner join `Agent` on Agent.Id = OutboundQA.AGENTNAME where OutboundQA.id=" + Id;
+                + " Professionalism,REMARKS12,tools,rude,Tagging2,mistakes,TOTAL,ACTIONTAKEN,Closing,RemarksClosing from `ShellQA`"
+                + " inner join `Agent` on Agent.Id = ShellQA.AGENTNAME where ShellQA.id=" + Id;
             using (MySqlConnection mConnection = new MySqlConnection(connString))
             {
                 mConnection.Open();
@@ -523,11 +523,11 @@ namespace BPOAttendanceProject.Controllers
             string constr = ConfigurationManager.ConnectionStrings["MySQLConnString"].ConnectionString;
             string query = "select Agent.Name as agentname, count(agentname) as CallsAudited, sum(Total) as TOTALSCORE, "
                 + "round((sum(total)/ (count(agentname)*100)*100),2) as QualityScore"
-                + " from OutboundQA " +
-                " inner join `Agent` on Agent.Id = OutboundQA.AGENTNAME where month(Date)=" + month + " and year(Date)="
+                + " from ShellQA " +
+                " inner join `Agent` on Agent.Id = ShellQA.AGENTNAME where month(Date)=" + month + " and year(Date)="
                 + year + " group by agentname;" +
                 "select count(agentname) as CallsAudited, sum(Total) as TOTALSCORE,round((sum(total) / (count(agentname)" +
-                " * 100) * 100), 2) as QualityScore from OutboundQA  where month(Date) = " + month +
+                " * 100) * 100), 2) as QualityScore from ShellQA  where month(Date) = " + month +
                 " and year(Date)= " + year + "; ";
             using (MySqlConnection con = new MySqlConnection(constr))
             {
@@ -584,18 +584,18 @@ namespace BPOAttendanceProject.Controllers
             string constr = ConfigurationManager.ConnectionStrings["MySQLConnString"].ConnectionString;
             //string query = "select Agent.Name as agentname, agentname as CallsAudited, Total as TOTALSCORE, "
             //    + "round((sum(total)/ (count(agentname)*100)*100),2) as QualityScore"
-            //    + " from OutboundQA " +
-            //    " inner join `Agent` on Agent.Id = OutboundQA.AGENTNAME where month(Date)=" + month + " and year(Date)="
+            //    + " from ShellQA " +
+            //    " inner join `Agent` on Agent.Id = ShellQA.AGENTNAME where month(Date)=" + month + " and year(Date)="
             //    + year + " group by agentname;" +
             //    "select count(agentname) as CallsAudited, sum(Total) as TOTALSCORE,round((sum(total) / (count(agentname)" +
-            //    " * 100) * 100), 2) as QualityScore from OutboundQA  where month(Date) = " + month +
+            //    " * 100) * 100), 2) as QualityScore from ShellQA  where month(Date) = " + month +
             //    " and year(Date)= " + year + "; ";
-            string query = "SELECT OutboundQA.id,DATE_FORMAT(OutboundQA.Date, '%d/%m/%y') as DATE,Agent.Name as AGENTNAME, CALLFROM,CALLTO,TicketNumber,RecordingURL,CALLREVIEW,TICKETREVIEW,Greeting,REMARKS,Probing,REMARKS2,`Tagging`, "
+            string query = "SELECT ShellQA.id,DATE_FORMAT(ShellQA.Date, '%d/%m/%y') as DATE,Agent.Name as AGENTNAME, CALLFROM,CALLTO,TicketNumber,RecordingURL,CALLREVIEW,TICKETREVIEW,Greeting,REMARKS,Probing,REMARKS2,`Tagging`, "
                 + " REMARKS3,Details,REMARKS4,Solution,REMARKS5,reminder,REMARKS6,Timeline,REMARKS8,listening,REMARKS9,Phone,REMARKS10,Grammar,REMARKS11,"
                 + " Professionalism,REMARKS12,tools,rude,Tagging2,mistakes,total,actiontaken"
-                + " from `OutboundQA` inner join `Agent` on Agent.Id = OutboundQA.AGENTNAME"
+                + " from `ShellQA` inner join `Agent` on Agent.Id = ShellQA.AGENTNAME"
                 + " where month(Date)=" + month + " and year(Date)="
-                + year + " order by OutboundQA.DATE desc";
+                + year + " order by ShellQA.DATE desc";
             using (MySqlConnection con = new MySqlConnection(constr))
             {
                 using (MySqlCommand cmd = new MySqlCommand(query))

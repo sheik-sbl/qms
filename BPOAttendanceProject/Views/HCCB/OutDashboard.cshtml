@@ -28,7 +28,7 @@
 
                 </div>
                 <div class="portlet-body">
-                    @using (Html.BeginForm("OutDashboard", "QMS", FormMethod.Post, new { @classs = "invoiceform", @id = "form" }))
+                    @using (Html.BeginForm("OutDashboard", "HCCB", FormMethod.Post, new { @classs = "invoiceform", @id = "form" }))
                     {
                         <div class="row">
                             <div class="col-md-1">Month</div>
@@ -76,7 +76,7 @@
                                     </button>
                                 </div>
                                 <div class="btn-group">
-                                    <a href='@Url.Action("DownloadExcelReport", "QMS")' class="btn sbold green"><b>Export to Excel</b></a>
+                                    <a href='@Url.Action("DownloadExcelReport", "HCCB")' class="btn sbold green"><b>Export to Excel</b></a>
                                 </div>
                             </div>
                         </div>

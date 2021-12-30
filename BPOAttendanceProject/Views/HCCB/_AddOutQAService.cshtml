@@ -4,7 +4,7 @@
 @model BPOAttendanceProject.Models.SoftwareServices
 
 <div>
-    @using (Html.BeginForm("SaveOutQAService", "QMS", FormMethod.Post, new { @classs = "invoiceform", @id = "form" }))
+    @using (Html.BeginForm("SaveOutQAService", "HCCB", FormMethod.Post, new { @classs = "invoiceform", @id = "form" }))
     {
         <div class="modal-content">
             <div class="modal-body">
@@ -808,7 +808,7 @@
 
             var month = $('#drpMonth').val();
             var year = $('#drpYear').val();
-            var pathurl = '@Url.Action("CalculateETo", "QMS")';
+            var pathurl = '@Url.Action("CalculateETo", "HCCB")';
              $.ajax({
                  url: pathurl,
                  type: 'GET',

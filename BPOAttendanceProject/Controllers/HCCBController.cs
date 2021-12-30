@@ -39,11 +39,11 @@ namespace QMSCallCenter.Controllers
             string connString = ConfigurationManager.ConnectionStrings["MySQLConnString"].ConnectionString;
             string Command = "select Agent.Name as agentname, count(agentname) as CallsAudited, sum(Total) as TOTALSCORE, "
                 + "round((sum(total)/ (count(agentname)*100)*100),2) as QualityScore"
-                + " from HCCBOutboundQA " +
-                " inner join `Agent` on Agent.Id = HCCBOutboundQA.AGENTNAME where month(Date)=" + modl.Month + " and year(Date)="
+                + " from HCCBQA " +
+                " inner join `Agent` on Agent.Id = HCCBQA.AGENTNAME where month(Date)=" + modl.Month + " and year(Date)="
                 + modl.Year + " group by agentname;" +
                 "select count(agentname) as CallsAudited, sum(Total) as TOTALSCORE,round((sum(total) / (count(agentname)" +
-                " * 100) * 100), 2) as QualityScore from HCCBOutboundQA  where month(Date) = " + modl.Month +
+                " * 100) * 100), 2) as QualityScore from HCCBQA  where month(Date) = " + modl.Month +
                 " and year(Date)= " + modl.Year + "; ";
 
             using (MySqlConnection mConnection = new MySqlConnection(connString))
@@ -73,11 +73,11 @@ namespace QMSCallCenter.Controllers
             if (string.IsNullOrEmpty(modl.Month))
                 modl.Month = DateTime.Today.Month.ToString();
             string connString = ConfigurationManager.ConnectionStrings["MySQLConnString"].ConnectionString;
-            string Command = "SELECT HCCBOutboundQA.id, DATE_FORMAT(HCCBOutboundQA.Date, '%d/%m/%y') as DATE,Agent.Name as AGENTNAME,CALLFROM,CALLTO, TicketNumber" +
+            string Command = "SELECT HCCBQA.id, DATE_FORMAT(HCCBQA.Date, '%d/%m/%y') as DATE,Agent.Name as AGENTNAME,CALLFROM,CALLTO, TicketNumber" +
                 ",SUBSTRING(recordingurl,1,30) as RecordingURL,SUBSTRING(CALLREVIEW,1,20)as CALLREVIEW" +
-                ", TICKETREVIEW from `HCCBOutboundQA` inner join `Agent` on Agent.Id = HCCBOutboundQA.AGENTNAME" +
+                ", TICKETREVIEW from `HCCBQA` inner join `Agent` on Agent.Id = HCCBQA.AGENTNAME" +
                 " where month(Date)=" + modl.Month + " and year(Date)="
-                + modl.Year + " order by HCCBOutboundQA.DATE";
+                + modl.Year + " order by HCCBQA.DATE";
             using (MySqlConnection mConnection = new MySqlConnection(connString))
             {
                 mConnection.Open();
@@ -97,10 +97,10 @@ namespace QMSCallCenter.Controllers
             int Id = Convert.ToInt16(ID);
             SoftwareServices Model = new SoftwareServices();
             string connString = ConfigurationManager.ConnectionStrings["MySQLConnString"].ConnectionString;
-            string Command = "SELECT HCCBOutboundQA.id,DATE_FORMAT(HCCBOutboundQA.Date, '%d/%m/%y') as DATE,Agent.Name as AGENTNAME, CALLFROM,CALLTO,TicketNumber,RecordingURL,CALLREVIEW,TICKETREVIEW,Greeting,REMARKS,Probing,REMARKS2,`Tagging`, "
+            string Command = "SELECT HCCBQA.id,DATE_FORMAT(HCCBQA.Date, '%d/%m/%y') as DATE,Agent.Name as AGENTNAME, CALLFROM,CALLTO,TicketNumber,RecordingURL,CALLREVIEW,TICKETREVIEW,Greeting,REMARKS,Probing,REMARKS2,`Tagging`, "
                 + " REMARKS3,Details,REMARKS4,Solution,REMARKS5,reminder,REMARKS6,Timeline,REMARKS8,listening,REMARKS9,Phone,REMARKS10,Grammar,REMARKS11,"
                 + " Professionalism,REMARKS12,tools,rude,Tagging2,mistakes,total,actiontaken"
-                + " from `HCCBOutboundQA` inner join `Agent` on Agent.Id = HCCBOutboundQA.AGENTNAME where HCCBOutboundQA.id=" + Id;
+                + " from `HCCBQA` inner join `Agent` on Agent.Id = HCCBQA.AGENTNAME where HCCBQA.id=" + Id;
             using (MySqlConnection mConnection = new MySqlConnection(connString))
             {
                 mConnection.Open();
@@ -269,7 +269,7 @@ namespace QMSCallCenter.Controllers
             string Command = string.Empty;
             if (model.Id == 0)
             {
-                Command = "INSERT INTO `HCCBOutboundQA`(" +
+                Command = "INSERT INTO `HCCBQA`(" +
                     "`DATE`,`AGENTNAME`, `CALLFROM`,`CALLTO`,`TicketNumber`,`RecordingURL`,`CALLREVIEW`,`TICKETREVIEW`," +
                     "`Greeting`,`REMARKS`,`Probing`,`REMARKS2`,`Tagging` " +
                     ", `REMARKS3`,`Details`,`REMARKS4`,`Solution`,`REMARKS5`,`reminder`,`REMARKS6`,"
@@ -301,7 +301,7 @@ namespace QMSCallCenter.Controllers
             }
             else
             {
-                Command = "UPDATE HCCBOutboundQA set  `DATE`=STR_TO_DATE('" + model.DATE + "','%d/%m/%Y')"
+                Command = "UPDATE HCCBQA set  `DATE`=STR_TO_DATE('" + model.DATE + "','%d/%m/%Y')"
                     + ",AGENTNAME='" + model.AGENTNAME + "',CALLFROM='" + model.CALLFROM
                     + "', CALLTO='" + model.CALLTO + "',TicketNumber='" + model.TicketNumber
                     + "', RecordingURL ='" + model.RecordingURL + "',CALLREVIEW='" + model.CALLREVIEW
@@ -320,7 +320,7 @@ namespace QMSCallCenter.Controllers
                     + "',rude='" + model.rude + "',`Tagging2`='" + model.Tagging2
                     + "',mistakes='" + model.mistakes + "',Closing = '" + model.Closing
                     + "',total='" + model.Total + "',`ActionTaken`='" + model.ActionTaken
-                    + "' where HCCBOutboundQA.Id=" + model.Id;
+                    + "' where HCCBQA.Id=" + model.Id;
                 using (MySqlConnection mConnection = new MySqlConnection(connString))
                 {
                     mConnection.Open();
@@ -357,7 +357,7 @@ namespace QMSCallCenter.Controllers
                 mConnection.Open();
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = mConnection;
-                cmd.CommandText = "delete from `HCCBOutboundQA` where `HCCBOutboundQA`.id=" + Id;
+                cmd.CommandText = "delete from `HCCBQA` where `HCCBQA`.id=" + Id;
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
                 Result = "1";
@@ -368,7 +368,7 @@ namespace QMSCallCenter.Controllers
         {
             int Result = 0;
             string connString = ConfigurationManager.ConnectionStrings["MySQLConnString"].ConnectionString;
-            string Command = "SELECT count(*) as cnt FROM `HCCBOutboundQA`";
+            string Command = "SELECT count(*) as cnt FROM `HCCBQA`";
             using (MySqlConnection mConnection = new MySqlConnection(connString))
             {
                 mConnection.Open();
@@ -389,10 +389,10 @@ namespace QMSCallCenter.Controllers
             int Id = Convert.ToInt16(ID);
             SoftwareServices Model = new SoftwareServices();
             string connString = ConfigurationManager.ConnectionStrings["MySQLConnString"].ConnectionString;
-            string Command = "SELECT HCCBOutboundQA.id,DATE_FORMAT(HCCBOutboundQA.Date, '%d/%m/%Y') as DATE,AGENTNAME, CALLFROM,CALLTO,TicketNumber,RecordingURL,CALLREVIEW,TICKETREVIEW,Greeting,REMARKS,Probing,REMARKS2,`Tagging`, "
+            string Command = "SELECT HCCBQA.id,DATE_FORMAT(HCCBQA.Date, '%d/%m/%Y') as DATE,AGENTNAME, CALLFROM,CALLTO,TicketNumber,RecordingURL,CALLREVIEW,TICKETREVIEW,Greeting,REMARKS,Probing,REMARKS2,`Tagging`, "
                 + " REMARKS3,Details,REMARKS4,Solution,REMARKS5,reminder,REMARKS6,Timeline,REMARKS8,listening,REMARKS9,Phone,REMARKS10,Grammar,REMARKS11,"
-                + " Professionalism,REMARKS12,tools,rude,Tagging2,mistakes,TOTAL,ACTIONTAKEN,Closing,RemarksClosing from `HCCBOutboundQA`"
-                + " inner join `Agent` on Agent.Id = HCCBOutboundQA.AGENTNAME where HCCBOutboundQA.id=" + Id;
+                + " Professionalism,REMARKS12,tools,rude,Tagging2,mistakes,TOTAL,ACTIONTAKEN,Closing,RemarksClosing from `HCCBQA`"
+                + " inner join `Agent` on Agent.Id = HCCBQA.AGENTNAME where HCCBQA.id=" + Id;
             using (MySqlConnection mConnection = new MySqlConnection(connString))
             {
                 mConnection.Open();
@@ -524,11 +524,11 @@ namespace QMSCallCenter.Controllers
             string constr = ConfigurationManager.ConnectionStrings["MySQLConnString"].ConnectionString;
             string query = "select Agent.Name as agentname, count(agentname) as CallsAudited, sum(Total) as TOTALSCORE, "
                 + "round((sum(total)/ (count(agentname)*100)*100),2) as QualityScore"
-                + " from HCCBOutboundQA " +
-                " inner join `Agent` on Agent.Id = HCCBOutboundQA.AGENTNAME where month(Date)=" + month + " and year(Date)="
+                + " from HCCBQA " +
+                " inner join `Agent` on Agent.Id = HCCBQA.AGENTNAME where month(Date)=" + month + " and year(Date)="
                 + year + " group by agentname;" +
                 "select count(agentname) as CallsAudited, sum(Total) as TOTALSCORE,round((sum(total) / (count(agentname)" +
-                " * 100) * 100), 2) as QualityScore from HCCBOutboundQA  where month(Date) = " + month +
+                " * 100) * 100), 2) as QualityScore from HCCBQA  where month(Date) = " + month +
                 " and year(Date)= " + year + "; ";
             using (MySqlConnection con = new MySqlConnection(constr))
             {
@@ -585,18 +585,18 @@ namespace QMSCallCenter.Controllers
             string constr = ConfigurationManager.ConnectionStrings["MySQLConnString"].ConnectionString;
             //string query = "select Agent.Name as agentname, agentname as CallsAudited, Total as TOTALSCORE, "
             //    + "round((sum(total)/ (count(agentname)*100)*100),2) as QualityScore"
-            //    + " from HCCBOutboundQA " +
-            //    " inner join `Agent` on Agent.Id = HCCBOutboundQA.AGENTNAME where month(Date)=" + month + " and year(Date)="
+            //    + " from HCCBQA " +
+            //    " inner join `Agent` on Agent.Id = HCCBQA.AGENTNAME where month(Date)=" + month + " and year(Date)="
             //    + year + " group by agentname;" +
             //    "select count(agentname) as CallsAudited, sum(Total) as TOTALSCORE,round((sum(total) / (count(agentname)" +
-            //    " * 100) * 100), 2) as QualityScore from HCCBOutboundQA  where month(Date) = " + month +
+            //    " * 100) * 100), 2) as QualityScore from HCCBQA  where month(Date) = " + month +
             //    " and year(Date)= " + year + "; ";
-            string query = "SELECT HCCBOutboundQA.id,DATE_FORMAT(HCCBOutboundQA.Date, '%d/%m/%y') as DATE,Agent.Name as AGENTNAME, CALLFROM,CALLTO,TicketNumber,RecordingURL,CALLREVIEW,TICKETREVIEW,Greeting,REMARKS,Probing,REMARKS2,`Tagging`, "
+            string query = "SELECT HCCBQA.id,DATE_FORMAT(HCCBQA.Date, '%d/%m/%y') as DATE,Agent.Name as AGENTNAME, CALLFROM,CALLTO,TicketNumber,RecordingURL,CALLREVIEW,TICKETREVIEW,Greeting,REMARKS,Probing,REMARKS2,`Tagging`, "
                 + " REMARKS3,Details,REMARKS4,Solution,REMARKS5,reminder,REMARKS6,Timeline,REMARKS8,listening,REMARKS9,Phone,REMARKS10,Grammar,REMARKS11,"
                 + " Professionalism,REMARKS12,tools,rude,Tagging2,mistakes,total,actiontaken"
-                + " from `HCCBOutboundQA` inner join `Agent` on Agent.Id = HCCBOutboundQA.AGENTNAME"
+                + " from `HCCBQA` inner join `Agent` on Agent.Id = HCCBQA.AGENTNAME"
                 + " where month(Date)=" + month + " and year(Date)="
-                + year + " order by HCCBOutboundQA.DATE desc";
+                + year + " order by HCCBQA.DATE desc";
             using (MySqlConnection con = new MySqlConnection(constr))
             {
                 using (MySqlCommand cmd = new MySqlCommand(query))

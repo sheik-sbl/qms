@@ -32,7 +32,7 @@
                     </div>
 
                 </div>
-                @using (Html.BeginForm("OutQAServices", "QMS", FormMethod.Post, new { @classs = "invoiceform", @id = "form" }))
+                @using (Html.BeginForm("OutQAServices", "HCCB", FormMethod.Post, new { @classs = "invoiceform", @id = "form" }))
                 {
                     <div class="row">
                         <div class="col-md-1">Month</div>
@@ -80,7 +80,7 @@
                                 </button>
                             </div>
                             <div class="btn-group">
-                                <a href='@Url.Action("DownloadExcelReportQA", "QMS", new { month = Model.Month, year=Model.Year})' class="btn sbold green"><b>Export to Excel</b></a>
+                                <a href='@Url.Action("DownloadExcelReportQA", "HCCB", new { month = Model.Month, year=Model.Year})' class="btn sbold green"><b>Export to Excel</b></a>
                             </div>
                         </div>
                     </div>
@@ -215,7 +215,7 @@
     function GetServicePopup(_ID) {
         debugger;
 
-        var pathurl = '@Url.Action("GetOutQAService", "QMS")';
+        var pathurl = '@Url.Action("GetOutQAService", "HCCB")';
         $.ajax({
             url: pathurl,
             type: 'GET',
@@ -247,7 +247,7 @@
   function () {
 
               $.ajax({
-                    url: '@Url.Action("DeleteService", "QMS")',
+                    url: '@Url.Action("DeleteService", "HCCB")',
                     type: 'POST',
                     data: { ID: _ID },
                     success: function (data) {
@@ -266,7 +266,7 @@
 
     function AddSoftware() {
 
-        var pathurl = '@Url.Action("AddOutQAService", "QMS")';
+        var pathurl = '@Url.Action("AddOutQAService", "HCCB")';
         $.ajax({
             url: pathurl,
             type: 'GET',
@@ -283,7 +283,7 @@
     }
 
     function ViewDetails(_ID) {
-        var pathurl = '@Url.Action("ViewOutQAService", "QMS")';
+        var pathurl = '@Url.Action("ViewOutQAService", "HCCB")';
          $.ajax({
              url: pathurl,
              type: 'GET',
